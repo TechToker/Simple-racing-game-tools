@@ -74,7 +74,7 @@ public class WheelDrive : MonoBehaviour
 			if (wheel.transform.localPosition.z > 0)
 				wheel.steerAngle = angle;
 
-			if (wheel.transform.localPosition.z < 0)
+			//if (wheel.transform.localPosition.z < 0)
                 wheel.brakeTorque = handBrake;
 
 			if (wheel.transform.localPosition.z < 0 && driveType != DriveType.FrontWheelDrive)

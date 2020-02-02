@@ -11,100 +11,123 @@ public enum DriveType
 
 public class WheelDrive : MonoBehaviour
 {
-    [Tooltip("Maximum steering angle of the wheels")]
-	public float maxAngle = 30f;
-	[Tooltip("Maximum torque applied to the driving wheels")]
-	public float maxTorque = 300f;
-	[Tooltip("Maximum brake torque applied to the driving wheels")]
-	public float brakeTorque = 30000f;
-	[Tooltip("If you need the visual wheels to be attached automatically, drag the wheel shape here.")]
-	public GameObject wheelShape;
+    [SerializeField] private Rigidbody _mainRigidBody;
 
+    [SerializeField] private WheelCollider[] _allWheels;
+
+    [SerializeField] private WheelCollider[] _forwardWheels;
+    [SerializeField] private WheelCollider[] _motorWheels;
+
+    [SerializeField] private GameObject _wheelVisualPrefab;
+
+	[SerializeField] private AnimationCurve _turningAngleBySpeed;
+
+    [SerializeField] private AnimationCurve _torqueBySpeed;
+    [SerializeField] private AnimationCurve _reverceTorqueBySpeed;
+
+    [SerializeField] private float _brakeTorque = 700f;
+    [SerializeField] private float _motorTorqueResistance = 5;
+
+    [Header("Vehicle substeps")]
     // На малых скоростях колесо может пробуксовывать и терять сцепление с дорогой.
     // Это может быть из-за недостатка вычислений физического движка, 
     // Чтобы этого не происходило можно увеличить количество "подшагов" для просчёта физики колёс
     // Т.е увеличить частоту вычислений для колёс на один fixed update
     // На высоких скоростях сцепления достаточно и необходимость в большем количестве вычислений избыточна
 
-	[Tooltip("The vehicle's speed when the physics engine can use different amount of sub-steps (in m/s).")]
-	public float criticalSpeed = 5f;
+    [Tooltip("The vehicle's speed when the physics engine can use different amount of sub-steps (in m/s).")]
+    [SerializeField] private float _criticalSpeed = 6f;
 	[Tooltip("Simulation sub-steps when the speed is above critical.")]
-	public int stepsBelow = 5;
+    [SerializeField] private int _stepsBelow = 8;
 	[Tooltip("Simulation sub-steps when the speed is below critical.")]
-	public int stepsAbove = 1;
+    [SerializeField] private int _stepsAbove = 2;
 
-	[Tooltip("The vehicle's drive type: rear-wheels drive, front-wheels drive or all-wheels drive.")]
-	public DriveType driveType;
+    private GameObject[] _visualWheels;
 
-    private WheelCollider[] m_Wheels;
-
-    // Find all the WheelColliders down in the hierarchy.
-	void Start()
+    void Start()
 	{
-		m_Wheels = GetComponentsInChildren<WheelCollider>();
+        //It actually sets parameters to the vehicle but not to a wheel.
+        _allWheels[0].ConfigureVehicleSubsteps(_criticalSpeed, _stepsBelow, _stepsAbove);
 
-		for (int i = 0; i < m_Wheels.Length; ++i) 
-		{
-			var wheel = m_Wheels [i];
+        if (_wheelVisualPrefab == null)
+            return;
 
-			// Create wheel shapes only when needed.
-			if (wheelShape != null)
-			{
-				var ws = Instantiate (wheelShape);
-				ws.transform.parent = wheel.transform;
-			}
-		}
+        _visualWheels = new GameObject[_allWheels.Length];
+
+        for (int i = 0; i < _allWheels.Length; i++)
+        {
+            GameObject ws = Instantiate(_wheelVisualPrefab);
+            ws.transform.parent = _allWheels[i].transform;
+            _visualWheels[i] = ws;
+        }
 	}
 
-	// This is a really simple approach to updating wheels.
-	// We simulate a rear wheel drive car and assume that the car is perfectly symmetric at local zero.
-	// This helps us to figure our which wheels are front ones and which are rear.
 	void Update()
 	{
-		m_Wheels[0].ConfigureVehicleSubsteps(criticalSpeed, stepsBelow, stepsAbove);
+        float carSpeed = _mainRigidBody.velocity.magnitude;
 
-		float angle = maxAngle * Input.GetAxis("Horizontal");
-		float torque = maxTorque * Input.GetAxis("Vertical");
+        float turningAngle = _turningAngleBySpeed.Evaluate(carSpeed) * Input.GetAxis("Horizontal");
+        float verticalMovementForce = Input.GetAxis("Vertical");
 
-		float handBrake = Input.GetKey(KeyCode.X) ? brakeTorque : 0;
+        bool isCarMovingForward = _mainRigidBody.transform.InverseTransformDirection(_mainRigidBody.velocity).z >= 0;
+        float motorTorq = 0, brakeTorq = 0;
 
-		foreach (WheelCollider wheel in m_Wheels)
-		{
-			// A simple car where front wheels steer while rear ones drive.
-			if (wheel.transform.localPosition.z > 0)
-				wheel.steerAngle = angle;
+        //IsCarMovingForward
+        if (isCarMovingForward)
+        {
+            if (verticalMovementForce >= 0)
+                motorTorq = _torqueBySpeed.Evaluate(carSpeed) * verticalMovementForce;
+            else
+                brakeTorq = _brakeTorque * -verticalMovementForce;
+        }
+        else
+        {
+            if (verticalMovementForce >= 0)
+                brakeTorq = _brakeTorque * verticalMovementForce;
+            else
+                motorTorq = _reverceTorqueBySpeed.Evaluate(carSpeed) * verticalMovementForce;
+        }
 
-			//if (wheel.transform.localPosition.z < 0)
-                wheel.brakeTorque = handBrake;
+        //If car speed != 0, add motor resistance force
+        if (carSpeed > 0.01f)
+            motorTorq += _motorTorqueResistance * (isCarMovingForward ? -1: 1);
 
-			if (wheel.transform.localPosition.z < 0 && driveType != DriveType.FrontWheelDrive)
-				wheel.motorTorque = torque;
+        foreach (WheelCollider wheel in _forwardWheels)
+            wheel.steerAngle = turningAngle;
 
-			if (wheel.transform.localPosition.z >= 0 && driveType != DriveType.RearWheelDrive)
-				wheel.motorTorque = torque;
+        foreach (WheelCollider wheel in _motorWheels)
+            wheel.motorTorque = motorTorq;
 
-			// Update visual wheels if any.
-			if (wheelShape) 
-			{
-				Quaternion q;
-				Vector3 p;
-				wheel.GetWorldPose (out p, out q);
+        foreach (WheelCollider wheel in _allWheels)
+            wheel.brakeTorque = brakeTorq;
 
-                //Set wheel' visual position
-				// Assume that the only child of the wheelcollider is the wheel shape.
-				Transform shapeTransform = wheel.transform.GetChild (0);
+        Debug.Log($"Motor: {motorTorq}; Brake: {brakeTorq}; Angle {turningAngle}");
 
-                if (wheel.name == "a0l" || wheel.name == "a1l" || wheel.name == "a2l")
-                {
-                    shapeTransform.rotation = q * Quaternion.Euler(0, 180, 0);
-                    shapeTransform.position = p;
-                }
-                else
-                {
-                    shapeTransform.position = p;
-                    shapeTransform.rotation = q;
-                }
-			}
-		}
-	}
+        UpdateWheelsVisual();
+    }
+
+    private void UpdateWheelsVisual()
+    {
+        if (_allWheels.Length != _visualWheels.Length)
+            return;
+
+        //Set visual wheels position & rotation by physics wheel
+        for(int i = 0; i < _allWheels.Length; i++)
+        {
+            Quaternion q; Vector3 p;
+            _allWheels[i].GetWorldPose(out p, out q);
+
+            //If wheel is left
+            if (_allWheels[i].transform.localPosition.x < 0)
+            {
+                _visualWheels[i].transform.rotation = q * Quaternion.Euler(0, 180, 0);
+                _visualWheels[i].transform.position = p;
+            }
+            else
+            {
+                _visualWheels[i].transform.position = p;
+                _visualWheels[i].transform.rotation = q;
+            }
+        }
+    }
 }

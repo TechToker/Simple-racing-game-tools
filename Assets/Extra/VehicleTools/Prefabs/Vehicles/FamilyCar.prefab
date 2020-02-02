@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 4000012209830938}
   - component: {fileID: 146000011699788318}
   m_Layer: 0
-  m_Name: a1r
+  m_Name: Wheel_BackRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,12 +223,12 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.315
   m_SuspensionSpring:
-    spring: 40208.598
-    damper: 6433.376
+    spring: 32166.879
+    damper: 5146.7007
     targetPosition: 0.5
   m_SuspensionDistance: 0.19620001
   m_ForceAppPointDistance: 0.6772526
-  m_Mass: 20
+  m_Mass: 15
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 0.3
@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 4000010121679894}
   - component: {fileID: 146000011612348708}
   m_Layer: 0
-  m_Name: a0r
+  m_Name: Wheel_ForwardRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -377,12 +377,12 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.315
   m_SuspensionSpring:
-    spring: 34293.516
-    damper: 5486.9624
+    spring: 27434.807
+    damper: 4389.5693
     targetPosition: 0.5
-  m_SuspensionDistance: 0.1962
+  m_SuspensionDistance: 0.19620003
   m_ForceAppPointDistance: 0.6772526
-  m_Mass: 20
+  m_Mass: 15
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 0.3
@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 4000011616540848}
   - component: {fileID: 146000012133133230}
   m_Layer: 0
-  m_Name: a1l
+  m_Name: Wheel_BackLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -438,12 +438,12 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.315
   m_SuspensionSpring:
-    spring: 40706.492
-    damper: 6513.0386
+    spring: 32565.19
+    damper: 5210.43
     targetPosition: 0.5
   m_SuspensionDistance: 0.1962
   m_ForceAppPointDistance: 0.6772526
-  m_Mass: 20
+  m_Mass: 15
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 0.3
@@ -506,9 +506,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000013904118194}
   serializedVersion: 2
-  m_Mass: 1500
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 1200
+  m_Drag: 0.05
+  m_AngularDrag: 0.5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -542,14 +542,168 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36ed7128051760b42bc56c15e5a6657d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAngle: 30
-  maxTorque: 750
-  brakeTorque: 100000
-  wheelShape: {fileID: 115638, guid: 2d269fe0b3459fd4b82b35627ebdb76b, type: 3}
-  criticalSpeed: 6
-  stepsBelow: 8
-  stepsAbove: 2
-  driveType: 0
+  _mainRigidBody: {fileID: 54000011937158112}
+  _allWheels:
+  - {fileID: 146000013638572144}
+  - {fileID: 146000011612348708}
+  - {fileID: 146000012133133230}
+  - {fileID: 146000011699788318}
+  _forwardWheels:
+  - {fileID: 146000013638572144}
+  - {fileID: 146000011612348708}
+  _motorWheels:
+  - {fileID: 146000013638572144}
+  - {fileID: 146000011612348708}
+  _wheelVisualPrefab: {fileID: 115638, guid: 2d269fe0b3459fd4b82b35627ebdb76b, type: 3}
+  _turningAngleBySpeed:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 30
+      inSlope: 0.008844568
+      outSlope: 0.008844568
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.5188317
+    - serializedVersion: 3
+      time: 5
+      value: 30
+      inSlope: -0.012250631
+      outSlope: -0.012250631
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3770794
+      outWeight: 0.706539
+    - serializedVersion: 3
+      time: 10
+      value: 15
+      inSlope: -1.176701
+      outSlope: -1.176701
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.16986933
+      outWeight: 0.13566494
+    - serializedVersion: 3
+      time: 20
+      value: 8
+      inSlope: -0.22772071
+      outSlope: -0.22772071
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.23020744
+      outWeight: 0.061779402
+    - serializedVersion: 3
+      time: 75
+      value: 5
+      inSlope: -0.011371734
+      outSlope: -0.011371734
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.08070717
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _torqueBySpeed:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 750
+      inSlope: -0.40419212
+      outSlope: -0.40419212
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.8711194
+    - serializedVersion: 3
+      time: 25
+      value: 650
+      inSlope: -6.1487927
+      outSlope: -6.1487927
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.104534976
+      outWeight: 0.14508076
+    - serializedVersion: 3
+      time: 46.441223
+      value: 502.97354
+      inSlope: -6.985895
+      outSlope: -6.985895
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15449658
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 62.10614
+      value: 153.03961
+      inSlope: -16.048069
+      outSlope: -16.048069
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.35356766
+      outWeight: 0.15945928
+    - serializedVersion: 3
+      time: 75
+      value: 0
+      inSlope: -1.699572
+      outSlope: -1.699572
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.08048843
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _reverceTorqueBySpeed:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 600
+      inSlope: -0.40419212
+      outSlope: -0.40419212
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.8711194
+    - serializedVersion: 3
+      time: 3
+      value: 550
+      inSlope: -15.3106
+      outSlope: -15.3106
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18533394
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 10
+      value: 120
+      inSlope: -6.1083274
+      outSlope: -6.1083274
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.28490806
+      outWeight: 0.03598059
+    - serializedVersion: 3
+      time: 75
+      value: 0
+      inSlope: -1.7255462
+      outSlope: -1.7255462
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.054987278
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _brakeTorque: 700
+  _motorTorqueResistance: 5
+  _criticalSpeed: 6
+  _stepsBelow: 8
+  _stepsAbove: 2
 --- !u!1 &1000014136951468
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,7 +715,7 @@ GameObject:
   - component: {fileID: 4000012552547554}
   - component: {fileID: 146000013638572144}
   m_Layer: 0
-  m_Name: a0l
+  m_Name: Wheel_ForwardLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -591,12 +745,12 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.315
   m_SuspensionSpring:
-    spring: 34791.406
-    damper: 5566.6245
+    spring: 27833.123
+    damper: 4453.3
     targetPosition: 0.5
-  m_SuspensionDistance: 0.1962
+  m_SuspensionDistance: 0.19620001
   m_ForceAppPointDistance: 0.6772526
-  m_Mass: 20
+  m_Mass: 15
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 0.3

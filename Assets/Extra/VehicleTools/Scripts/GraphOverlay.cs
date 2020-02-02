@@ -155,10 +155,29 @@ public class GraphOverlay : MonoBehaviour
 		}
 	}
 
+
+    private float timeTo20;
+    private float timeTo40;
+    private float timeTo60;
+    private float timeTo80;
+    private float timeTo100;
+    private float timeTo120;
+    private float timeTo140;
+    private float timeTo160;
+
+    private float timer = 0;
+
 	void Update()
 	{
-		// Clear.
-		Array.Copy(m_PixelsBg, m_Pixels, m_Pixels.Length);
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            timer = 0;
+        }
+
+        timer += Time.deltaTime;
+
+        // Clear.
+        Array.Copy(m_PixelsBg, m_Pixels, m_Pixels.Length);
 
 		// Draw guides.
         DrawLine(new Vector2(0f, m_HeightPixels * 0.5f), new Vector2(m_WidthPixels, m_HeightPixels * 0.5f), zeroColor);
@@ -196,8 +215,30 @@ public class GraphOverlay : MonoBehaviour
 		m_Texture.SetPixels32(m_Pixels);
 		m_Texture.Apply();
 
-		if (vehicleBody)
-			m_SpeedText.text = string.Format("Speed: {0:0.00} m/s", vehicleBody.velocity.magnitude);
+        if (vehicleBody)
+        {
+            string anw = string.Format("Speed: {0:0.00} m/s", vehicleBody.velocity.magnitude) + Environment.NewLine;
+
+            if (vehicleBody.velocity.magnitude * 3.6 > 40 & timeTo40 < 0.5f)
+                timeTo40 = timer;
+
+            if (vehicleBody.velocity.magnitude * 3.6 > 60 & timeTo60 < 0.5f)
+                timeTo60 = timer;
+
+            if (vehicleBody.velocity.magnitude * 3.6 > 100 & timeTo100 < 0.5f)
+                timeTo100 = timer;
+
+            if (vehicleBody.velocity.magnitude * 3.6 > 140 & timeTo140 < 0.5f)
+                timeTo140 = timer;
+
+            anw += $"to 40: {timeTo40}" + Environment.NewLine;
+            anw += $"to 60: {timeTo60}" + Environment.NewLine;
+            anw += $"to 100: {timeTo100}" + Environment.NewLine;
+            anw += $"to 140: {timeTo140}" + Environment.NewLine;
+
+            m_SpeedText.text = anw;
+
+        }
 	}
 
 	// Convert time-value to the pixel plot space.

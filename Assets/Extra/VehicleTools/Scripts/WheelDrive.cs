@@ -8,6 +8,7 @@ public class WheelDrive : BaseCar
 	{
         float turningAngle = _turningAngleBySpeed.Evaluate(CarSpeed) * Input.GetAxis("Horizontal");
         float verticalMovementForce = Input.GetAxis("Vertical");
+        bool isHandbrakeEnable = Input.GetKey(KeyCode.Space); 
 
         float motorTorq = 0, brakeTorq = 0;
 
@@ -28,7 +29,9 @@ public class WheelDrive : BaseCar
 
         SetSteerAngle(turningAngle);
         SetMotorTorque(motorTorq);
-        SetBrakeTorque(brakeTorq);
+
+        Debug.LogError(isHandbrakeEnable);
+        SetBrakeTorque(brakeTorq, isHandbrakeEnable? _handBrakeTorque: 0);
 
         //if(IsDebug)
         //    Debug.Log($"Motor: {motorTorq}; Brake: {brakeTorq}; Angle {turningAngle}");

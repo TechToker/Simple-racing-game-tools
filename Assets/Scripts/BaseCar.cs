@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,9 +9,9 @@ public class BaseCar : MonoBehaviour
 
     [SerializeField] protected Rigidbody _mainRigidBody;
 
-    [SerializeField] protected WheelCollider[] _allWheels;
-
     [SerializeField] protected WheelCollider[] _forwardWheels;
+    [SerializeField] protected WheelCollider[] _backwardWheels;
+
     [SerializeField] protected WheelCollider[] _motorWheels;
 
     [SerializeField] private GameObject _wheelVisualPrefab;
@@ -21,7 +22,12 @@ public class BaseCar : MonoBehaviour
     [SerializeField] protected AnimationCurve _reverceTorqueBySpeed;
 
     [SerializeField] protected float _brakeTorque = 700f;
+    [SerializeField] protected float _handBrakeTorque = 500f;
     [SerializeField] protected float _motorTorqueResistance = 5;
+
+    [Header("Extra params")]
+    [SerializeField] protected float _defaultRearWheelStiffness = 0.9f;
+    [SerializeField] protected float _handbrakeRearWheelStiffness = 0.75f;
 
     [Header("Vehicle substeps")]
     // На малых скоростях колесо может пробуксовывать и терять сцепление с дорогой.
@@ -41,9 +47,14 @@ public class BaseCar : MonoBehaviour
     protected bool IsCarMovingForward => _mainRigidBody.transform.InverseTransformDirection(_mainRigidBody.velocity).z >= 0;
 
     private GameObject[] _visualWheels;
+    private WheelCollider[] _allWheels;
 
     void Start()
     {
+        _allWheels = new WheelCollider[_forwardWheels.Length + _backwardWheels.Length];
+        Array.Copy(_forwardWheels, _allWheels, _forwardWheels.Length);
+        Array.Copy(_backwardWheels, 0, _allWheels, _forwardWheels.Length, _backwardWheels.Length);
+
         //It actually sets parameters to the vehicle but not to a wheel.
         _allWheels[0].ConfigureVehicleSubsteps(_criticalSpeed, _stepsBelow, _stepsAbove);
 
@@ -87,13 +98,26 @@ public class BaseCar : MonoBehaviour
             wheel.motorTorque = motorTorq;
     }
 
-    protected void SetBrakeTorque(float brakeTorq)
+    protected void SetBrakeTorque(float brakeTorq, float handBrakeTorq)
     {
         if (IsDebug)
-            Debug.Log($"Brake: {brakeTorq};");
+            Debug.Log($"Brake: {brakeTorq}; HandBrake: {handBrakeTorq}");
 
-        foreach (WheelCollider wheel in _allWheels)
+        foreach (WheelCollider wheel in _forwardWheels)
             wheel.brakeTorque = brakeTorq;
+
+        foreach (WheelCollider wheel in _backwardWheels)
+        {
+            wheel.brakeTorque = brakeTorq + handBrakeTorq;
+
+            WheelFrictionCurve friction = wheel.sidewaysFriction;
+            if (handBrakeTorq > 0)
+                friction.stiffness = _handbrakeRearWheelStiffness;
+            else
+                friction.stiffness = _defaultRearWheelStiffness;
+
+            wheel.sidewaysFriction = friction;
+        }
     }
 
     private void UpdateWheelsVisual()

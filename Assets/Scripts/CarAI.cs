@@ -50,7 +50,7 @@ public class CarAI : BaseCar
             float maxPossibleAngle = _turningAngleBySpeed.Evaluate(CarSpeed);
             turningAngle = Mathf.Clamp(Mathf.Atan2(deltaVec.x, deltaVec.z) * Mathf.Rad2Deg, -maxPossibleAngle, maxPossibleAngle);
 
-            Debug.Log(turningAngle);
+            //Debug.Log(turningAngle);
         }
 
         SetSteerAngle(turningAngle);

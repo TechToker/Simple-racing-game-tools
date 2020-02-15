@@ -47,7 +47,7 @@ public class BaseCar : MonoBehaviour
     protected bool IsCarMovingForward => _mainRigidBody.transform.InverseTransformDirection(_mainRigidBody.velocity).z >= 0;
 
     private GameObject[] _visualWheels;
-    private WheelCollider[] _allWheels;
+    protected WheelCollider[] _allWheels;
 
     void Start()
     {

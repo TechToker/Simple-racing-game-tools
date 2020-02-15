@@ -4,7 +4,7 @@ using System;
 [Serializable]
 public class WheelDrive : BaseCar
 {
-	protected override void Update()
+	protected void FixedUpdate()
 	{
         float turningAngle = _turningAngleBySpeed.Evaluate(CarSpeed) * Input.GetAxis("Horizontal");
         float verticalMovementForce = Input.GetAxis("Vertical");

@@ -49,13 +49,13 @@ WheelCollider:
   m_Mass: 15
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
-    m_ExtremumSlip: 0.3
+    m_ExtremumSlip: 0.8
     m_ExtremumValue: 1.5
     m_AsymptoteSlip: 0.6
     m_AsymptoteValue: 1.2
     m_Stiffness: 1.35
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.2
+    m_ExtremumSlip: 0.8
     m_ExtremumValue: 1.5
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 1.2
@@ -209,13 +209,13 @@ WheelCollider:
   m_Mass: 15
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
-    m_ExtremumSlip: 0.3
+    m_ExtremumSlip: 0.8
     m_ExtremumValue: 1.5
     m_AsymptoteSlip: 0.6
     m_AsymptoteValue: 1.2
     m_Stiffness: 1.35
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.2
+    m_ExtremumSlip: 0.8
     m_ExtremumValue: 1.5
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 1.2
@@ -270,13 +270,13 @@ WheelCollider:
   m_Mass: 15
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
-    m_ExtremumSlip: 0.3
+    m_ExtremumSlip: 0.8
     m_ExtremumValue: 1.5
     m_AsymptoteSlip: 0.6
     m_AsymptoteValue: 1.2
     m_Stiffness: 1.35
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.2
+    m_ExtremumSlip: 0.8
     m_ExtremumValue: 1.5
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 1.2
@@ -331,13 +331,13 @@ WheelCollider:
   m_Mass: 15
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
-    m_ExtremumSlip: 0.3
+    m_ExtremumSlip: 0.8
     m_ExtremumValue: 1.5
     m_AsymptoteSlip: 0.6
     m_AsymptoteValue: 1.2
     m_Stiffness: 1.35
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.2
+    m_ExtremumSlip: 0.8
     m_ExtremumValue: 1.5
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 1.2
@@ -353,8 +353,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4247216085177620519}
   - component: {fileID: 4247216085177620514}
-  - component: {fileID: 4247216085177620512}
+  - component: {fileID: 7289247421392153190}
   - component: {fileID: 4247216085177620513}
+  - component: {fileID: 4247216085177620512}
   m_Layer: 0
   m_Name: ChaseCar
   m_TagString: Untagged
@@ -397,7 +398,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4247216085177620512
+--- !u!114 &7289247421392153190
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -406,13 +407,51 @@ MonoBehaviour:
   m_GameObject: {fileID: 4247216085177620515}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61682be5314d0440b9e67529196ac1a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e3cddae682d41d47b3f66872d5b256c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  naturalFrequency: 10
-  dampingRatio: 0.8
-  forceShift: 0.03
-  setSuspensionDistance: 1
+  Car: {fileID: 4247216085177620513}
+  _taget: {fileID: 0}
+  _targetPosUpdateTime: 0.35
+  CheckRoadDistance: 3
+  _roadExist: 0
+  _targetBrakingSpeedByTargetDistance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.076862335
+      value: 0
+      inSlope: 0.02219717
+      outSlope: 0.02219717
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.6515233
+    - serializedVersion: 3
+      time: 5
+      value: 5
+      inSlope: 0.52540165
+      outSlope: 0.52540165
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3721688
+      outWeight: 0.014569879
+    - serializedVersion: 3
+      time: 100
+      value: 50
+      inSlope: -0.011371734
+      outSlope: -0.011371734
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.08070717
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  CurrentMode: 0
+  _finishBrakingPosition: {x: 0, y: 0, z: 0}
+  _brakingPedalForce: 0
+  _brakingPedalForceDelta: 0.1
 --- !u!114 &4247216085177620513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,5 +628,19 @@ MonoBehaviour:
   _criticalSpeed: 6
   _stepsBelow: 8
   _stepsAbove: 2
-  _taget: {fileID: 0}
-  _targetPosUpdateTime: 0.3
+--- !u!114 &4247216085177620512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4247216085177620515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61682be5314d0440b9e67529196ac1a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  naturalFrequency: 10
+  dampingRatio: 0.8
+  forceShift: 0.03
+  setSuspensionDistance: 1

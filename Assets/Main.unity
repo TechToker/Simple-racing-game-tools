@@ -3135,11 +3135,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4247216085177620513, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: _taget
-      value: 
-      objectReference: {fileID: 4000014493964234}
     - target: {fileID: 4247216085177620515, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
       propertyPath: m_Name
@@ -3200,6 +3195,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
+        type: 3}
+      propertyPath: _taget
+      value: 
+      objectReference: {fileID: 4000014493964234}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc21667f58cd3a146b4d6e9c5e10f492, type: 3}
 --- !u!1001 &4854544629196717392
@@ -3209,6 +3209,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4708650447282832568, guid: a705b2e85ab488849b71b7a97641c882,
+        type: 3}
+      propertyPath: m_SuspensionSpring.spring
+      value: 25148.578
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708650447282832568, guid: a705b2e85ab488849b71b7a97641c882,
+        type: 3}
+      propertyPath: m_SuspensionSpring.damper
+      value: 4023.7722
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708650447282832568, guid: a705b2e85ab488849b71b7a97641c882,
+        type: 3}
+      propertyPath: m_SuspensionDistance
+      value: 0.1962
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708650447757246338, guid: a705b2e85ab488849b71b7a97641c882,
+        type: 3}
+      propertyPath: m_SuspensionSpring.spring
+      value: 29486.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708650447757246338, guid: a705b2e85ab488849b71b7a97641c882,
+        type: 3}
+      propertyPath: m_SuspensionSpring.damper
+      value: 4717.808
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708650447757246338, guid: a705b2e85ab488849b71b7a97641c882,
+        type: 3}
+      propertyPath: m_SuspensionDistance
+      value: 0.19620003
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708650453875654124, guid: a705b2e85ab488849b71b7a97641c882,
+        type: 3}
+      propertyPath: m_SuspensionDistance
+      value: 0.19620001
+      objectReference: {fileID: 0}
     - target: {fileID: 4850653202817657498, guid: a705b2e85ab488849b71b7a97641c882,
         type: 3}
       propertyPath: m_LocalPosition.x

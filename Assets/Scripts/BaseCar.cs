@@ -17,7 +17,6 @@ public class BaseCar : MonoBehaviour
     [SerializeField] private GameObject _wheelVisualPrefab;
 
     [SerializeField] protected AnimationCurve _turningAngleBySpeed;
-
     [SerializeField] protected AnimationCurve _torqueBySpeed;
     [SerializeField] protected AnimationCurve _reverceTorqueBySpeed;
 
@@ -43,11 +42,14 @@ public class BaseCar : MonoBehaviour
     [Tooltip("Simulation sub-steps when the speed is below critical.")]
     [SerializeField] private int _stepsAbove = 2;
 
-    protected float CarSpeed => _mainRigidBody.velocity.magnitude;
-    protected bool IsCarMovingForward => _mainRigidBody.transform.InverseTransformDirection(_mainRigidBody.velocity).z >= 0;
+    public float CarSpeed => _mainRigidBody.velocity.magnitude;
+    public bool IsCarMovingForward => _mainRigidBody.transform.InverseTransformDirection(_mainRigidBody.velocity).z >= 0;
+    public float MaxWheelAngle => _turningAngleBySpeed.Evaluate(CarSpeed);
 
     private GameObject[] _visualWheels;
     protected WheelCollider[] _allWheels;
+
+    private float _currentBrakeTorque;
 
     void Start()
     {
@@ -76,17 +78,26 @@ public class BaseCar : MonoBehaviour
         UpdateWheelsVisual();
     }
 
-    protected void SetSteerAngle(float turningAngle)
+    public void SetSteerAngle(float turningAngle)
     {
         if (IsDebug)
             Debug.Log($"Angle {turningAngle}");
 
+        float maxPossibleAngle = _turningAngleBySpeed.Evaluate(CarSpeed);
+
         foreach (WheelCollider wheel in _forwardWheels)
-            wheel.steerAngle = turningAngle;
+            wheel.steerAngle = Mathf.Clamp(turningAngle, -maxPossibleAngle, maxPossibleAngle);
     }
 
-    protected void SetMotorTorque(float motorTorq)
+    public void SetMotorTorque(float motorInput)
     {
+        float motorTorq = 0;
+
+        if (IsCarMovingForward)
+            motorTorq = _torqueBySpeed.Evaluate(CarSpeed) * motorInput;
+        else
+            motorTorq = _reverceTorqueBySpeed.Evaluate(CarSpeed) * motorInput;
+
         //If car speed != 0, add motor resistance force
         if (CarSpeed > 0.01f)
             motorTorq += _motorTorqueResistance * (IsCarMovingForward ? -1 : 1);
@@ -98,23 +109,36 @@ public class BaseCar : MonoBehaviour
             wheel.motorTorque = motorTorq;
     }
 
-    protected void SetBrakeTorque(float brakeTorq, float handBrakeTorq)
+    public void SetBrakeTorque(float brakeInput)
+    {
+        float brakeTorq = _brakeTorque * brakeInput;
+
+        if (IsDebug)
+            Debug.Log($"Brake: {brakeTorq}");
+
+        _currentBrakeTorque = brakeTorq;
+        foreach (WheelCollider wheel in _allWheels)
+            wheel.brakeTorque = brakeTorq;
+    }
+
+    public void SetEBrake(bool isEnable)
     {
         if (IsDebug)
-            Debug.Log($"Brake: {brakeTorq}; HandBrake: {handBrakeTorq}");
-
-        foreach (WheelCollider wheel in _forwardWheels)
-            wheel.brakeTorque = brakeTorq;
+            Debug.Log($"HandBrake: {isEnable}");
 
         foreach (WheelCollider wheel in _backwardWheels)
         {
-            wheel.brakeTorque = brakeTorq + handBrakeTorq;
-
             WheelFrictionCurve friction = wheel.sidewaysFriction;
-            if (handBrakeTorq > 0)
+            if (isEnable)
+            {
                 friction.stiffness = _handbrakeRearWheelStiffness;
+                wheel.brakeTorque = _currentBrakeTorque + _handBrakeTorque;
+            }
             else
+            {
                 friction.stiffness = _defaultRearWheelStiffness;
+                wheel.brakeTorque = _currentBrakeTorque;
+            }
 
             wheel.sidewaysFriction = friction;
         }

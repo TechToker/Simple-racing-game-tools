@@ -46,6 +46,12 @@ public class BaseCar : MonoBehaviour
     public bool IsCarMovingForward => _mainRigidBody.transform.InverseTransformDirection(_mainRigidBody.velocity).z >= 0;
     public float MaxWheelAngle => _turningAngleBySpeed.Evaluate(CarSpeed);
 
+    public float TurningAngle { get; private set; }
+    public float AccelerationInput { get; private set; }
+    public float BrakingInput { get; private set; }
+    public bool EBrakeInput { get; private set; }
+
+
     private GameObject[] _visualWheels;
     protected WheelCollider[] _allWheels;
 
@@ -78,19 +84,22 @@ public class BaseCar : MonoBehaviour
         UpdateWheelsVisual();
     }
 
-    public void SetSteerAngle(float turningAngle)
+    public void SetSteerAngle(float turningAnlge)
     {
-        if (IsDebug)
-            Debug.Log($"Angle {turningAngle}");
+        TurningAngle = turningAnlge;
 
-        float maxPossibleAngle = _turningAngleBySpeed.Evaluate(CarSpeed);
+        if (IsDebug)
+            Debug.Log($"Angle {turningAnlge}");
+
+        float maxPossibleAngle = MaxWheelAngle;
 
         foreach (WheelCollider wheel in _forwardWheels)
-            wheel.steerAngle = Mathf.Clamp(turningAngle, -maxPossibleAngle, maxPossibleAngle);
+            wheel.steerAngle = Mathf.Clamp(turningAnlge, -maxPossibleAngle, maxPossibleAngle);
     }
 
     public void SetMotorTorque(float motorInput)
     {
+        AccelerationInput = motorInput;
         float motorTorq = 0;
 
         if (IsCarMovingForward)
@@ -111,6 +120,7 @@ public class BaseCar : MonoBehaviour
 
     public void SetBrakeTorque(float brakeInput)
     {
+        BrakingInput = brakeInput;
         float brakeTorq = _brakeTorque * brakeInput;
 
         if (IsDebug)
@@ -123,6 +133,8 @@ public class BaseCar : MonoBehaviour
 
     public void SetEBrake(bool isEnable)
     {
+        EBrakeInput = isEnable;
+
         if (IsDebug)
             Debug.Log($"HandBrake: {isEnable}");
 

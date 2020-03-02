@@ -129,59 +129,77 @@ public class DriverAI : BaseDriver
         RIGHT,
     }
 
+    public float _distanceToLocalTarget = 4f;
+    public Vector2 _localTarget;
+    public float _carRadius = 1.5f;
+
     private void DOChase()
     {
         if (_navMeshPath.corners.Length == 0)
             return;
 
         //Calculate distance to turn
-        AnalystTurningPositions.Clear();
-        float currentAnalystDistance = Vector3.Distance(Car.transform.position, _navMeshPath.corners[0]);
-        for (int i = 1; i < _navMeshPath.corners.Length; i++)
-        {
-            float distanceBetweenCorners = Vector3.Distance(_navMeshPath.corners[i - 1], _navMeshPath.corners[i]);
+        //Plus: calculate actual turning points
 
-            currentAnalystDistance += distanceBetweenCorners;
-            AnalystTurningPositions.Add(_navMeshPath.corners[i]);
-
-            if(currentAnalystDistance > TurningAlanystDistance)
-            {
-                break;
-            }
-        }
+        AnalystTurningPositions = GetActualTurningPoints(_navMeshPath.corners, TurningAlanystDistance);
 
         //Calculate turn angle
-        float turnAngle = 0;
-        TurningDirections direction;
 
+        Vector3 cornerExitPoint = AnalystTurningPositions[AnalystTurningPositions.Count != 0 ? AnalystTurningPositions.Count - 1 : 0];
+        float turnAngle = GetAngleToBetweenTransfors(transform, cornerExitPoint);
+        TurningDirections direction = turnAngle > 0 ? TurningDirections.RIGHT : TurningDirections.LEFT;
 
-        float turningAnlge1 = GetAngleToBetweenTransfors(transform, AnalystTurningPositions[AnalystTurningPositions.Count - 1]);
-        direction = turningAnlge1 > 0 ? TurningDirections.RIGHT : TurningDirections.LEFT;
-
-        float expectedSpeed = _targetSpeedByTurningAngle.Evaluate(turningAnlge1);
-
-        if (Car.CarSpeed > expectedSpeed)
-        {
-            Debug.LogError($"Brake with {_brakingPedalForce}; Current Speed: {Car.CarSpeed}; Expected speed: {expectedSpeed}; Brake more!");
-            _brakingPedalForce += _brakingPedalForceDelta;
-        }
-        else
-        {
-            Debug.LogError($"Brake with {_brakingPedalForce}; Current Speed: {Car.CarSpeed}; Expected speed: {expectedSpeed}; Brake lower!");
-            _brakingPedalForce -= _brakingPedalForceDelta;
-        }
-
-        _brakingPedalForce = Mathf.Clamp(_brakingPedalForce, 0, 1f);
-
-        Car.SetBrakeTorque(_brakingPedalForce);
+        SetCarExpectedSpeed(_targetSpeedByTurningAngle.Evaluate(Mathf.Abs(turnAngle)));
+        Debug.Log($"{turnAngle}");
 
         if(_brakingPedalForce == 0)
             Car.SetMotorTorque(MotorTorque);
 
-        if (_navMeshPath.corners.Length > 0)
-            Car.SetSteerAngle(GetAngleToBetweenTransfors(transform.transform, _navMeshPath.corners[1]));
+        Car.SetSteerAngle(GetAngleToBetweenTransfors(transform.transform, AnalystTurningPositions[0]));
+    }
 
-        Debug.LogError($"{turningAnlge1}; Direction: {direction}; CurSpeed: {Car.CarSpeed}; ExceptedSpeed: {expectedSpeed}; Motor torque: {MotorTorque}");
+    private List<Vector3> GetActualTurningPoints(Vector3[] navPath, float analysisDistance)
+    {
+        List<Vector3> actualPoints = new List<Vector3>();
+        float _currentAnalysisDistance = 0;
+
+        //! TODO: Может быть проблема
+        //Пушо может возникнуть ситуация когда точку уже проехали, но она уже за радиусом позади нас
+        navPath[0] = transform.position;
+
+        for (int i = 1; i < navPath.Length; i++)
+        {
+            //Берем список точек которые находятся за радиусом автомобиля. Не распространяется на последнюю точку пути (цель)
+            if (Vector3.Distance(transform.position, navPath[i]) > _carRadius || (i == navPath.Length - 1 && actualPoints.Count == 0))
+            {
+                float distanceBetweenCorners = Vector3.Distance(actualPoints.Count == 0 ? transform.position : actualPoints[actualPoints.Count - 1], navPath[i]);
+                _currentAnalysisDistance += distanceBetweenCorners;
+
+                actualPoints.Add(navPath[i]);
+
+                if (_currentAnalysisDistance > analysisDistance)
+                    return actualPoints;
+            }
+        }
+
+
+        return actualPoints;
+    }
+
+    private void SetCarExpectedSpeed(float expectedSpeed)
+    {
+        if (Car.CarSpeed > expectedSpeed)
+        {
+            _brakingPedalForce += _brakingPedalForceDelta;
+        }
+        else
+        {
+            _brakingPedalForce -= _brakingPedalForceDelta;
+        }
+
+        Debug.LogError($"Current Speed: {Car.CarSpeed}; Expected speed: {expectedSpeed};");
+        _brakingPedalForce = Mathf.Clamp(_brakingPedalForce, 0, 1f);
+        Car.SetBrakeTorque(_brakingPedalForce);
     }
 
     private void DOBrakingByTarget()

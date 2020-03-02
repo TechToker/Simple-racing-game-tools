@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1812057517134539468}
   - component: {fileID: 8892548522804033548}
   - component: {fileID: 2340833424690575283}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: UI_Toggle_EBrake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6327568926893130206}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 143754742025160710}
   - component: {fileID: 643316354997970630}
   - component: {fileID: 8435674211896057756}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 3846870897992816504}
   - component: {fileID: 7017627710230279481}
   - component: {fileID: 1284133376538095701}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 6270134900973869175}
   - component: {fileID: 8741684742648526378}
   - component: {fileID: 593543232549949756}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +386,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7092361345382863478}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 723621731968346354}
   - component: {fileID: 8488971906189207052}
   - component: {fileID: 9078010244498973384}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: UI_Panel_InputInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -518,7 +518,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4247216084056458503}
   - component: {fileID: 4247216084056458502}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wheel_BackLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -581,7 +581,7 @@ GameObject:
   - component: {fileID: 4247216084154607570}
   - component: {fileID: 4247216084154607571}
   - component: {fileID: 4247216084154607564}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FamilyCarChassis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -678,7 +678,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4247216084211675441}
   - component: {fileID: 4247216084211675440}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wheel_ForwardRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -739,7 +739,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4247216084533371966}
   - component: {fileID: 4247216084533371965}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wheel_ForwardLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -800,7 +800,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4247216085113554026}
   - component: {fileID: 4247216085113554025}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wheel_BackRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -864,7 +864,7 @@ GameObject:
   - component: {fileID: 7289247421392153190}
   - component: {fileID: 4247216085177620513}
   - component: {fileID: 4247216085177620512}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ChaseCar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -922,7 +922,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Car: {fileID: 4247216085177620513}
   _taget: {fileID: 0}
-  _targetPosUpdateTime: 0.35
+  _targetPosUpdateTime: 0.02
   CheckRoadDistance: 3
   _roadExist: 0
   _targetBrakingSpeedByTargetDistance:
@@ -958,7 +958,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  CurrentMode: 0
+  CurrentMode: 1
   _finishBrakingPosition: {x: 0, y: 0, z: 0}
   _brakingPedalForce: 0
   _brakingPedalForceDelta: 0.1
@@ -1209,7 +1209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6121142473612769556}
   - component: {fileID: 8702167128208327228}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ChaseCam_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1269,7 +1269,7 @@ GameObject:
   - component: {fileID: 5887887181854939143}
   - component: {fileID: 1370528359406079511}
   - component: {fileID: 1729184640213453047}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: UI_Slider_Acceleration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1394,7 +1394,7 @@ GameObject:
   - component: {fileID: 2684137571030383269}
   - component: {fileID: 1926564645736549460}
   - component: {fileID: 6581496579625384729}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: UI_Slider_Braking
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1517,7 +1517,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5583143372026811745}
   - component: {fileID: 4440647171774090502}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1561,7 +1561,7 @@ GameObject:
   - component: {fileID: 4722642906150058277}
   - component: {fileID: 3422376160203927625}
   - component: {fileID: 2645798565825382629}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas_AI_helper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1640,7 +1640,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7993156475514705578}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ChaseCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1674,7 +1674,7 @@ GameObject:
   - component: {fileID: 6011937523753925102}
   - component: {fileID: 3669587636638918167}
   - component: {fileID: 6308651712500606261}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: UI_Slider_Turning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1798,7 +1798,7 @@ GameObject:
   - component: {fileID: 6322230779782116211}
   - component: {fileID: 1299716399311317199}
   - component: {fileID: 7974308855539349162}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1869,7 +1869,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 661920759835395213}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}

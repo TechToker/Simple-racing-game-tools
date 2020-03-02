@@ -106,7 +106,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 2
+    agentRadius: 4
     agentHeight: 2
     agentSlope: 14
     agentClimb: 0.3
@@ -114,7 +114,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.6666667
+    cellSize: 1.3333334
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -4253,8 +4253,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951780681}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.09229594, y: 0.70105743, z: -0.09229594, w: 0.70105743}
+  m_LocalPosition: {x: 41, y: 3.5, z: 100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 390374273}
@@ -4919,8 +4919,43 @@ PrefabInstance:
       objectReference: {fileID: 4000014493964234}
     - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
-      propertyPath: CurrentMode
-      value: 1
+      propertyPath: _targetPosUpdateTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
+        type: 3}
+      propertyPath: _carRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
+        type: 3}
+      propertyPath: TurningAlanystDistance
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
+        type: 3}
+      propertyPath: _targetSpeedByTurningAngle.m_Curve.Array.data[1].value
+      value: 15.0945835
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
+        type: 3}
+      propertyPath: _targetSpeedByTurningAngle.m_Curve.Array.data[1].time
+      value: 31.029982
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
+        type: 3}
+      propertyPath: _targetSpeedByTurningAngle.m_Curve.Array.data[1].inSlope
+      value: -0.16920672
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
+        type: 3}
+      propertyPath: _targetSpeedByTurningAngle.m_Curve.Array.data[1].outSlope
+      value: -0.16920672
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
+        type: 3}
+      propertyPath: _targetSpeedByTurningAngle.m_Curve.Array.data[1].outWeight
+      value: 0.077756524
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc21667f58cd3a146b4d6e9c5e10f492, type: 3}
@@ -4933,33 +4968,33 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4708650445658754610, guid: a705b2e85ab488849b71b7a97641c882,
         type: 3}
-      propertyPath: m_SuspensionSpring.spring
-      value: 29851.504
-      objectReference: {fileID: 0}
-    - target: {fileID: 4708650445658754610, guid: a705b2e85ab488849b71b7a97641c882,
-        type: 3}
-      propertyPath: m_SuspensionSpring.damper
-      value: 4776.24
-      objectReference: {fileID: 0}
-    - target: {fileID: 4708650445658754610, guid: a705b2e85ab488849b71b7a97641c882,
-        type: 3}
       propertyPath: m_SuspensionDistance
-      value: 0.1962
+      value: 0.19619998
       objectReference: {fileID: 0}
-    - target: {fileID: 4708650447757246338, guid: a705b2e85ab488849b71b7a97641c882,
+    - target: {fileID: 4708650447282832568, guid: a705b2e85ab488849b71b7a97641c882,
         type: 3}
       propertyPath: m_SuspensionSpring.spring
-      value: 29486.326
+      value: 25148.506
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708650447282832568, guid: a705b2e85ab488849b71b7a97641c882,
+        type: 3}
+      propertyPath: m_SuspensionSpring.damper
+      value: 4023.761
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708650447757246338, guid: a705b2e85ab488849b71b7a97641c882,
+        type: 3}
+      propertyPath: m_SuspensionSpring.spring
+      value: 29486.32
       objectReference: {fileID: 0}
     - target: {fileID: 4708650447757246338, guid: a705b2e85ab488849b71b7a97641c882,
         type: 3}
       propertyPath: m_SuspensionSpring.damper
-      value: 4717.812
+      value: 4717.8115
       objectReference: {fileID: 0}
     - target: {fileID: 4708650447757246338, guid: a705b2e85ab488849b71b7a97641c882,
         type: 3}
       propertyPath: m_SuspensionDistance
-      value: 0.1962
+      value: 0.19620001
       objectReference: {fileID: 0}
     - target: {fileID: 4708650453875654124, guid: a705b2e85ab488849b71b7a97641c882,
         type: 3}
@@ -4970,6 +5005,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SuspensionSpring.damper
       value: 4082.188
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708650453875654124, guid: a705b2e85ab488849b71b7a97641c882,
+        type: 3}
+      propertyPath: m_SuspensionDistance
+      value: 0.19620001
       objectReference: {fileID: 0}
     - target: {fileID: 4850653202817657498, guid: a705b2e85ab488849b71b7a97641c882,
         type: 3}

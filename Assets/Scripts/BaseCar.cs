@@ -44,6 +44,8 @@ public class BaseCar : MonoBehaviour
 
     public float CarSpeed => _mainRigidBody.velocity.magnitude;
     public bool IsCarMovingForward => _mainRigidBody.transform.InverseTransformDirection(_mainRigidBody.velocity).z >= 0;
+    public Vector3 RelativeForce => _mainRigidBody.velocity;
+
     public float MaxWheelAngle => _turningAngleBySpeed.Evaluate(CarSpeed);
 
     public float TurningAngle { get; private set; }

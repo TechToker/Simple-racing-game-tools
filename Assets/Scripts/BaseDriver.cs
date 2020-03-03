@@ -4,7 +4,5 @@ using UnityEngine;
 
 public class BaseDriver : MonoBehaviour
 {
-    [SerializeField] protected BaseCar Car;
-
-
+    public BaseCar Car;
 }

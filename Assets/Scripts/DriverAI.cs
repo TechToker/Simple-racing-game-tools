@@ -4,11 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum CurrentDriverMode
+public enum DriverMode
 {
     None = 0,
+
     Chase = 1,
-    BrakeAroundTarget = 2,
+    Follow = 2,
+    PitManeuver = 3,
+    SideRam = 4,
+    RoadBlock = 5,
+
+    WaypointRace = 10,
+    BrakeAroundTarget = 20,
 }
 
 public class DriverAI : BaseDriver
@@ -28,8 +35,23 @@ public class DriverAI : BaseDriver
     [Header("TurningBraking")]
     public AnimationCurve TargetSpeedByTurnAngle;
 
+    [Header("FollowState")]
+    public float WheelAngleSpeed = 1;
+    public Vector3 OffsetFromTarget = new Vector3(3f, 0, 0);
 
-    public CurrentDriverMode CurrentMode;
+    public AnimationCurve DistanceFactor;
+    public AnimationCurve DeltaSpeedFactor;
+    public AnimationCurve DeltaSpeedMultyplyerByDistance;
+
+    [Header("Race")]
+    [SerializeField] public AnimationCurve SpeedByCornerAnlge;
+    [SerializeField] public AnimationCurve BrakingDistanceByDeltaSpeed;
+
+    [SerializeField] private RaceCircuit _circuit;
+    
+    public DriverMode CurrentMode;
+    private DriverMode _currentMode;
+
     private BaseState _state;
 
     public float TurningAlanystDistance = 30f;
@@ -41,8 +63,7 @@ public class DriverAI : BaseDriver
 
     private void OnEnable()
     {
-        //_state = new ChaseState(this, Car);
-        _state = new FollowState(this, Car);
+        SetDriverMode(CurrentMode);
     }
 
     private void OnDrawGizmos()
@@ -62,7 +83,42 @@ public class DriverAI : BaseDriver
     {
         _state.OnUpdate();
 
+        //SetDriverMode(CurrentMode);
+
         if (Input.GetKeyDown(KeyCode.B))
-            _state = new BrakingByTargetState(TargetTransform.position, this, Car);
+        {
+            SetDriverMode(DriverMode.RoadBlock);
+        }
+    }
+
+
+    public void SetDriverMode(DriverMode mode)
+    {
+        if (mode == _currentMode)
+            return;
+
+        switch (mode)
+        {
+            case (DriverMode.None):
+                break;
+            case (DriverMode.Chase):
+                _state = new ChaseState(this, Car);
+                break;
+            case (DriverMode.Follow):
+                _state = new FollowRelativeTargetState(this, Car);
+                break;
+            case (DriverMode.PitManeuver):
+                _state = new PitManeuverState(this, Car);
+                break;
+            case (DriverMode.RoadBlock):
+                _state = new RoadBlockState(this, Car);
+                break;
+            case (DriverMode.WaypointRace):
+                _state = new RacingState(_circuit, this, Car);
+                break;
+        }
+
+        _currentMode = mode;
+        Debug.LogError($"Set state: {mode}");
     }
 }

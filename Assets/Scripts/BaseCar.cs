@@ -46,6 +46,8 @@ public class BaseCar : MonoBehaviour
     public bool IsCarMovingForward => _mainRigidBody.transform.InverseTransformDirection(_mainRigidBody.velocity).z >= 0;
     public Vector3 RelativeForce => _mainRigidBody.velocity;
 
+    public float CurrentWheelAngle => _forwardWheels[0].steerAngle;
+
     public float MaxWheelAngle => _turningAngleBySpeed.Evaluate(CarSpeed);
 
     public float TurningAngle { get; private set; }
@@ -75,6 +77,10 @@ public class BaseCar : MonoBehaviour
 
         for (int i = 0; i < _allWheels.Length; i++)
         {
+            WheelFrictionCurve friction = _allWheels[i].sidewaysFriction;
+            friction.stiffness = _defaultRearWheelStiffness;
+            _allWheels[i].sidewaysFriction = friction;
+
             GameObject ws = Instantiate(_wheelVisualPrefab);
             ws.transform.parent = _allWheels[i].transform;
             _visualWheels[i] = ws;

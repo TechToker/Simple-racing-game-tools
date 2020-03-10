@@ -77,13 +77,16 @@ public class BaseCar : MonoBehaviour
 
         for (int i = 0; i < _allWheels.Length; i++)
         {
-            WheelFrictionCurve friction = _allWheels[i].sidewaysFriction;
-            friction.stiffness = _defaultRearWheelStiffness;
-            _allWheels[i].sidewaysFriction = friction;
-
             GameObject ws = Instantiate(_wheelVisualPrefab);
             ws.transform.parent = _allWheels[i].transform;
             _visualWheels[i] = ws;
+        }
+
+        foreach(WheelCollider wc in _backwardWheels)
+        {
+            WheelFrictionCurve friction = wc.sidewaysFriction;
+            friction.stiffness = _defaultRearWheelStiffness;
+            wc.sidewaysFriction = friction;
         }
     }
 

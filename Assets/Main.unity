@@ -136,12 +136,17 @@ PrefabInstance:
     - target: {fileID: 4247216084056458502, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
       propertyPath: m_SuspensionSpring.spring
-      value: 32565.17
+      value: 32565.176
       objectReference: {fileID: 0}
     - target: {fileID: 4247216084056458502, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
       propertyPath: m_SuspensionSpring.damper
-      value: 5210.4272
+      value: 5210.428
+      objectReference: {fileID: 0}
+    - target: {fileID: 4247216084056458502, guid: bc21667f58cd3a146b4d6e9c5e10f492,
+        type: 3}
+      propertyPath: m_SuspensionDistance
+      value: 0.1962
       objectReference: {fileID: 0}
     - target: {fileID: 4247216085177620515, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
@@ -248,11 +253,6 @@ PrefabInstance:
       propertyPath: _circuit
       value: 
       objectReference: {fileID: 1102156168}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: WheelAngleSpeed
-      value: 0.01
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc21667f58cd3a146b4d6e9c5e10f492, type: 3}
 --- !u!1 &71711752
@@ -4949,8 +4949,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951780681}
-  m_LocalRotation: {x: 0.09229594, y: 0.70105743, z: -0.09229594, w: 0.70105743}
-  m_LocalPosition: {x: 40.999977, y: 3.5, z: 5}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 390374273}

@@ -50,10 +50,10 @@ namespace BehaviourAI
             float targetAngle = GetAngleToBetweenTransfors(Car.transform, _analysisWaypoints[0].transform.position);
 
             float lerpAngle = targetAngle;
-            //////if(Mathf.Abs(Driver.Car.CurrentWheelAngle) > Mathf.Abs(targetAngle))
-            //////    lerpAngle = Mathf.Lerp(Driver.Car.CurrentWheelAngle, targetAngle, Time.fixedDeltaTime * Driver.WheelAngleSpeed);
 
+            lerpAngle = Mathf.Lerp(Driver.Car.CurrentWheelAngle, targetAngle, Time.fixedDeltaTime * Driver.WheelAngleSpeed);
             Debug.LogError($"Cur ang: {Driver.Car.CurrentWheelAngle}; Target ang: {targetAngle}; lerp ang: {lerpAngle}");
+
             Car.SetSteerAngle(lerpAngle);
 
             //Debug.LogError($"Distance to turn start: {Vector3.Distance(Car.transform.position, _analysisWaypoints[0].transform.position)}; Turn mileage: {GetTurnMileage()}" +

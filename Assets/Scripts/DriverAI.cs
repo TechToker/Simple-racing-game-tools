@@ -44,6 +44,7 @@ public class DriverAI : BaseDriver
     public AnimationCurve DeltaSpeedMultyplyerByDistance;
 
     [Header("Race")]
+    [SerializeField] public Transform Tracker;
     [SerializeField] public AnimationCurve SpeedByCornerAnlge;
     [SerializeField] public AnimationCurve BrakingDistanceByDeltaSpeed;
 

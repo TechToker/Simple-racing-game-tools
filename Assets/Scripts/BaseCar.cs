@@ -42,6 +42,9 @@ public class BaseCar : MonoBehaviour
     [Tooltip("Simulation sub-steps when the speed is below critical.")]
     [SerializeField] private int _stepsAbove = 2;
 
+    [Header("Effects")]
+    [SerializeField] private GameObject _lights;
+
     public float CarSpeed => _mainRigidBody.velocity.magnitude;
     public bool IsCarMovingForward => _mainRigidBody.transform.InverseTransformDirection(_mainRigidBody.velocity).z >= 0;
     public Vector3 RelativeForce => _mainRigidBody.velocity;
@@ -93,6 +96,8 @@ public class BaseCar : MonoBehaviour
     protected virtual void Update()
     {
         UpdateWheelsVisual();
+
+        _lights.gameObject.SetActive(_forwardWheels[0].brakeTorque > 0);
     }
 
     public void SetSteerAngle(float turningAnlge)

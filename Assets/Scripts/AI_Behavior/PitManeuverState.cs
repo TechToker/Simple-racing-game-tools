@@ -22,6 +22,7 @@ namespace BehaviourAI {
 
         public override void OnUpdate()
         {
+            base.OnUpdate();
         }
 
         public override string GetStateName()

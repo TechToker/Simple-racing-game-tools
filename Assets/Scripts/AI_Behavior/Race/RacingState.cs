@@ -23,6 +23,8 @@ namespace BehaviourAI
 
         public override void OnDrawGizmos()
         {
+            base.OnDrawGizmos();
+
             if (_analysisWaypoints == null)
                 return;
 
@@ -55,6 +57,21 @@ namespace BehaviourAI
         private void SetSteering()
         {
             float steerAngleToTracker = GetAngleToBetweenTransfors(Car.transform, Driver.Tracker.transform.position);
+
+            //FROM BASE STATE: уворот
+
+            if (_frontSensors[0].IsDetected)
+                steerAngleToTracker += Driver.Car.MaxWheelAngle * 0.33f;
+            else
+                steerAngleToTracker -= Driver.Car.MaxWheelAngle * 0.33f;
+
+            if (_frontSensors[2].IsDetected)
+                steerAngleToTracker -= Driver.Car.MaxWheelAngle * 0.33f;
+            else
+                steerAngleToTracker += Driver.Car.MaxWheelAngle * 0.33f;
+
+            //end 
+
             float lerpSteerAngle = Mathf.Lerp(Driver.Car.CurrentWheelAngle, steerAngleToTracker, Time.fixedDeltaTime * Driver.WheelAngleSpeed);
 
             Car.SetSteerAngle(lerpSteerAngle);

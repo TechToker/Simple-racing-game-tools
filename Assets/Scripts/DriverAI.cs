@@ -64,6 +64,7 @@ public class DriverAI : BaseDriver
 
     private void OnEnable()
     {
+        _state = new BaseState(this, Car);
         SetDriverMode(CurrentMode);
     }
 
@@ -101,6 +102,7 @@ public class DriverAI : BaseDriver
         switch (mode)
         {
             case (DriverMode.None):
+                _state = new BaseState(this, Car);
                 break;
             case (DriverMode.Chase):
                 _state = new ChaseState(this, Car);

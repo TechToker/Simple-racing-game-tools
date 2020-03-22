@@ -1315,7 +1315,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _circuit: {fileID: 0}
-  CurrentMode: 10
+  CurrentMode: 2
   TurningAlanystDistance: 30
   CarRadius: 1.5
 --- !u!114 &4247216085177620513

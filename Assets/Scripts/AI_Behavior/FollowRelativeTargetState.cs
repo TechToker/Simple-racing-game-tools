@@ -114,6 +114,8 @@ namespace BehaviourAI
             }
 
             Debug.Log($"{_nearTargetTime}");
+
+            base.OnUpdate();
         }
 
         private void ChangeRelativePosition(Vector3 newRelativePos)

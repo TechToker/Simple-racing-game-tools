@@ -555,6 +555,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 3
+  _width: 2.5
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 2
+  _gizmosScaleZ: 0.1
 --- !u!4 &29268495
 Transform:
   m_ObjectHideFlags: 0
@@ -593,13 +597,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 71711752}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -55.53, y: 0, z: 0.1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -39.4, y: 0, z: 19.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1102156167}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &71711754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,6 +617,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 3
+  _width: 10
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 1
+  _gizmosScaleZ: 0.1
+--- !u!1 &91652547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 91652548}
+  - component: {fileID: 91652549}
+  m_Layer: 0
+  m_Name: WayPoint (11)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &91652548
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91652547}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 24.9, y: 0, z: -24.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1102156167}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &91652549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91652547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 3
+  _width: 7.93
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 1
+  _gizmosScaleZ: 0.1
 --- !u!1001 &98160693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -697,7 +753,7 @@ GameObject:
   - component: {fileID: 184393609}
   - component: {fileID: 184393608}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -771,7 +827,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 184393607}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 1.0000343, z: 5.8}
+  m_LocalPosition: {x: 41.6, y: 1.0000343, z: -4.1}
   m_LocalScale: {x: 1, y: 1, z: -11.79}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1588,6 +1644,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 3
+  _width: 2.5
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 2
+  _gizmosScaleZ: 0.1
 --- !u!4 &415935091
 Transform:
   m_ObjectHideFlags: 0
@@ -1788,13 +1848,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497206350}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.25, y: 0, z: 66.33}
+  m_LocalRotation: {x: 0, y: -0.40673664, z: 0, w: 0.9135455}
+  m_LocalPosition: {x: 38.13, y: 0, z: 69.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1102156167}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -48, z: 0}
 --- !u!114 &497206352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1808,6 +1868,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 3
+  _width: 10
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 1
+  _gizmosScaleZ: 0.1
 --- !u!1 &506168591
 GameObject:
   m_ObjectHideFlags: 0
@@ -2304,6 +2368,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 3
+  _width: 2.5
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 2
+  _gizmosScaleZ: 0.1
 --- !u!4 &653293072
 Transform:
   m_ObjectHideFlags: 0
@@ -2634,6 +2702,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 3
+  _width: 2.5
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 2
+  _gizmosScaleZ: 0.1
 --- !u!4 &836025093
 Transform:
   m_ObjectHideFlags: 0
@@ -2692,7 +2764,7 @@ GameObject:
   - component: {fileID: 1015023289}
   - component: {fileID: 1015023290}
   m_Layer: 0
-  m_Name: WayPoint
+  m_Name: WayPoint (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2705,13 +2777,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1015023288}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 47.25, y: 0, z: -9.27}
+  m_LocalRotation: {x: 0, y: 0.3230917, z: 0, w: 0.9463677}
+  m_LocalPosition: {x: 47.25, y: 0, z: -10.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1102156167}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 37.7, z: 0}
 --- !u!114 &1015023290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2725,6 +2797,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 3
+  _width: 10
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 1
+  _gizmosScaleZ: 0.1
 --- !u!1 &1043595260
 GameObject:
   m_ObjectHideFlags: 0
@@ -2749,13 +2825,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1043595260}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35.3, y: 0, z: -22.4}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -33.23, y: 0, z: -18.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1102156167}
   m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1043595262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2769,6 +2845,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 3
+  _width: 10
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 1
+  _gizmosScaleZ: 0.1
 --- !u!1 &1054457410
 GameObject:
   m_ObjectHideFlags: 0
@@ -2799,6 +2879,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 3
+  _width: 2.5
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 2
+  _gizmosScaleZ: 0.1
 --- !u!4 &1054457412
 Transform:
   m_ObjectHideFlags: 0
@@ -3082,10 +3166,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1102156166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 53.2, y: 1, z: 18.7}
+  m_LocalPosition: {x: 53.2, y: 0, z: 18.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1015023289}
+  - {fileID: 1248834291}
   - {fileID: 1358973379}
   - {fileID: 497206351}
   - {fileID: 1656961165}
@@ -3096,6 +3180,8 @@ Transform:
   - {fileID: 1327054558}
   - {fileID: 1043595261}
   - {fileID: 1752332568}
+  - {fileID: 91652548}
+  - {fileID: 1015023289}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3112,7 +3198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _waypoints:
-  - {fileID: 1015023290}
+  - {fileID: 1248834292}
   - {fileID: 1358973380}
   - {fileID: 497206352}
   - {fileID: 1656961166}
@@ -3123,6 +3209,18 @@ MonoBehaviour:
   - {fileID: 1327054559}
   - {fileID: 1043595262}
   - {fileID: 1752332569}
+  - {fileID: 91652549}
+  - {fileID: 1015023290}
+  _mainStartingLineRacingPoint: 0.5
+  _shortDistancePriority: 0.75
+  _smallestAnglePriority: 0.25
+  _racingLinerGradientDescentStep: 0.5
+  _trackCenterLineColor: {r: 0.023529425, g: 0.11320752, b: 0, a: 1}
+  _leftBorderColor: {r: 0.03773582, g: 0.03773582, b: 0.03773582, a: 1}
+  _rightBorderColor: {r: 0.03773582, g: 0.03773582, b: 0.03773582, a: 1}
+  _racingLineColor: {r: 1, g: 0, b: 0, a: 1}
+  _enableShortestDistanceCalculations: 1
+  _enableSmallestAnglePriority: 0
 --- !u!1 &1124197703
 GameObject:
   m_ObjectHideFlags: 0
@@ -3161,6 +3259,16 @@ MonoBehaviour:
   - {fileID: 29268494}
   - {fileID: 653293071}
   - {fileID: 2020863025}
+  _mainStartingLineRacingPoint: 0
+  _shortDistancePriority: 0.75
+  _smallestAnglePriority: 0.25
+  _racingLinerGradientDescentStep: 0.2
+  _trackCenterLineColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _leftBorderColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _rightBorderColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _racingLineColor: {r: 1, g: 0, b: 0, a: 1}
+  _enableShortestDistanceCalculations: 0
+  _enableSmallestAnglePriority: 0
 --- !u!4 &1124197705
 Transform:
   m_ObjectHideFlags: 0
@@ -3332,6 +3440,54 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1171919866}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1248834290
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1248834291}
+  - component: {fileID: 1248834292}
+  m_Layer: 0
+  m_Name: WayPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1248834291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248834290}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 43.5, y: 0, z: 2.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1102156167}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1248834292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248834290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 3
+  _width: 10
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 1
+  _gizmosScaleZ: 0.1
 --- !u!1 &1283687825
 GameObject:
   m_ObjectHideFlags: 0
@@ -3356,13 +3512,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1283687825}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.1, y: 0, z: 80.86}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -13.11, y: 0, z: 78.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1102156167}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &1283687827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3376,6 +3532,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 3
+  _width: 10
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 1
+  _gizmosScaleZ: 0.1
 --- !u!114 &1307869471 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4813165985070282730, guid: a705b2e85ab488849b71b7a97641c882,
@@ -3455,13 +3615,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1327054557}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -49.3, y: 0, z: -14.9}
+  m_LocalRotation: {x: 0, y: 0.92387956, z: 0, w: 0.38268343}
+  m_LocalPosition: {x: -51.5, y: 0, z: -17.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1102156167}
   m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
 --- !u!114 &1327054559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3475,6 +3635,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 3
+  _width: 10
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 1
+  _gizmosScaleZ: 0.1
 --- !u!1 &1336716373
 GameObject:
   m_ObjectHideFlags: 0
@@ -3721,7 +3885,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1358973378}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55.06, y: 0, z: 29.2}
+  m_LocalPosition: {x: 51.5, y: 0, z: 38.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1102156167}
@@ -3740,6 +3904,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 3
+  _width: 10
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 1
+  _gizmosScaleZ: 0.1
 --- !u!1001 &1361590649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4186,13 +4354,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1444367037}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -54.44, y: 0, z: 42.23}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -53.34, y: 0, z: 38.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1102156167}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1444367039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4206,6 +4374,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 3
+  _width: 10
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 1
+  _gizmosScaleZ: 0.1
 --- !u!1001 &1473450872
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5062,13 +5234,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1656961164}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.13, y: 0, z: 80.69}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 13.2, y: 0, z: 78.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1102156167}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &1656961166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5082,6 +5254,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 3
+  _width: 10
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 1
+  _gizmosScaleZ: 0.1
 --- !u!1 &1658907089
 GameObject:
   m_ObjectHideFlags: 0
@@ -5549,13 +5725,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1752332567}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.8, y: 0, z: -26.5}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -18.8, y: 0, z: -4.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1102156167}
   m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1752332569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5569,6 +5745,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 3
+  _width: 7.93
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 1
+  _gizmosScaleZ: 0.1
 --- !u!1001 &1795930187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5668,13 +5848,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1871038932}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -42.74, y: 0, z: 62.34}
+  m_LocalRotation: {x: 0, y: 0.9396927, z: -0, w: -0.3420201}
+  m_LocalPosition: {x: -43.41, y: 0, z: 65.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1102156167}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 220, z: 0}
 --- !u!114 &1871038934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5688,6 +5868,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 3
+  _width: 10
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 1
+  _gizmosScaleZ: 0.1
 --- !u!1001 &1879645141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5789,6 +5973,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 3
+  _width: 2.5
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 2
+  _gizmosScaleZ: 0.1
 --- !u!4 &1920238269
 Transform:
   m_ObjectHideFlags: 0
@@ -6019,6 +6207,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 3
+  _width: 2.5
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 2
+  _gizmosScaleZ: 0.1
 --- !u!4 &1999271390
 Transform:
   m_ObjectHideFlags: 0
@@ -6301,6 +6493,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 3
+  _width: 2.5
+  _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _gizmosScaleY: 2
+  _gizmosScaleZ: 0.1
 --- !u!4 &2020863026
 Transform:
   m_ObjectHideFlags: 0

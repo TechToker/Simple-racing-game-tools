@@ -21,7 +21,8 @@ public class WayPoint : MonoBehaviour
     public Vector3 LeftBorder => transform.TransformPoint(-_width / 2, _gizmosScaleY / 2, 0);
     public Vector3 RightBorder => transform.TransformPoint(_width / 2, _gizmosScaleY / 2, 0);
 
-    public Vector3 RacingPoint => transform.TransformPoint(_racingLinePoint, _gizmosScaleY / 2, 0);
+    public Vector3 RacingPoint => transform.TransformPoint(_racingLinePoint * Width, _gizmosScaleY / 2, 0);
+    public float LocalRacingPoint => _racingLinePoint;
     private float _racingLinePoint = 0;
 
     private RaceCircuit _circuit;
@@ -39,19 +40,14 @@ public class WayPoint : MonoBehaviour
 
     public void OnDrawGizmosSelected()
     {
-
         Gizmos.color = _gateColor;
-
-        //Gizmos.DrawWireSphere(transform.position, _radius);
-
+        
         Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
         Gizmos.DrawWireCube(new Vector3(0, _gizmosScaleY / 2, 0), new Vector3(_width, _gizmosScaleY, _gizmosScaleZ));
-
-        //Gizmos.DrawWireSphere(new Vector3(-_width / 2, _gizmosScaleY / 2, 0), 1);
     }
 
     public void SetRacingPoint(float racingPoint)
     {
-        _racingLinePoint = racingPoint;
+        _racingLinePoint = Mathf.Clamp(racingPoint, -0.5f, 0.5f);
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RaceCircuit : MonoBehaviour
 {
-    [SerializeField] private WayPoint[] _waypoints;
+    public List<WayPoint> Waypoints;
 
     [Header("Racing line")]
     [Range(-1, 1)]
@@ -24,6 +25,8 @@ public class RaceCircuit : MonoBehaviour
     [SerializeField] private Color _racingLineColor = Color.red;
 
     [Header("Debug")]
+    public bool ShowRotationPoints;
+    
     [SerializeField] private bool DrawGizmo;
     public bool _enableShortestDistanceCalculations;
     public bool _enableSmallestAnglePriority;
@@ -45,32 +48,32 @@ public class RaceCircuit : MonoBehaviour
 
     public void Bake()
     {
-        _waypoints = GetComponentsInChildren<WayPoint>();
+        Waypoints = GetComponentsInChildren<WayPoint>().ToList();
 
-        foreach (WayPoint wp in _waypoints)
+        foreach (WayPoint wp in Waypoints)
             wp.SetCircuit(this);
         
-        for (int i = 0; i < _waypoints.Length; i++)
+        for (int i = 0; i < Waypoints.Count; i++)
         {
             if (i == 0)
             {
-                _waypoints[i].SetRacingPoint(_mainStartingLineRacingPoint * _waypoints[i].Width / 2);
+                Waypoints[i].SetRacingPoint(_mainStartingLineRacingPoint * Waypoints[i].Width / 2);
                 continue;
             }
 
             if(_enableShortestDistanceCalculations)
-                _waypoints[i].SetRacingPoint(GetRacingPointBetweenWaypoints(_waypoints[i - 1], _waypoints[i]));
+                Waypoints[i].SetRacingPoint(GetRacingPointBetweenWaypoints(Waypoints[i - 1], Waypoints[i]));
             else if (_enableSmallestAnglePriority)
             {
-                WayPoint nextWp = _waypoints[(i + 1) % _waypoints.Length];
-                WayPoint prevWp = _waypoints[(i - 1 + _waypoints.Length) % _waypoints.Length];
+                WayPoint nextWp = Waypoints[(i + 1) % Waypoints.Count];
+                WayPoint prevWp = Waypoints[(i - 1 + Waypoints.Count) % Waypoints.Count];
 
-                float currentRp = GetBestRacingPointByAngle(_waypoints[i], prevWp, nextWp);
+                float currentRp = GetBestRacingPointByAngle(Waypoints[i], prevWp, nextWp);
                 
 //                nextWp.SetRacingPoint(nextWp.LocalRacingPoint - currentRp * 0.5f);
 //                prevWp.SetRacingPoint(prevWp.LocalRacingPoint - currentRp * 0.5f);
                 
-                _waypoints[i].SetRacingPoint(currentRp);
+                Waypoints[i].SetRacingPoint(currentRp);
             }
         }
     }
@@ -84,13 +87,13 @@ public class RaceCircuit : MonoBehaviour
 //        }
         
         Gizmos.color = Color.cyan;
-        Gizmos.DrawRay(_waypoints[0].Center, _waypoints[1].Center - _waypoints[0].Center);
-        Gizmos.DrawRay(_waypoints[1].Center, _waypoints[2].Center - _waypoints[1].Center);
+        Gizmos.DrawRay(Waypoints[0].Center, Waypoints[1].Center - Waypoints[0].Center);
+        Gizmos.DrawRay(Waypoints[1].Center, Waypoints[2].Center - Waypoints[1].Center);
         
-        for (int i = 0; i < _waypoints.Length; i++)
+        for (int i = 0; i < Waypoints.Count; i++)
         {
-            WayPoint wpFrom = _waypoints[i];
-            WayPoint wpTo = (i != _waypoints.Length - 1) ? _waypoints[i + 1] : _waypoints[0];
+            WayPoint wpFrom = Waypoints[i];
+            WayPoint wpTo = (i != Waypoints.Count - 1) ? Waypoints[i + 1] : Waypoints[0];
 
 //            Gizmos.color = _trackCenterLineColor;
 //            Gizmos.DrawLine(wpFrom.Center, wpTo.Center);
@@ -189,17 +192,16 @@ public class RaceCircuit : MonoBehaviour
 
     public WayPoint GetPoint(int index)
     {
-        return _waypoints[index];
+        return Waypoints[index];
     }
 
     public int GetNextPoint(int point)
     {
-        if (point < _waypoints.Length - 1)
+        if (point < Waypoints.Count - 1)
             return point + 1;
         else
             return 0;
     }
-
 
     public List<WayPoint> GetWaypointsInDistance(Vector3 startPosition, float analysisDistance, int currentWaypoint)
     {
@@ -212,7 +214,7 @@ public class RaceCircuit : MonoBehaviour
             WayPoint currentPoint = GetPoint(currentWaypoint);
 
             currentWaypoint = GetNextPoint(currentWaypoint);
-            WayPoint nextPoint = _waypoints[currentWaypoint];
+            WayPoint nextPoint = Waypoints[currentWaypoint];
 
             distance += Vector3.Distance(currentPoint.transform.position, nextPoint.transform.position);
 
@@ -221,5 +223,23 @@ public class RaceCircuit : MonoBehaviour
         } while (distance < analysisDistance);
 
         return points;
+    }
+
+    public void SetPointPosition(int index, Vector3 newPos)
+    {
+        Waypoints[index].transform.position = new Vector3(newPos.x, Waypoints[index].transform.position.y, newPos.z);
+    }
+
+    public void SetPointRotation(int index, float zAngle)
+    {
+        
+    }
+
+    public void AddNewWaypoint(Vector3 position)
+    {
+        GameObject copyFrom = Waypoints[Waypoints.Count - 1].gameObject;
+        GameObject newWaypoint = Instantiate(copyFrom, new Vector3(position.x, copyFrom.transform.position.y, position.z), copyFrom.transform.rotation, transform);
+        
+        Waypoints.Add(newWaypoint.GetComponent<WayPoint>());
     }
 }

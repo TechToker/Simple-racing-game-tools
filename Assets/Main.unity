@@ -554,17 +554,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 16
+  _shortestRacingLinePoint: -0.5
+  _finalRacingPoint: 0.21280003
+  TurningAngle: 16
   DistanceToNextWaypoint: 14
   WaypointDifficulty: 0.01
   NextWaypointDifficulty: 0.72
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: -27.65298, y: 0, z: -29.542645}
 --- !u!4 &23822120
 Transform:
   m_ObjectHideFlags: 0
@@ -608,17 +610,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 2.5
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 2
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &29268495
 Transform:
   m_ObjectHideFlags: 0
@@ -662,17 +666,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 46
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 11
   WaypointDifficulty: 0.45
   NextWaypointDifficulty: 0.39
   PrevWaypointDifficulty: 0.16
   PrevWpDirection: -1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &29817791
 Transform:
   m_ObjectHideFlags: 0
@@ -716,17 +722,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 15
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 20
   WaypointDifficulty: 0.01
   NextWaypointDifficulty: 0.03
   PrevWaypointDifficulty: 0.42
   PrevWpDirection: 1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &56283751
 Transform:
   m_ObjectHideFlags: 0
@@ -784,17 +792,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &86984233
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,17 +834,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 41
+  _shortestRacingLinePoint: -0.5
+  _finalRacingPoint: -0.5
+  TurningAngle: 41
   DistanceToNextWaypoint: 24
   WaypointDifficulty: 0.3
   NextWaypointDifficulty: 0.01
   PrevWaypointDifficulty: 0
   PrevWpDirection: 1
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: -98.52928, y: 0, z: -17.299164}
 --- !u!4 &86984235
 Transform:
   m_ObjectHideFlags: 0
@@ -892,17 +904,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 7.93
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &91903289
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,7 +1069,7 @@ MonoBehaviour:
   IsClosed: 1
   ShowRoadCenterLine: 0
   ShowRoadBorder: 1
-  ShowShortestRacingLine: 0
+  ShowShortestRacingLine: 1
   ShowFinalRacingLine: 1
   EnableWaypointsHandles: 1
   ShowWaypointsNames: 1
@@ -1198,17 +1212,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 17
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0.0099
+  TurningAngle: 17
   DistanceToNextWaypoint: 11
   WaypointDifficulty: 0.01
   NextWaypointDifficulty: 0.01
   PrevWaypointDifficulty: 0
   PrevWpDirection: 1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: -82.66983, y: 0, z: 24.689613}
 --- !u!4 &122562015
 Transform:
   m_ObjectHideFlags: 0
@@ -1252,17 +1268,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 34
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 112
   WaypointDifficulty: 0.12
   NextWaypointDifficulty: -0
   PrevWaypointDifficulty: 0.76
   PrevWpDirection: -1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &156162097
 Transform:
   m_ObjectHideFlags: 0
@@ -1306,17 +1324,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 75
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 61
   WaypointDifficulty: 0.93
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0.13
   PrevWpDirection: -1
   NextWpDirection: 1
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &174705678
 Transform:
   m_ObjectHideFlags: 0
@@ -1686,17 +1706,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 113
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 14
   WaypointDifficulty: 1
   NextWaypointDifficulty: 0.09
   PrevWaypointDifficulty: 0.02
   PrevWpDirection: -1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &261435301
 Transform:
   m_ObjectHideFlags: 0
@@ -1805,17 +1827,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 42
+  _shortestRacingLinePoint: -0.5
+  _finalRacingPoint: -0.0846
+  TurningAngle: 42
   DistanceToNextWaypoint: 43
   WaypointDifficulty: 0.33
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0.62
   PrevWpDirection: -1
   NextWpDirection: 1
+  _rightRotateControlPoint: {x: 16.146154, y: 0, z: 59.90487}
 --- !u!4 &281920087
 Transform:
   m_ObjectHideFlags: 0
@@ -1952,17 +1976,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 54
+  _shortestRacingLinePoint: 0.5
+  _finalRacingPoint: 0.5
+  TurningAngle: 54
   DistanceToNextWaypoint: 16
   WaypointDifficulty: 0.67
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0.31
   PrevWpDirection: -1
   NextWpDirection: 1
+  _rightRotateControlPoint: {x: -57.952866, y: 0, z: 18.064636}
 --- !u!4 &299490273
 Transform:
   m_ObjectHideFlags: 0
@@ -2083,17 +2109,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 32
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 16
   WaypointDifficulty: 0.09
   NextWaypointDifficulty: 0.11
   PrevWaypointDifficulty: 0
   PrevWpDirection: -1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &352731512
 Transform:
   m_ObjectHideFlags: 0
@@ -2301,17 +2329,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 46
+  _shortestRacingLinePoint: -0.5
+  _finalRacingPoint: -0.5
+  TurningAngle: 46
   DistanceToNextWaypoint: 9
   WaypointDifficulty: 0.45
   NextWaypointDifficulty: 0.88
   PrevWaypointDifficulty: 0.01
   PrevWpDirection: -1
   NextWpDirection: 1
+  _rightRotateControlPoint: {x: -105.47313, y: 0, z: 28.237997}
 --- !u!4 &385908868
 Transform:
   m_ObjectHideFlags: 0
@@ -2585,17 +2615,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 2.5
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 2
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &415935091
 Transform:
   m_ObjectHideFlags: 0
@@ -2789,17 +2821,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 69
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 12
   WaypointDifficulty: 0.88
   NextWaypointDifficulty: 0.57
   PrevWaypointDifficulty: 0.32
   PrevWpDirection: -1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &457863222
 Transform:
   m_ObjectHideFlags: 0
@@ -2855,17 +2889,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 20
+  _shortestRacingLinePoint: 0.5
+  _finalRacingPoint: 0.5
+  TurningAngle: 20
   DistanceToNextWaypoint: 10
   WaypointDifficulty: 0.02
   NextWaypointDifficulty: 0.03
   PrevWaypointDifficulty: 0.46
   PrevWpDirection: -1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: -22.04646, y: 0, z: -3.5611024}
 --- !u!4 &462865225
 Transform:
   m_ObjectHideFlags: 0
@@ -2909,17 +2945,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 36
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 11
   WaypointDifficulty: 0.17
   NextWaypointDifficulty: 0.41
   PrevWaypointDifficulty: 0.06
   PrevWpDirection: -1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &481319813
 Transform:
   m_ObjectHideFlags: 0
@@ -2977,17 +3015,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &506168591
 GameObject:
   m_ObjectHideFlags: 0
@@ -3396,17 +3436,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 31
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0.0372
+  TurningAngle: 31
   DistanceToNextWaypoint: 43
   WaypointDifficulty: 0.07
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0.04
   PrevWpDirection: -1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: -73.61842, y: 0, z: -26.184103}
 --- !u!4 &590947151
 Transform:
   m_ObjectHideFlags: 0
@@ -3537,17 +3579,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 63
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 13
   WaypointDifficulty: 0.82
   NextWaypointDifficulty: 0.39
   PrevWaypointDifficulty: 0.6
   PrevWpDirection: -1
   NextWpDirection: 1
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &624685862
 Transform:
   m_ObjectHideFlags: 0
@@ -3591,17 +3635,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 2.5
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 2
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &653293072
 Transform:
   m_ObjectHideFlags: 0
@@ -3645,17 +3691,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 53
+  _shortestRacingLinePoint: -0.5
+  _finalRacingPoint: -0.32849997
+  TurningAngle: 53
   DistanceToNextWaypoint: 18
   WaypointDifficulty: 0.65
   NextWaypointDifficulty: 0.32
   PrevWaypointDifficulty: 0.81
   PrevWpDirection: -1
   NextWpDirection: 1
+  _rightRotateControlPoint: {x: -53.848557, y: 0, z: 28.805502}
 --- !u!4 &698017563
 Transform:
   m_ObjectHideFlags: 0
@@ -3699,17 +3747,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 25
+  _shortestRacingLinePoint: -0.5
+  _finalRacingPoint: 0.23719996
+  TurningAngle: 25
   DistanceToNextWaypoint: 14
   WaypointDifficulty: 0.03
   NextWaypointDifficulty: 0.76
   PrevWaypointDifficulty: 0
   PrevWpDirection: 1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: 17.89377, y: 0, z: 29.162071}
 --- !u!4 &732251507
 Transform:
   m_ObjectHideFlags: 0
@@ -3921,17 +3971,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 36
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 89
   WaypointDifficulty: 0.17
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0.01
   PrevWpDirection: 1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &765845384
 Transform:
   m_ObjectHideFlags: 0
@@ -4093,17 +4145,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 2.5
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 2
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &836025093
 Transform:
   m_ObjectHideFlags: 0
@@ -4147,17 +4201,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 35
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 11
   WaypointDifficulty: 0.14
   NextWaypointDifficulty: 0.86
   PrevWaypointDifficulty: -0
   PrevWpDirection: -1
   NextWpDirection: 0.5
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &887688294
 Transform:
   m_ObjectHideFlags: 0
@@ -4201,17 +4257,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 71
+  _shortestRacingLinePoint: 0.5
+  _finalRacingPoint: 0.5
+  TurningAngle: 71
   DistanceToNextWaypoint: 32
   WaypointDifficulty: 0.9
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0.44
   PrevWpDirection: -1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: -101.8103, y: 0, z: 19.572886}
 --- !u!4 &912806053
 Transform:
   m_ObjectHideFlags: 0
@@ -4255,17 +4313,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 45
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 14
   WaypointDifficulty: 0.42
   NextWaypointDifficulty: 0.67
   PrevWaypointDifficulty: 0.41
   PrevWpDirection: -1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &952698398
 Transform:
   m_ObjectHideFlags: 0
@@ -4356,17 +4416,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &1043595260
 GameObject:
   m_ObjectHideFlags: 0
@@ -4410,17 +4472,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &1045806507
 GameObject:
   m_ObjectHideFlags: 0
@@ -4450,17 +4514,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 6
+  _shortestRacingLinePoint: 0.5
+  _finalRacingPoint: 0.08000001
+  TurningAngle: 6
   DistanceToNextWaypoint: 15
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0.01
   PrevWaypointDifficulty: 0.42
   PrevWpDirection: 1
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: -69.72134, y: 0, z: 18.140818}
 --- !u!4 &1045806509
 Transform:
   m_ObjectHideFlags: 0
@@ -4504,17 +4570,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 2.5
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 2
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &1054457412
 Transform:
   m_ObjectHideFlags: 0
@@ -5054,17 +5122,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 32
+  _shortestRacingLinePoint: 0.5
+  _finalRacingPoint: -0.082399964
+  TurningAngle: 32
   DistanceToNextWaypoint: 11
   WaypointDifficulty: 0.09
   NextWaypointDifficulty: 0.64
   PrevWaypointDifficulty: -0
   PrevWpDirection: 1
   NextWpDirection: 1
+  _rightRotateControlPoint: {x: -26.816227, y: 0, z: 24.85666}
 --- !u!4 &1149170432
 Transform:
   m_ObjectHideFlags: 0
@@ -5179,17 +5249,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 84
+  _shortestRacingLinePoint: -0.5
+  _finalRacingPoint: -0.4947
+  TurningAngle: 84
   DistanceToNextWaypoint: 13
   WaypointDifficulty: 0.99
   NextWaypointDifficulty: 0.53
-  PrevWaypointDifficulty: -0
+  PrevWaypointDifficulty: 0
   PrevWpDirection: -1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: -58.728012, y: 0, z: 44.13645}
 --- !u!4 &1178234969
 Transform:
   m_ObjectHideFlags: 0
@@ -5233,17 +5305,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 21
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 13
   WaypointDifficulty: 0.02
   NextWaypointDifficulty: 0.82
   PrevWaypointDifficulty: 0
   PrevWpDirection: -1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &1189992671
 Transform:
   m_ObjectHideFlags: 0
@@ -5301,17 +5375,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &1283687825
 GameObject:
   m_ObjectHideFlags: 0
@@ -5355,17 +5431,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &1306217288
 GameObject:
   m_ObjectHideFlags: 0
@@ -5395,17 +5473,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 47
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 13
   WaypointDifficulty: 0.48
   NextWaypointDifficulty: 0.07
   PrevWaypointDifficulty: 0.67
   PrevWpDirection: 0.4
   NextWpDirection: 1
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &1306217290
 Transform:
   m_ObjectHideFlags: 0
@@ -5518,17 +5598,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &1333785515
 GameObject:
   m_ObjectHideFlags: 0
@@ -5558,17 +5640,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 23
+  _shortestRacingLinePoint: -0.5
+  _finalRacingPoint: -0.5
+  TurningAngle: 23
   DistanceToNextWaypoint: 13
   WaypointDifficulty: 0.03
   NextWaypointDifficulty: -0
   PrevWaypointDifficulty: 0.02
   PrevWpDirection: 1
   NextWpDirection: 1
+  _rightRotateControlPoint: {x: -15.115725, y: 0, z: 4.666786}
 --- !u!4 &1333785517
 Transform:
   m_ObjectHideFlags: 0
@@ -5847,17 +5931,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1361590649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6029,17 +6115,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 13
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 69
   WaypointDifficulty: 0.01
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &1408121005
 Transform:
   m_ObjectHideFlags: 0
@@ -6377,17 +6465,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1473450872
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6488,17 +6578,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 4
+  _shortestRacingLinePoint: -0.5
+  _finalRacingPoint: 0.25
+  TurningAngle: 4
   DistanceToNextWaypoint: 14
   WaypointDifficulty: -0
   NextWaypointDifficulty: 0.75
-  PrevWaypointDifficulty: 0.08
+  PrevWaypointDifficulty: 0
   PrevWpDirection: 1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: -41.856148, y: 0, z: 56.69555}
 --- !u!4 &1476694819
 Transform:
   m_ObjectHideFlags: 0
@@ -6673,17 +6765,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 77
+  _shortestRacingLinePoint: -0.5
+  _finalRacingPoint: -0.5
+  TurningAngle: 77
   DistanceToNextWaypoint: 18
   WaypointDifficulty: 0.95
   NextWaypointDifficulty: 0.01
   PrevWaypointDifficulty: 0.01
   PrevWpDirection: -1
   NextWpDirection: 1
+  _rightRotateControlPoint: {x: -10.654211, y: 0, z: -16.941109}
 --- !u!4 &1513554835
 Transform:
   m_ObjectHideFlags: 0
@@ -7215,17 +7309,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 16
+  _shortestRacingLinePoint: -0.5
+  _finalRacingPoint: -0.0941
+  TurningAngle: 16
   DistanceToNextWaypoint: 11
   WaypointDifficulty: 0.01
   NextWaypointDifficulty: 0.41
   PrevWaypointDifficulty: 0.01
   PrevWpDirection: 0
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: -89.4731, y: 0, z: 33.04058}
 --- !u!4 &1616806103
 Transform:
   m_ObjectHideFlags: 0
@@ -7233,7 +7329,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1616806101}
-  m_LocalRotation: {x: -0, y: 0.66467595, z: -0, w: -0.74713176}
+  m_LocalRotation: {x: -0, y: 0.63958436, z: -0, w: -0.7687209}
   m_LocalPosition: {x: -90.382416, y: 0, z: 28.12396}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -7425,17 +7521,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &1658907089
 GameObject:
   m_ObjectHideFlags: 0
@@ -7922,17 +8020,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 7.93
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &1752576272
 GameObject:
   m_ObjectHideFlags: 0
@@ -7994,17 +8094,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 1
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 87
   WaypointDifficulty: -0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: -1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &1780149843
 Transform:
   m_ObjectHideFlags: 0
@@ -8123,17 +8225,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 55
+  _shortestRacingLinePoint: 0.5
+  _finalRacingPoint: 0.476
+  TurningAngle: 55
   DistanceToNextWaypoint: 41
   WaypointDifficulty: 0.7
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0.08
   PrevWpDirection: 1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: -23.802294, y: 0, z: 31.337994}
 --- !u!4 &1805367740
 Transform:
   m_ObjectHideFlags: 0
@@ -8380,17 +8484,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1879645141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8491,17 +8597,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 5
+  _shortestRacingLinePoint: 0.5
+  _finalRacingPoint: 0.45
+  TurningAngle: 5
   DistanceToNextWaypoint: 14
   WaypointDifficulty: -0
   NextWaypointDifficulty: 0.07
   PrevWaypointDifficulty: 0.02
   PrevWpDirection: -1
   NextWpDirection: 1
+  _rightRotateControlPoint: {x: -25.33523, y: 0, z: 13.606354}
 --- !u!4 &1901773378
 Transform:
   m_ObjectHideFlags: 0
@@ -8545,17 +8653,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 2.5
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 2
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &1920238269
 Transform:
   m_ObjectHideFlags: 0
@@ -8674,17 +8784,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 53
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 11
   WaypointDifficulty: 0.65
   NextWaypointDifficulty: 0.75
   PrevWaypointDifficulty: 0.77
   PrevWpDirection: -1
   NextWpDirection: 0.4
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &1934240712
 Transform:
   m_ObjectHideFlags: 0
@@ -8839,17 +8951,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 58
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 17
   WaypointDifficulty: 0.76
   NextWaypointDifficulty: 0.01
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0.5
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &1973136148
 Transform:
   m_ObjectHideFlags: 0
@@ -8893,17 +9007,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 2.5
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 2
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &1999271390
 Transform:
   m_ObjectHideFlags: 0
@@ -8947,17 +9063,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 96
+  _shortestRacingLinePoint: -0.5
+  _finalRacingPoint: -0.5
+  TurningAngle: 96
   DistanceToNextWaypoint: 16
   WaypointDifficulty: 1
   NextWaypointDifficulty: 0.21
   PrevWaypointDifficulty: 0.02
   PrevWpDirection: -1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: 30.254107, y: 0, z: 43.28915}
 --- !u!4 &1999325913
 Transform:
   m_ObjectHideFlags: 0
@@ -9239,17 +9357,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 2.5
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 2
-  AngleToNextWaypoint: 0
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 0
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 0
   NextWpDirection: 0
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &2020863026
 Transform:
   m_ObjectHideFlags: 0
@@ -9528,17 +9648,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 32
+  _shortestRacingLinePoint: 0
+  _finalRacingPoint: 0
+  TurningAngle: 0
   DistanceToNextWaypoint: 23
   WaypointDifficulty: 0.09
   NextWaypointDifficulty: 0.03
   PrevWaypointDifficulty: 0.39
   PrevWpDirection: 1
   NextWpDirection: 1
+  _rightRotateControlPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &2100447158
 Transform:
   m_ObjectHideFlags: 0
@@ -9582,17 +9704,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _gizmosScaleY: 1
-  AngleToNextWaypoint: 34
+  _shortestRacingLinePoint: 0.5
+  _finalRacingPoint: 0.5
+  TurningAngle: 34
   DistanceToNextWaypoint: 15
   WaypointDifficulty: 0.12
   NextWaypointDifficulty: -0
   PrevWaypointDifficulty: 0
   PrevWpDirection: -1
   NextWpDirection: -1
+  _rightRotateControlPoint: {x: -26.931396, y: 0, z: 54.857445}
 --- !u!4 &2136298051
 Transform:
   m_ObjectHideFlags: 0

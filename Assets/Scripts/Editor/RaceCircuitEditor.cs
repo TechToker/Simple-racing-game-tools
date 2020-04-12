@@ -171,7 +171,7 @@ public class RaceCircuitEditor : Editor
 
         if (_circuit.ShowWaypointsData)
         {
-            info += $"Ag: {_circuit.Waypoints[index].AngleToNextWaypoint}° " +
+            info += $"Ag: {_circuit.Waypoints[index].TurningAngle}° " +
                     $"Dist: {_circuit.Waypoints[index].DistanceToNextWaypoint}m {Environment.NewLine}";
 
             zOffset += 0.7f;
@@ -223,7 +223,7 @@ public class RaceCircuitEditor : Editor
         }
     }
     
-    public Vector2 FindNearestPointOnLine(Vector2 origin, Vector2 end, Vector2 point)
+    private Vector2 FindNearestPointOnLine(Vector2 origin, Vector2 end, Vector2 point)
     {
         //Get heading
         Vector2 heading = (end - origin);

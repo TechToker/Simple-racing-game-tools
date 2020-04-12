@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class WayPoint : MonoBehaviour
 {
-    [Header("New")]
+    [Header("Base")]
     [SerializeField] private float _width = 2.5f;
     public float Width => _width;
 
@@ -16,9 +16,25 @@ public class WayPoint : MonoBehaviour
     public Vector3 Center => new Vector3(transform.position.x, transform.position.y + _gizmosScaleY / 2, transform.position.z);
     public Vector3 LeftBorder => transform.TransformPoint(-_width / 2, _gizmosScaleY / 2, 0);
     public Vector3 RightBorder => transform.TransformPoint(_width / 2, _gizmosScaleY / 2, 0);
+    
+    public Vector3 ShortestRacingPoint => transform.TransformPoint(_shortestRacingLinePoint * Width, _gizmosScaleY / 2, 0);
+    public float LocalShortestRacingPoint => _shortestRacingLinePoint;
+    [HideInInspector] [SerializeField] private float _shortestRacingLinePoint;
+    
+    public Vector3 FinalRacingPoint => transform.TransformPoint(_finalRacingPoint * Width, _gizmosScaleY / 2, 0);
+    [HideInInspector] [SerializeField] private float _finalRacingPoint;
 
+    public float TurningAngle;
+    public float DistanceToNextWaypoint;
+    
+    public float WaypointDifficulty;
+    public float NextWaypointDifficulty;
+    public float PrevWaypointDifficulty;
 
-    private Vector3 _rightRotateControlPoint;
+    public float PrevWpDirection;
+    public float NextWpDirection;
+    
+    [HideInInspector] [SerializeField] private Vector3 _rightRotateControlPoint;
     public Vector3 RightRotateControlPoint
     {
         get => _rightRotateControlPoint;
@@ -38,32 +54,22 @@ public class WayPoint : MonoBehaviour
             
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y - angle, 0);
     }
-
-    public Vector3 RacingPoint => transform.TransformPoint(_racingLinePoint * Width, _gizmosScaleY / 2, 0);
-    public float LocalRacingPoint => _racingLinePoint;
-    private float _racingLinePoint = 0;
     
-    private float _debugRacingLinePoint = 0;
-    public Vector3 DebugRacingPoint => transform.TransformPoint(_debugRacingLinePoint * Width, _gizmosScaleY / 2, 0);
-
-    public float AngleToNextWaypoint;
-    public float DistanceToNextWaypoint;
-    
-    public float WaypointDifficulty;
-    public float NextWaypointDifficulty;
-    public float PrevWaypointDifficulty;
-
-    public float PrevWpDirection;
-    public float NextWpDirection;
-
-    private RaceCircuit _circuit;
-    public void SetCircuit(RaceCircuit circuit)
+    public void Bake()
     {
-        _circuit = circuit;
-        
-        _racingLinePoint = 0;
-        _debugRacingLinePoint = 0;
-        
+        _shortestRacingLinePoint = 0;
+        _finalRacingPoint = 0;
+
+        TurningAngle = 0;
+        DistanceToNextWaypoint = 0;
+
+        WaypointDifficulty = 0;
+        NextWaypointDifficulty = 0;
+        PrevWaypointDifficulty = 0;
+
+        PrevWpDirection = 0;
+        NextWpDirection = 0;
+
         ResetControlPoint();
     }
 
@@ -84,13 +90,13 @@ public class WayPoint : MonoBehaviour
         Gizmos.DrawLine(LeftBorder, RightBorder);
     }
 
-    public void SetRacingPoint(float racingPoint)
+    public void SetShortestRacingPoint(float racingPoint)
     {
-        _racingLinePoint = Mathf.Clamp(racingPoint, -0.5f, 0.5f);
+        _shortestRacingLinePoint = Mathf.Clamp(racingPoint, -0.5f, 0.5f);
     }
 
-    public void SetDebugRacingPoint(float dRacingPoint)
+    public void SetFinalRacingPoint(float racingPoint)
     {
-        _debugRacingLinePoint = Mathf.Clamp(dRacingPoint, -0.5f, 0.5f);
+        _finalRacingPoint = Mathf.Clamp(racingPoint, -0.5f, 0.5f);
     }
 }

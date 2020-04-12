@@ -84,13 +84,13 @@ public class RaceCircuit : MonoBehaviour
             if (ShowShortestRacingLine)
             {
                 Gizmos.color = Color.blue;
-                Gizmos.DrawLine(wpFrom.RacingPoint, wpTo.RacingPoint);
+                Gizmos.DrawLine(wpFrom.ShortestRacingPoint, wpTo.ShortestRacingPoint);
             }
 
             if (ShowFinalRacingLine)
             {
                 Gizmos.color = Color.red;
-                Gizmos.DrawLine(wpFrom.DebugRacingPoint, wpTo.DebugRacingPoint);
+                Gizmos.DrawLine(wpFrom.FinalRacingPoint, wpTo.FinalRacingPoint);
             }
         }
     }
@@ -99,20 +99,21 @@ public class RaceCircuit : MonoBehaviour
     {
         Waypoints = GetComponentsInChildren<WayPoint>().ToList();
         
+        //Bake elements and build shortest racing line
         for (int i = 0; i < Waypoints.Count; i++)
         {
-            Waypoints[i].SetCircuit(this);
+            Waypoints[i].Bake();
             Waypoints[i].gameObject.name = string.Format(WaypointFormatName, i);
             
             if (i == 0)
             {
-                Waypoints[i].SetRacingPoint(_mainStartingLineRacingPoint);
+                Waypoints[i].SetShortestRacingPoint(_mainStartingLineRacingPoint);
                 continue;
             }
 
             if (_enableShortestDistanceCalculations)
             {
-                Waypoints[i].SetRacingPoint(GetBestRacingPointByDistance(Waypoints[i - 1], Waypoints[i]));
+                Waypoints[i].SetShortestRacingPoint(GetBestRacingPointByDistance(Waypoints[i - 1], Waypoints[i]));
             }
             else if (_enableSmallestAnglePriority)
             {
@@ -120,36 +121,44 @@ public class RaceCircuit : MonoBehaviour
                 WayPoint prevWp = GetWaypointByIndex(i - 1);
 
                 float currentRp = GetBestRacingPointByAngle(Waypoints[i], prevWp, nextWp);
-                Waypoints[i].SetRacingPoint(currentRp);
+                Waypoints[i].SetShortestRacingPoint(currentRp);
             }
         }
         
+        //Calculate waypoint angles & distance between them
         for (int i = 0; i < Waypoints.Count; i++)
         {
-            float currentWaypointAngle = Vector3.Angle(Waypoints[i].RacingPoint - GetWaypointByIndex(i - 1).RacingPoint, GetWaypointByIndex(i + 1).RacingPoint - Waypoints[i].RacingPoint);
+            Vector3 toPrevWaypointVector = Waypoints[i].ShortestRacingPoint - GetWaypointByIndex(i - 1).ShortestRacingPoint;
+            Vector3 toNextWaypointVector = GetWaypointByIndex(i + 1).ShortestRacingPoint - Waypoints[i].ShortestRacingPoint;
+            
+            float currentWaypointAngle = Vector3.Angle(toPrevWaypointVector, toNextWaypointVector);
             float distanceToNextWp = Vector3.Distance(Waypoints[i].transform.position, GetWaypointByIndex(i + 1).transform.position);
             
-            Waypoints[i].AngleToNextWaypoint = Mathf.RoundToInt(currentWaypointAngle);
+            Waypoints[i].TurningAngle = Mathf.RoundToInt(currentWaypointAngle);
             Waypoints[i].DistanceToNextWaypoint = Mathf.RoundToInt(distanceToNextWp);
         }
 
+        //Build final racing line by formula
         for (int i = 0; i < Waypoints.Count; i++)
         {
             WayPoint nextWp = GetWaypointByIndex(i + 1);
             WayPoint prevWp = GetWaypointByIndex(i - 1);
 
-            float difficulty = (float) Math.Round(_waypointDifficultyByAngle.Evaluate(nextWp.AngleToNextWaypoint), 2);
-            nextWp.WaypointDifficulty = difficulty;
+            nextWp.WaypointDifficulty = (float) Math.Round(_waypointDifficultyByAngle.Evaluate(nextWp.TurningAngle), 2);
 
-            Waypoints[i].NextWaypointDifficulty = (float) Math.Round(nextWp.WaypointDifficulty * _waypointDifficultyByDistance.Evaluate(Waypoints[i].DistanceToNextWaypoint), 2);
-            Waypoints[i].PrevWaypointDifficulty = (float) Math.Round(prevWp.WaypointDifficulty * _waypointDifficultyByDistance.Evaluate(prevWp.DistanceToNextWaypoint), 2);
+            float toNextWpDistanceCoef = _waypointDifficultyByDistance.Evaluate(Waypoints[i].DistanceToNextWaypoint);
+            float toPrevWpDistanceCoef = _waypointDifficultyByDistance.Evaluate(prevWp.DistanceToNextWaypoint);
+
+            Waypoints[i].NextWaypointDifficulty = (float) Math.Round(nextWp.WaypointDifficulty * toNextWpDistanceCoef, 2);
+            Waypoints[i].PrevWaypointDifficulty = (float) Math.Round(prevWp.WaypointDifficulty * toPrevWpDistanceCoef, 2);
             
-            Waypoints[i].NextWpDirection = nextWp.LocalRacingPoint * 2;
-            Waypoints[i].PrevWpDirection = prevWp.LocalRacingPoint * 2;
+            Waypoints[i].NextWpDirection = nextWp.LocalShortestRacingPoint * 2;
+            Waypoints[i].PrevWpDirection = prevWp.LocalShortestRacingPoint * 2;
             
-            float offset = (1 - Waypoints[i].WaypointDifficulty) * 
-                           (Waypoints[i].NextWaypointDifficulty * -Waypoints[i].NextWpDirection + Waypoints[i].PrevWaypointDifficulty * -Waypoints[i].PrevWpDirection);
-            Waypoints[i].SetDebugRacingPoint(Waypoints[i].LocalRacingPoint + offset);
+            float offset = (Waypoints[i].NextWaypointDifficulty * -Waypoints[i].NextWpDirection + Waypoints[i].PrevWaypointDifficulty * -Waypoints[i].PrevWpDirection)
+                           * (1 - Waypoints[i].WaypointDifficulty);
+            
+            Waypoints[i].SetFinalRacingPoint(Waypoints[i].LocalShortestRacingPoint + offset);
         }
     }
 
@@ -158,7 +167,7 @@ public class RaceCircuit : MonoBehaviour
         GradientDirections gradientDirection = GradientDirections.LEFT;
         
         //Angle through current waypoint center (Racing point on init = center)
-        float minAngle = Vector3.Angle(current.RacingPoint - prev.RacingPoint, next.RacingPoint - current.RacingPoint);
+        float minAngle = Vector3.Angle(current.ShortestRacingPoint - prev.ShortestRacingPoint, next.ShortestRacingPoint - current.ShortestRacingPoint);
         float currentRacingPoint = 0;
 
         //While next offset not cross the road border
@@ -172,9 +181,9 @@ public class RaceCircuit : MonoBehaviour
             Vector3 racingPointCandidateWorldPos = current.ConvertLocalPointToWorld(new Vector3(racingPointCandidate * current.Width, 0, 0));
             
             //Vector from prev point to current racing point candidate
-            Vector3 beforeWaypointVec = racingPointCandidateWorldPos - prev.RacingPoint;
+            Vector3 beforeWaypointVec = racingPointCandidateWorldPos - prev.ShortestRacingPoint;
             //Vector from current racing point candidate to next point
-            Vector3 afterWaypointVec = next.RacingPoint - racingPointCandidateWorldPos;
+            Vector3 afterWaypointVec = next.ShortestRacingPoint - racingPointCandidateWorldPos;
             
             //Calculate angle between vectors
             float minAngleCandidate = Vector3.Angle(beforeWaypointVec, afterWaypointVec);
@@ -200,34 +209,32 @@ public class RaceCircuit : MonoBehaviour
     private float GetBestRacingPointByDistance(WayPoint from, WayPoint to)
     {
         GradientDirections gradientDirection = GradientDirections.LEFT;
-        bool canChangeGradientDirection = true;
-
+        
+        float minWaypointsDistance = Vector3.Distance(from.ShortestRacingPoint, to.Center);
         float currentRacingPoint = 0;
-        float minWaypointsDistance = Vector3.Distance(from.RacingPoint, to.Center);
-
-        while(Mathf.Abs(currentRacingPoint) + _racingLineGradientStep < to.Width / 2)
+        
+        //While next offset not cross the road border
+        while(Mathf.Abs(currentRacingPoint) + _racingLineGradientStep <= 0.501f)
         {
             float racingPointCandidate = gradientDirection == GradientDirections.LEFT ?
                 currentRacingPoint - _racingLineGradientStep 
                 : currentRacingPoint + _racingLineGradientStep;
 
             Vector3 pointCandidateWorldPos = to.ConvertLocalPointToWorld(new Vector3(racingPointCandidate, 0, 0));
-            float waypointsDistance = Vector3.Distance(from.RacingPoint, pointCandidateWorldPos);
+            float waypointsDistance = Vector3.Distance(from.ShortestRacingPoint, pointCandidateWorldPos);
 
             if (waypointsDistance < minWaypointsDistance)
             {
                 minWaypointsDistance = waypointsDistance;
                 currentRacingPoint = racingPointCandidate;
-
             }
             else
             {
-                if (canChangeGradientDirection)
+                //Move racing point next candidate to right only if before we not move to left
+                if (Math.Abs(currentRacingPoint) < float.Epsilon && gradientDirection != GradientDirections.RIGHT)
                     gradientDirection = GradientDirections.RIGHT;
                 else
-                    return currentRacingPoint;
-
-                canChangeGradientDirection = false;
+                    break;
             }
         }
 

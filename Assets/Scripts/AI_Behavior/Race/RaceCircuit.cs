@@ -9,28 +9,39 @@ public class RaceCircuit : MonoBehaviour
     public List<WayPoint> Waypoints;
 
     [Header("Racing line")]
-    [Range(-1, 1)]
+    [Range(-0.5f, 0.5f)]
     [SerializeField] private float _mainStartingLineRacingPoint = 0;
-    
+
     [Tooltip("Percent from waypoint width")]
     [Range(0, 1)]
     [SerializeField] private float _racingLineGradientStep = 0.1f;
-
-    [Header("Gizmos : borders")]
-    [SerializeField] private Color _trackCenterLineColor = Color.gray;
-    [SerializeField] private Color _leftBorderColor = Color.gray;
-    [SerializeField] private Color _rightBorderColor = Color.gray;
-
-    [Header("Gizmos : racing line")]
-    [SerializeField] private Color _racingLineColor = Color.red;
-
-    [Header("Debug")]
-    [SerializeField] bool _showRotationHandles;
     
-    [SerializeField] private bool DrawGizmo;
     public bool _enableShortestDistanceCalculations;
     public bool _enableSmallestAnglePriority;
 
+    [SerializeField] private AnimationCurve _waypointDifficultyByAngle;
+    [SerializeField] private AnimationCurve _waypointDifficultyByDistance;
+
+
+    [Header("Debug: Road")]
+    public bool IsClosed;
+
+    public bool ShowRoadCenterLine;
+    public bool ShowRoadBorder;
+    
+    [Header("Debug: Racing line")]
+    [SerializeField] private bool ShowShortestRacingLine;
+    [SerializeField] private bool ShowFinalRacingLine;
+
+    [Header("Debug: Waypoints")]
+    public bool EnableWaypointsHandles;
+    
+    [Header("Debug: Waypoints data")]
+    public bool ShowWaypointsNames;
+    public bool ShowWaypointsData;
+    public bool ShowWaypointsDifficulty;
+    public bool ShowWaypointsDirections;
+    
     private const string WaypointFormatName = "Waypoint {0}";
 
     private enum GradientDirections
@@ -38,81 +49,107 @@ public class RaceCircuit : MonoBehaviour
         LEFT,
         RIGHT,
     };
-
-
-    public bool ShowRotationHandles => _showRotationHandles;
-
-    private void OnDrawGizmos()
+    
+    //TODO: Replace that
+    public WayPoint GetPoint(int index)
     {
-        if(!DrawGizmo)
-            return;
-        
-        DrawCircuit();
+        return Waypoints[index];
     }
 
-    public void Bake()
+    public int GetNextPoint(int point)
     {
-        Waypoints = GetComponentsInChildren<WayPoint>().ToList();
-
-        for(int i = 0; i < Waypoints.Count; i++)
-        {
-            Waypoints[i].SetCircuit(this);
-            Waypoints[i].gameObject.name = string.Format(WaypointFormatName, i);
-        }
-
-        for (int i = 0; i < Waypoints.Count; i++)
-        {
-            if (i == 0)
-            {
-                Waypoints[i].SetRacingPoint(_mainStartingLineRacingPoint * Waypoints[i].Width / 2);
-                continue;
-            }
-
-            if(_enableShortestDistanceCalculations)
-                Waypoints[i].SetRacingPoint(GetRacingPointBetweenWaypoints(Waypoints[i - 1], Waypoints[i]));
-            else if (_enableSmallestAnglePriority)
-            {
-                WayPoint nextWp = Waypoints[(i + 1) % Waypoints.Count];
-                WayPoint prevWp = Waypoints[(i - 1 + Waypoints.Count) % Waypoints.Count];
-
-                float currentRp = GetBestRacingPointByAngle(Waypoints[i], prevWp, nextWp);
-                
-//                nextWp.SetRacingPoint(nextWp.LocalRacingPoint - currentRp * 0.5f);
-//                prevWp.SetRacingPoint(prevWp.LocalRacingPoint - currentRp * 0.5f);
-                
-                Waypoints[i].SetRacingPoint(currentRp);
-            }
-        }
+        if (point < Waypoints.Count - 1)
+            return point + 1;
+        else
+            return 0;
+    }
+    
+    public WayPoint GetWaypointByIndex(int index)
+    {
+        return Waypoints[(index + Waypoints.Count) % Waypoints.Count];
     }
 
-    private void DrawCircuit()
+    private void OnDrawGizmosSelected()
     {
-//        for (int i = 0; i < 2; i++)
-//        {
-//            Gizmos.color = _racingLineColor;
-//            Gizmos.DrawLine(_waypoints[i].RacingPoint, _waypoints[i + 1].RacingPoint);
-//        }
-        
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawRay(Waypoints[0].Center, Waypoints[1].Center - Waypoints[0].Center);
-        Gizmos.DrawRay(Waypoints[1].Center, Waypoints[2].Center - Waypoints[1].Center);
-        
+        DrawRacingLine();
+    }
+    
+    private void DrawRacingLine()
+    {
         for (int i = 0; i < Waypoints.Count; i++)
         {
             WayPoint wpFrom = Waypoints[i];
             WayPoint wpTo = (i != Waypoints.Count - 1) ? Waypoints[i + 1] : Waypoints[0];
 
-//            Gizmos.color = _trackCenterLineColor;
-//            Gizmos.DrawLine(wpFrom.Center, wpTo.Center);
+            if (ShowShortestRacingLine)
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(wpFrom.RacingPoint, wpTo.RacingPoint);
+            }
 
-            Gizmos.color = _leftBorderColor;
-            Gizmos.DrawLine(wpFrom.LeftBorder, wpTo.LeftBorder);
+            if (ShowFinalRacingLine)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(wpFrom.DebugRacingPoint, wpTo.DebugRacingPoint);
+            }
+        }
+    }
 
-            Gizmos.color = _rightBorderColor;
-            Gizmos.DrawLine(wpFrom.RightBorder, wpTo.RightBorder);
+    public void Bake()
+    {
+        Waypoints = GetComponentsInChildren<WayPoint>().ToList();
+        
+        for (int i = 0; i < Waypoints.Count; i++)
+        {
+            Waypoints[i].SetCircuit(this);
+            Waypoints[i].gameObject.name = string.Format(WaypointFormatName, i);
+            
+            if (i == 0)
+            {
+                Waypoints[i].SetRacingPoint(_mainStartingLineRacingPoint);
+                continue;
+            }
 
-            Gizmos.color = _racingLineColor;
-            Gizmos.DrawLine(wpFrom.RacingPoint, wpTo.RacingPoint);
+            if (_enableShortestDistanceCalculations)
+            {
+                Waypoints[i].SetRacingPoint(GetBestRacingPointByDistance(Waypoints[i - 1], Waypoints[i]));
+            }
+            else if (_enableSmallestAnglePriority)
+            {
+                WayPoint nextWp = GetWaypointByIndex(i + 1);
+                WayPoint prevWp = GetWaypointByIndex(i - 1);
+
+                float currentRp = GetBestRacingPointByAngle(Waypoints[i], prevWp, nextWp);
+                Waypoints[i].SetRacingPoint(currentRp);
+            }
+        }
+        
+        for (int i = 0; i < Waypoints.Count; i++)
+        {
+            float currentWaypointAngle = Vector3.Angle(Waypoints[i].RacingPoint - GetWaypointByIndex(i - 1).RacingPoint, GetWaypointByIndex(i + 1).RacingPoint - Waypoints[i].RacingPoint);
+            float distanceToNextWp = Vector3.Distance(Waypoints[i].transform.position, GetWaypointByIndex(i + 1).transform.position);
+            
+            Waypoints[i].AngleToNextWaypoint = Mathf.RoundToInt(currentWaypointAngle);
+            Waypoints[i].DistanceToNextWaypoint = Mathf.RoundToInt(distanceToNextWp);
+        }
+
+        for (int i = 0; i < Waypoints.Count; i++)
+        {
+            WayPoint nextWp = GetWaypointByIndex(i + 1);
+            WayPoint prevWp = GetWaypointByIndex(i - 1);
+
+            float difficulty = (float) Math.Round(_waypointDifficultyByAngle.Evaluate(nextWp.AngleToNextWaypoint), 2);
+            nextWp.WaypointDifficulty = difficulty;
+
+            Waypoints[i].NextWaypointDifficulty = (float) Math.Round(nextWp.WaypointDifficulty * _waypointDifficultyByDistance.Evaluate(Waypoints[i].DistanceToNextWaypoint), 2);
+            Waypoints[i].PrevWaypointDifficulty = (float) Math.Round(prevWp.WaypointDifficulty * _waypointDifficultyByDistance.Evaluate(prevWp.DistanceToNextWaypoint), 2);
+            
+            Waypoints[i].NextWpDirection = nextWp.LocalRacingPoint * 2;
+            Waypoints[i].PrevWpDirection = prevWp.LocalRacingPoint * 2;
+            
+            float offset = (1 - Waypoints[i].WaypointDifficulty) * 
+                           (Waypoints[i].NextWaypointDifficulty * -Waypoints[i].NextWpDirection + Waypoints[i].PrevWaypointDifficulty * -Waypoints[i].PrevWpDirection);
+            Waypoints[i].SetDebugRacingPoint(Waypoints[i].LocalRacingPoint + offset);
         }
     }
 
@@ -160,7 +197,7 @@ public class RaceCircuit : MonoBehaviour
         return currentRacingPoint;
     }
 
-    private float GetRacingPointBetweenWaypoints(WayPoint from, WayPoint to)
+    private float GetBestRacingPointByDistance(WayPoint from, WayPoint to)
     {
         GradientDirections gradientDirection = GradientDirections.LEFT;
         bool canChangeGradientDirection = true;
@@ -197,32 +234,18 @@ public class RaceCircuit : MonoBehaviour
         return currentRacingPoint;
     }
 
-    public WayPoint GetPoint(int index)
-    {
-        return Waypoints[index];
-    }
-
-    public int GetNextPoint(int point)
-    {
-        if (point < Waypoints.Count - 1)
-            return point + 1;
-        else
-            return 0;
-    }
-
     public List<WayPoint> GetWaypointsInDistance(Vector3 startPosition, float analysisDistance, int currentWaypoint)
     {
-        float distance = Vector3.Distance(startPosition, GetPoint(currentWaypoint).transform.position);
+        float distance = Vector3.Distance(startPosition, GetWaypointByIndex(currentWaypoint).transform.position);
         List<WayPoint> points = new List<WayPoint>();
-        points.Add(GetPoint(currentWaypoint));
+        points.Add(GetWaypointByIndex(currentWaypoint));
 
         do
         {
-            WayPoint currentPoint = GetPoint(currentWaypoint);
-
-            currentWaypoint = GetNextPoint(currentWaypoint);
-            WayPoint nextPoint = Waypoints[currentWaypoint];
-
+            WayPoint currentPoint = GetWaypointByIndex(currentWaypoint);
+            WayPoint nextPoint = GetWaypointByIndex(currentWaypoint + 1);
+            currentWaypoint += 1; 
+            
             distance += Vector3.Distance(currentPoint.transform.position, nextPoint.transform.position);
 
             points.Add(nextPoint);
@@ -238,16 +261,11 @@ public class RaceCircuit : MonoBehaviour
         Waypoints[index].ResetControlPoint();
     }
 
-    public void SetPointRotation(int index, float zAngle)
-    {
-        
-    }
-
     public void AddNewWaypoint(Vector3 position)
     {
         GameObject copyFrom = Waypoints[Waypoints.Count - 1].gameObject;
         GameObject newWaypoint = Instantiate(copyFrom, new Vector3(position.x, copyFrom.transform.position.y, position.z), copyFrom.transform.rotation, transform);
-        newWaypoint.name = $"Waypoint: {Waypoints.Count}";
+        newWaypoint.name = string.Format(WaypointFormatName, Waypoints.Count);
         
         Waypoints.Add(newWaypoint.GetComponent<WayPoint>());
     }
@@ -259,16 +277,21 @@ public class RaceCircuit : MonoBehaviour
 
         newWaypoint.transform.SetSiblingIndex(insertIndex);
         Waypoints.Insert(insertIndex, newWaypoint.GetComponent<WayPoint>());
-        
-        for (int i = insertIndex; i < Waypoints.Count; i++)
-        {
-            Waypoints[i].name = $"Waypoint {i}";
-        }
+
+        UpdateWaypointsIndex(insertIndex);
     }
 
-    public void DeleteWaypoint(int waypointIndex)
+    public void DeleteWaypoint(int deleteIndex)
     {
-        DestroyImmediate(Waypoints[waypointIndex].gameObject);
-        Waypoints.RemoveAt(waypointIndex);
+        DestroyImmediate(Waypoints[deleteIndex].gameObject);
+        Waypoints.RemoveAt(deleteIndex);
+
+        UpdateWaypointsIndex(deleteIndex);
+    }
+
+    private void UpdateWaypointsIndex(int fromIndex)
+    {
+        for (int i = fromIndex; i < Waypoints.Count; i++)
+            Waypoints[i].name = string.Format(WaypointFormatName, i);
     }
 }

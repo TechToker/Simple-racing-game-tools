@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +24,14 @@ public class RaceCircuitEditor : Editor
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
-
+        
+        GUILayout.Space(15);
+        
+        GUILayout.Label("Hotkeys: ",  EditorStyles.boldLabel);
+        GUILayout.Label("Shift + LMB : Add waypoint at the end");
+        GUILayout.Label("Ctrl + LMB : Insert waypoint in sequence");
+        GUILayout.Label("RMB : Delete waypoint");
+        
         if (GUILayout.Button("Bake"))
         {
             RaceCircuit rc = target as RaceCircuit;
@@ -33,11 +41,11 @@ public class RaceCircuitEditor : Editor
     
     private void OnSceneGUI()
     {
-        Input();
-        Draw();
+        InputProcessing();
+        DrawCircuit();
     }
 
-    private void Input()
+    private void InputProcessing()
     {
         Event guiEvent = Event.current;
         Vector3 mousePos = HandleUtility.GUIPointToWorldRay(guiEvent.mousePosition).origin;
@@ -110,8 +118,10 @@ public class RaceCircuitEditor : Editor
         }
 
         Vector3 waypointInsertPos = new Vector3(nearestPoint.x, 0, nearestPoint.y);
+        
         if (guiEvent.type == EventType.MouseDown && guiEvent.button == 0 && guiEvent.control && minDistance < _pointInsertTriggerDistance)
         {
+            Undo.RecordObject(_circuit, "Insert waypoint");
             _circuit.InsertWaypoint(insertIndex, waypointInsertPos);
         }
         
@@ -122,38 +132,88 @@ public class RaceCircuitEditor : Editor
         }
     }
 
-    private void Draw()
+    private void DrawCircuit()
     {
-        Handles.color = Color.green;
-        for (int i = 0; i < _circuit.Waypoints.Count - 1; i++)
+        Handles.color = Color.black;
+        int maxIndex = _circuit.IsClosed? _circuit.Waypoints.Count : _circuit.Waypoints.Count - 1;
+        
+        for (int i = 0; i < maxIndex; i++)
         {
-            Handles.DrawLine(_circuit.Waypoints[i].Center, _circuit.Waypoints[i + 1].Center);
+            WayPoint current = _circuit.GetWaypointByIndex(i);
+            WayPoint next = _circuit.GetWaypointByIndex(i + 1);
             
-            Handles.color = Color.black;
-            Handles.DrawLine(_circuit.Waypoints[i].Center, _circuit.Waypoints[i].RightRotateControlPoint);
+            DrawWaypointInfo(current, i);
+
+            if(_circuit.ShowRoadCenterLine)
+                Handles.DrawLine(current.Center, next.Center);
+
+            if (_circuit.ShowRoadBorder)
+            {
+                Handles.DrawLine(current.LeftBorder, next.LeftBorder);
+                Handles.DrawLine(current.RightBorder, next.RightBorder);
+            }
         }
 
-        for (int i = 0; i < _circuit.Waypoints.Count && _circuit.ShowRotationHandles; i++)
+        if(_circuit.EnableWaypointsHandles)
+            DrawWaypointsHandles();
+    }
+
+    private void DrawWaypointInfo(WayPoint wp, int index)
+    {
+        if (_circuit.ShowWaypointsNames)
         {
-            Quaternion newRotation = Handles.RotationHandle(_circuit.Waypoints[i].transform.rotation,
-                _circuit.Waypoints[i].transform.position);
-            _circuit.Waypoints[i].transform.rotation = newRotation;
+            Handles.Label(new Vector3(wp.RightBorder.x - 1, 0, wp.RightBorder.z - 2),
+                $"WP {index}{Environment.NewLine}", EditorStyles.boldLabel);
+        }
+
+        string info = string.Empty;
+        float zOffset = 4.5f;
+
+        if (_circuit.ShowWaypointsData)
+        {
+            info += $"Ag: {_circuit.Waypoints[index].AngleToNextWaypoint}° " +
+                    $"Dist: {_circuit.Waypoints[index].DistanceToNextWaypoint}m {Environment.NewLine}";
+
+            zOffset += 0.7f;
+        }
+
+        if (_circuit.ShowWaypointsDifficulty)
+        {
+            info += $"Dif: {_circuit.Waypoints[index].WaypointDifficulty}{Environment.NewLine}" +
+                    $"nDif: {_circuit.Waypoints[index].NextWaypointDifficulty}{Environment.NewLine}" +
+                    $"pDif: {_circuit.Waypoints[index].PrevWaypointDifficulty}{Environment.NewLine}";
+                
+            zOffset += 1.5f;
+        }
+
+        if (_circuit.ShowWaypointsDirections)
+        {
+            info += $"nDir:{_circuit.Waypoints[index].NextWpDirection}{Environment.NewLine}" +
+                    $"pDir:{_circuit.Waypoints[index].PrevWpDirection}{Environment.NewLine}";
+                
+            zOffset += 1.2f;
         }
         
+        Vector3 labelPosition = new Vector3(wp.RightBorder.x, 0, wp.RightBorder.z - zOffset);
+        Handles.Label(labelPosition, info);
+    }
+
+    private void DrawWaypointsHandles()
+    {
         for (int i = 0; i < _circuit.Waypoints.Count; i++)
         {
-            Handles.color = i != _closestWaypoint? Color.green : Color.magenta;
+            Handles.color = i != _closestWaypoint? i == 0? Color.red : Color.green : Color.magenta;
             Vector3 newPos = Handles.FreeMoveHandle(_circuit.Waypoints[i].transform.position, Quaternion.identity, 2f, Vector3.zero, Handles.CylinderHandleCap);
-
+            
             //Rotate control
+            Handles.DrawLine(_circuit.Waypoints[i].Center, _circuit.Waypoints[i].RightRotateControlPoint);
+            
             Vector3 rotateControlPos = Handles.FreeMoveHandle(_circuit.Waypoints[i].RightRotateControlPoint, Quaternion.identity, 1f, Vector3.zero, Handles.CylinderHandleCap);
             if (_circuit.Waypoints[i].RightRotateControlPoint != rotateControlPos)
             {
                 _circuit.Waypoints[i].RightRotateControlPoint = rotateControlPos;
             }
-
-            //Handles.FreeMoveHandle(_circuit.Waypoints[i].RightBorder, Quaternion.identity, 1f, Vector3.zero, Handles.CylinderHandleCap);
-
+            
             //Move control
             if (_circuit.Waypoints[i].transform.position != newPos)
             {

@@ -49,21 +49,7 @@ public class RaceCircuit : MonoBehaviour
         LEFT,
         RIGHT,
     };
-    
-    //TODO: Replace that
-    public WayPoint GetPoint(int index)
-    {
-        return Waypoints[index];
-    }
 
-    public int GetNextPoint(int point)
-    {
-        if (point < Waypoints.Count - 1)
-            return point + 1;
-        else
-            return 0;
-    }
-    
     public WayPoint GetWaypointByIndex(int index)
     {
         return Waypoints[(index + Waypoints.Count) % Waypoints.Count];

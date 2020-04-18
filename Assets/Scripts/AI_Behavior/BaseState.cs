@@ -70,11 +70,11 @@ namespace BehaviourAI
 
         public virtual void OnDrawGizmos()
         {
-            foreach(CarSensor sensor in _allSensors)
-            {
-                Gizmos.color = sensor.IsDetected? Color.red : Color.white;
-                Gizmos.DrawRay(sensor.SensorPosition, sensor.SensorDirection);
-            }
+//            foreach(CarSensor sensor in _allSensors)
+//            {
+//                Gizmos.color = sensor.IsDetected? Color.red : Color.white;
+//                Gizmos.DrawRay(sensor.SensorPosition, sensor.SensorDirection);
+//            }
         }
 
         private bool _isCarMoveForward;

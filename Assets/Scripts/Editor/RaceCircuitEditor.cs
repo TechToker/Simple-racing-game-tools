@@ -95,6 +95,9 @@ public class RaceCircuitEditor : Editor
 
     private void InsertWaypointHandler(Event guiEvent, Vector3 mousePos)
     {
+        if(!_circuit.EnableWaypointsHandles)
+            return;
+        
         float minDistance = float.MaxValue;
         Vector2 nearestPoint = Vector2.zero;
         int insertIndex = -1;

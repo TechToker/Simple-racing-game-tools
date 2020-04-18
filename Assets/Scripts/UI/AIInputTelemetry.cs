@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace RacingGame.UI
 
         [Header("Data containers")]
         [SerializeField] private TextMeshProUGUI _uiTextBehaviourState;
+        [SerializeField] private TextMeshProUGUI _uiTextSpeed;
         [SerializeField] private Slider _uiSliderTurningInput;
         [SerializeField] private Slider _uiSliderAcceleationInput;
         [SerializeField] private Slider _uiSliderBrakingInput;
@@ -20,6 +22,7 @@ namespace RacingGame.UI
         private void LateUpdate()
         {
             _uiTextBehaviourState.SetText(_driver.CurrentStateName);
+            _uiTextSpeed.SetText($"{Math.Round(_driver.Car.CarSpeed, 1)}m/s");
 
             _uiSliderTurningInput.value = (_driver.Car.TurningAngle + _driver.Car.MaxWheelAngle) / (_driver.Car.MaxWheelAngle * 2);
             _uiSliderAcceleationInput.value = Mathf.Abs(_driver.Car.AccelerationInput);

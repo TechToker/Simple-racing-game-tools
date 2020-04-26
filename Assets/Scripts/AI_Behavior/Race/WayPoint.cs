@@ -11,28 +11,31 @@ public class WayPoint : MonoBehaviour
 
     [Header("Gizmos")]
     [SerializeField] private Color _gateColor = Color.gray;
-    [SerializeField] private float _gizmosScaleY = 2f;
+    [SerializeField] private float _circlePosY = 0.25f;
 
-    public Vector3 Center => new Vector3(transform.position.x, transform.position.y + _gizmosScaleY / 2, transform.position.z);
-    public Vector3 LeftBorder => transform.TransformPoint(-_width / 2, _gizmosScaleY / 2, 0);
-    public Vector3 RightBorder => transform.TransformPoint(_width / 2, _gizmosScaleY / 2, 0);
+    public Vector3 Center => new Vector3(transform.position.x, transform.position.y + _circlePosY, transform.position.z);
+    public Vector3 LeftBorder => transform.TransformPoint(-_width / 2, _circlePosY, 0);
+    public Vector3 RightBorder => transform.TransformPoint(_width / 2, _circlePosY, 0);
     
-    public Vector3 ShortestRacingPoint => transform.TransformPoint(_shortestRacingLinePoint * Width, _gizmosScaleY / 2, 0);
-    public float LocalShortestRacingPoint => _shortestRacingLinePoint;
+    //Racing points
     [HideInInspector] [SerializeField] private float _shortestRacingLinePoint;
-    
-    public Vector3 FinalRacingPoint => transform.TransformPoint(_finalRacingPoint * Width, _gizmosScaleY / 2, 0);
+    public float LocalShortestRacingPoint => _shortestRacingLinePoint;
+    public Vector3 ShortestRacingPoint { get; private set; }
+
     [HideInInspector] [SerializeField] private float _finalRacingPoint;
+    public float LocalFinalRacingPoint => _finalRacingPoint;
+    public Vector3 FinalRacingPoint { get; private set; }
 
-    public float TurningAngle;
-    public float DistanceToNextWaypoint;
+    //Gizmos fields
+    [HideInInspector] public float TurningAngle;
+    [HideInInspector] public float DistanceToNextWaypoint;
     
-    public float WaypointDifficulty;
-    public float NextWaypointDifficulty;
-    public float PrevWaypointDifficulty;
+    [HideInInspector] public float WaypointDifficulty;
+    [HideInInspector] public float NextWaypointDifficulty;
+    [HideInInspector] public float PrevWaypointDifficulty;
 
-    public float PrevWpDirection;
-    public float NextWpDirection;
+    [HideInInspector] public float PrevWpDirection;
+    [HideInInspector] public float NextWpDirection;
     
     [HideInInspector] [SerializeField] private Vector3 _rightRotateControlPoint;
     public Vector3 RightRotateControlPoint
@@ -78,10 +81,10 @@ public class WayPoint : MonoBehaviour
         _rightRotateControlPoint = transform.position + transform.right * _width / 2;
     }
 
-    //Think about refactoring
+    //TODO: Think about refactoring
     public Vector3 ConvertLocalPointToWorld(Vector3 localPoint)
     {
-        return transform.TransformPoint(localPoint.x, _gizmosScaleY / 2 + localPoint.y, localPoint.z);
+        return transform.TransformPoint(localPoint.x, _circlePosY + localPoint.y, localPoint.z);
     }
 
     public void OnDrawGizmosSelected()
@@ -93,10 +96,12 @@ public class WayPoint : MonoBehaviour
     public void SetShortestRacingPoint(float racingPoint)
     {
         _shortestRacingLinePoint = Mathf.Clamp(racingPoint, -0.5f, 0.5f);
+        ShortestRacingPoint = transform.TransformPoint(_shortestRacingLinePoint * Width, _circlePosY, 0);
     }
 
     public void SetFinalRacingPoint(float racingPoint)
     {
         _finalRacingPoint = Mathf.Clamp(racingPoint, -0.5f, 0.5f);
+        FinalRacingPoint = transform.TransformPoint(_finalRacingPoint * Width, _circlePosY, 0);
     }
 }

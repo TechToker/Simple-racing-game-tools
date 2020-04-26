@@ -44,7 +44,6 @@ public class DriverAI : BaseDriver
     public AnimationCurve DeltaSpeedMultyplyerByDistance;
 
     [Header("Race")]
-    [SerializeField] public Transform Tracker;
     [SerializeField] public AnimationCurve SpeedByCornerAnlge;
     [SerializeField] public AnimationCurve BrakingDistanceByDeltaSpeed;
 
@@ -59,8 +58,6 @@ public class DriverAI : BaseDriver
     public float CarRadius = 1.5f;
 
     public string CurrentStateName => _state.GetStateName();
-
-    public Transform TargetTransform => TargetCar.transform;
 
     private void OnEnable()
     {

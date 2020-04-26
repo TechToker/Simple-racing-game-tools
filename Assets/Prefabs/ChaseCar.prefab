@@ -895,10 +895,10 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.315
   m_SuspensionSpring:
-    spring: 32565.176
-    damper: 5210.428
+    spring: 32565.17
+    damper: 5210.4272
     targetPosition: 0.5
-  m_SuspensionDistance: 0.1962
+  m_SuspensionDistance: 0.19620001
   m_ForceAppPointDistance: 0.67725265
   m_Mass: 15
   m_WheelDampingRate: 0.25
@@ -1458,7 +1458,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Tracker: {fileID: 0}
   SpeedByCornerAnlge:
     serializedVersion: 2
     m_Curve:
@@ -1593,26 +1592,8 @@ MonoBehaviour:
       inWeight: 0.3770794
       outWeight: 0.706539
     - serializedVersion: 3
-      time: 10
-      value: 25
-      inSlope: -2.0292168
-      outSlope: -2.0292168
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.16986933
-      outWeight: 0.13614374
-    - serializedVersion: 3
-      time: 23.563477
-      value: 8.78479
-      inSlope: -0.22772071
-      outSlope: -0.22772071
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.23020744
-      outWeight: 0.061779402
-    - serializedVersion: 3
       time: 75
-      value: 5
+      value: 45
       inSlope: -0.011371734
       outSlope: -0.011371734
       tangentMode: 0
@@ -1627,7 +1608,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 200
+      value: 750
       inSlope: -0.40419212
       outSlope: -0.40419212
       tangentMode: 0
@@ -1636,13 +1617,31 @@ MonoBehaviour:
       outWeight: 0.8711194
     - serializedVersion: 3
       time: 25
-      value: 150
+      value: 650
       inSlope: -6.1487927
       outSlope: -6.1487927
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.104534976
       outWeight: 0.14508076
+    - serializedVersion: 3
+      time: 46.441223
+      value: 502.97354
+      inSlope: -6.985895
+      outSlope: -6.985895
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15449658
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 62.10614
+      value: 153.03961
+      inSlope: -16.048069
+      outSlope: -16.048069
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.35356766
+      outWeight: 0.15945928
     - serializedVersion: 3
       time: 75
       value: 0

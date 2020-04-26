@@ -183,6 +183,21 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1951780685}
+    - target: {fileID: 4247216084056458502, guid: bc21667f58cd3a146b4d6e9c5e10f492,
+        type: 3}
+      propertyPath: m_SuspensionSpring.spring
+      value: 32565.176
+      objectReference: {fileID: 0}
+    - target: {fileID: 4247216084056458502, guid: bc21667f58cd3a146b4d6e9c5e10f492,
+        type: 3}
+      propertyPath: m_SuspensionSpring.damper
+      value: 5210.428
+      objectReference: {fileID: 0}
+    - target: {fileID: 4247216084056458502, guid: bc21667f58cd3a146b4d6e9c5e10f492,
+        type: 3}
+      propertyPath: m_SuspensionDistance
+      value: 0.1962
+      objectReference: {fileID: 0}
     - target: {fileID: 4247216085177620515, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
       propertyPath: m_Name
@@ -305,11 +320,6 @@ PrefabInstance:
       objectReference: {fileID: 1307869471}
     - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
-      propertyPath: Tracker
-      value: 
-      objectReference: {fileID: 1581793330}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
       propertyPath: _circuit
       value: 
       objectReference: {fileID: 1102156168}
@@ -346,7 +356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: 0.21280003
   TurningAngle: 16
@@ -402,7 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 2.5
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 2
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -458,7 +468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -514,7 +524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -564,7 +574,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 71711752}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -53.67114, y: 0, z: 15.333229}
+  m_LocalPosition: {x: -52.775124, y: 0, z: -8.191575}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1102156167}
@@ -584,17 +594,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: 0.5
-  TurningAngle: 2
-  DistanceToNextWaypoint: 32
+  TurningAngle: 3
+  DistanceToNextWaypoint: 9
   WaypointDifficulty: -0
-  NextWaypointDifficulty: 0.99
-  PrevWaypointDifficulty: 0.02
+  NextWaypointDifficulty: 1
+  PrevWaypointDifficulty: 0.01
   PrevWpDirection: -1
   NextWpDirection: -1
-  _rightRotateControlPoint: {x: -5.471138, y: 0, z: 34.03323}
+  _rightRotateControlPoint: {x: -4.575123, y: 0, z: 10.508426}
 --- !u!1 &86984233
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,7 +636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.5
   TurningAngle: 41
@@ -696,7 +706,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 12
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.5
   TurningAngle: 49
@@ -900,7 +910,7 @@ Transform:
   - {fileID: 281920087}
   - {fileID: 2136298051}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &98160693
 PrefabInstance:
@@ -1004,7 +1014,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0.0099
   TurningAngle: 17
@@ -1060,7 +1070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -1116,7 +1126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -1232,7 +1242,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: -11.79}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &196099059 stripped
 Transform:
@@ -1498,7 +1508,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -1619,7 +1629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.0846
   TurningAngle: 42
@@ -1768,7 +1778,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
   _finalRacingPoint: 0.5
   TurningAngle: 54
@@ -1901,7 +1911,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -2121,7 +2131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.5
   TurningAngle: 46
@@ -2407,7 +2417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 2.5
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 2
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -2613,7 +2623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -2681,7 +2691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
   _finalRacingPoint: 0.5
   TurningAngle: 20
@@ -2737,7 +2747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -2807,7 +2817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.5
   TurningAngle: 31
@@ -3228,7 +3238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0.0372
   TurningAngle: 31
@@ -3371,7 +3381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -3427,7 +3437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 2.5
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 2
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -3483,7 +3493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.32849997
   TurningAngle: 53
@@ -3539,7 +3549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: 0.23719996
   TurningAngle: 25
@@ -3763,7 +3773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -3937,7 +3947,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 2.5
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 2
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -3993,7 +4003,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -4049,7 +4059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
   _finalRacingPoint: 0.5
   TurningAngle: 71
@@ -4105,7 +4115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -4194,7 +4204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
   _finalRacingPoint: 0.08000001
   TurningAngle: 6
@@ -4250,7 +4260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 2.5
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 2
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -4872,7 +4882,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
   _finalRacingPoint: -0.082399964
   TurningAngle: 32
@@ -4999,7 +5009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.4947
   TurningAngle: 84
@@ -5055,7 +5065,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -5125,7 +5135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
   _finalRacingPoint: 0.28
   TurningAngle: 41
@@ -5181,7 +5191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.053800017
   TurningAngle: 24
@@ -5223,7 +5233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -5348,10 +5358,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.5
-  TurningAngle: 88
+  TurningAngle: 91
   DistanceToNextWaypoint: 33
   WaypointDifficulty: 1
   NextWaypointDifficulty: 0
@@ -5390,7 +5400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.5
   TurningAngle: 23
@@ -5681,7 +5691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
   _finalRacingPoint: 0.5
   TurningAngle: 39
@@ -5865,7 +5875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -6215,11 +6225,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.059000015
-  TurningAngle: 19
-  DistanceToNextWaypoint: 23
+  TurningAngle: 21
+  DistanceToNextWaypoint: 47
   WaypointDifficulty: 0.02
   NextWaypointDifficulty: -0
   PrevWaypointDifficulty: 0.45
@@ -6328,7 +6338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: 0.25
   TurningAngle: 4
@@ -6515,7 +6525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.5
   TurningAngle: 77
@@ -6779,85 +6789,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1554019152}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1581793327
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1581793330}
-  - component: {fileID: 1581793329}
-  - component: {fileID: 1581793328}
-  m_Layer: 0
-  m_Name: Capsule
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!23 &1581793328
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1581793327}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!33 &1581793329
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1581793327}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1581793330
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1581793327}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 93.2, y: 1, z: 0.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1608939573
 GameObject:
   m_ObjectHideFlags: 0
@@ -7059,7 +6990,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.0941
   TurningAngle: 16
@@ -7271,7 +7202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.402
   TurningAngle: 20
@@ -7770,11 +7701,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 7.93
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: 0.47000003
   TurningAngle: 7
-  DistanceToNextWaypoint: 55
+  DistanceToNextWaypoint: 57
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0.97
@@ -7811,7 +7742,7 @@ Transform:
   - {fileID: 1856023329}
   - {fileID: 223796064}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1780149841
 GameObject:
@@ -7844,7 +7775,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -7975,7 +7906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
   _finalRacingPoint: 0.476
   TurningAngle: 55
@@ -8234,7 +8165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.4725
   TurningAngle: 46
@@ -8347,7 +8278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
   _finalRacingPoint: 0.45
   TurningAngle: 5
@@ -8403,7 +8334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 2.5
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 2
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -8534,7 +8465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -8701,7 +8632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -8757,17 +8688,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 20
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: 0.04000002
   TurningAngle: 6
-  DistanceToNextWaypoint: 16
+  DistanceToNextWaypoint: 15
   WaypointDifficulty: 0
   NextWaypointDifficulty: 0.54
   PrevWaypointDifficulty: 0
   PrevWpDirection: -1
   NextWpDirection: -1
-  _rightRotateControlPoint: {x: 88.69667, y: 0, z: -9.630652}
+  _rightRotateControlPoint: {x: 90.64734, y: 0, z: -9.63066}
 --- !u!4 &1983166080
 Transform:
   m_ObjectHideFlags: 0
@@ -8776,7 +8707,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983166078}
   m_LocalRotation: {x: -0, y: 0.7171138, z: -0, w: 0.6969561}
-  m_LocalPosition: {x: 35.78171, y: 0, z: -18.334717}
+  m_LocalPosition: {x: 37.73238, y: 0, z: -18.334724}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1102156167}
@@ -8813,7 +8744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 2.5
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 2
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -8869,7 +8800,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.5
   TurningAngle: 96
@@ -9163,7 +9094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 2.5
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 2
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -9454,7 +9385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0
   _finalRacingPoint: 0
   TurningAngle: 0
@@ -9510,7 +9441,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _gizmosScaleY: 1
+  _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
   _finalRacingPoint: 0.5
   TurningAngle: 34

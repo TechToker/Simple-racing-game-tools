@@ -693,6 +693,78 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &3283584120191534601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6407064021094541471}
+  - component: {fileID: 6207498855169946258}
+  - component: {fileID: 7339598395786060718}
+  m_Layer: 8
+  m_Name: TMP SubMeshUI [LiberationSans SDF Material + LiberationSans SDF Atlas]
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6407064021094541471
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3283584120191534601}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4811284324770748002}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 1, y: 1}
+--- !u!222 &6207498855169946258
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3283584120191534601}
+  m_CullTransparentMesh: 0
+--- !u!114 &7339598395786060718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3283584120191534601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_spriteAsset: {fileID: 0}
+  m_material: {fileID: 0}
+  m_sharedMaterial: {fileID: 0}
+  m_isDefaultMaterial: 0
+  m_padding: 0
+  m_canvasRenderer: {fileID: 6207498855169946258}
+  m_TextComponent: {fileID: 422774993223194562}
+  m_materialReferenceIndex: 1
 --- !u!1 &4042776348721804160
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,6 +863,7 @@ RectTransform:
   - {fileID: 5318256010396703454}
   - {fileID: 544533230852253953}
   - {fileID: 306182311}
+  - {fileID: 4811284324770748002}
   m_Father: {fileID: 4722642906150058277}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -814,6 +887,7 @@ MonoBehaviour:
   _driver: {fileID: 7289247421392153190}
   _uiTextBehaviourState: {fileID: 7194941582311105447}
   _uiTextSpeed: {fileID: 306182312}
+  _uiTextRubberbandingValue: {fileID: 422774993223194562}
   _uiSliderTurningInput: {fileID: 6011937523753925102}
   _uiSliderAcceleationInput: {fileID: 5887887181854939143}
   _uiSliderBrakingInput: {fileID: 2684137571030383269}
@@ -895,8 +969,8 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.315
   m_SuspensionSpring:
-    spring: 32565.17
-    damper: 5210.4272
+    spring: 32565.232
+    damper: 5210.437
     targetPosition: 0.5
   m_SuspensionDistance: 0.19620001
   m_ForceAppPointDistance: 0.67725265
@@ -1055,10 +1129,10 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.315
   m_SuspensionSpring:
-    spring: 27434.832
-    damper: 4389.573
+    spring: 27434.768
+    damper: 4389.563
     targetPosition: 0.5
-  m_SuspensionDistance: 0.1962
+  m_SuspensionDistance: 0.19620001
   m_ForceAppPointDistance: 0.67725265
   m_Mass: 15
   m_WheelDampingRate: 0.25
@@ -1116,10 +1190,10 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.315
   m_SuspensionSpring:
-    spring: 27833.135
-    damper: 4453.302
+    spring: 27833.064
+    damper: 4453.2905
     targetPosition: 0.5
-  m_SuspensionDistance: 0.1962
+  m_SuspensionDistance: 0.19620001
   m_ForceAppPointDistance: 0.67725265
   m_Mass: 15
   m_WheelDampingRate: 0.25
@@ -1177,8 +1251,8 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.315
   m_SuspensionSpring:
-    spring: 32166.865
-    damper: 5146.6987
+    spring: 32166.934
+    damper: 5146.709
     targetPosition: 0.5
   m_SuspensionDistance: 0.1962
   m_ForceAppPointDistance: 0.67725265
@@ -1348,8 +1422,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  WheelAngleSpeed: 5
-  OffsetFromTarget: {x: 0, y: 0, z: -8}
+  WheelAngleSpeed: 300
   DistanceFactor:
     serializedVersion: 2
     m_Curve:
@@ -1464,30 +1537,21 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 50
-      inSlope: -0.40419212
-      outSlope: -0.40419212
+      inSlope: -0.13034685
+      outSlope: -0.13034685
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.8711194
+      outWeight: 0.33484277
     - serializedVersion: 3
-      time: 36.564194
-      value: 13.503275
-      inSlope: -0.3872314
-      outSlope: -0.3872314
+      time: 51.638084
+      value: 13.425558
+      inSlope: -0.17434059
+      outSlope: -0.17434059
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.27642488
-    - serializedVersion: 3
-      time: 63.770412
-      value: 5.7050896
-      inSlope: -0.009823442
-      outSlope: -0.009823442
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.11318139
+      outWeight: 0.07890343
     - serializedVersion: 3
       time: 180
       value: 5
@@ -1543,9 +1607,11 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _circuit: {fileID: 0}
+  IsAttack: 0
+  RubberBandingValue: 1
+  RBAccelerationSpeedMultiplyer: 1
   CurrentMode: 10
   TurningAlanystDistance: 30
-  CarRadius: 1.5
 --- !u!114 &4247216085177620513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1576,29 +1642,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 45
-      inSlope: 0.008844568
-      outSlope: 0.008844568
+      inSlope: 0.000007571769
+      outSlope: 0.000007571769
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.5188317
-    - serializedVersion: 3
-      time: 5
-      value: 45
-      inSlope: -0.012250631
-      outSlope: -0.012250631
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.3770794
-      outWeight: 0.706539
+      outWeight: 0.006717404
     - serializedVersion: 3
       time: 75
       value: 45
-      inSlope: -0.011371734
-      outSlope: -0.011371734
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.08070717
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1904,6 +1961,162 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6021295583440290491
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4811284324770748002}
+  - component: {fileID: 1152111059035625017}
+  - component: {fileID: 422774993223194562}
+  m_Layer: 8
+  m_Name: UI_Text_RubberBanding
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4811284324770748002
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6021295583440290491}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6407064021094541471}
+  m_Father: {fileID: 9077925008349930593}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.05, y: -0.45}
+  m_SizeDelta: {x: -0.425, y: 0.2}
+  m_Pivot: {x: 1, y: 1}
+--- !u!222 &1152111059035625017
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6021295583440290491}
+  m_CullTransparentMesh: 0
+--- !u!114 &422774993223194562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6021295583440290491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'RB: 0.95'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontSize: 0.145
+  m_fontSizeBase: 0.145
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_textAlignment: 514
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_firstOverflowCharacterIndex: -1
+  m_linkedTextComponent: {fileID: 0}
+  m_isLinkedTextComponent: 0
+  m_isTextTruncated: 0
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_ignoreRectMaskCulling: 0
+  m_ignoreCulling: 1
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_firstVisibleCharacter: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_textInfo:
+    textComponent: {fileID: 422774993223194562}
+    characterCount: 8
+    spriteCount: 0
+    spaceCount: 1
+    wordCount: 3
+    linkCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_spriteAnimator: {fileID: 0}
+  m_hasFontAssetChanged: 0
+  m_subTextObjects:
+  - {fileID: 0}
+  - {fileID: 7339598395786060718}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6297298443147301946
 GameObject:
   m_ObjectHideFlags: 0

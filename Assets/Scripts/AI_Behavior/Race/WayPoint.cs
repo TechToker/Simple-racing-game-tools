@@ -25,6 +25,11 @@ public class WayPoint : MonoBehaviour
     [HideInInspector] [SerializeField] private float _finalRacingPoint;
     public float LocalFinalRacingPoint => _finalRacingPoint;
     public Vector3 FinalRacingPoint { get; private set; }
+    
+    //Overtake racing point
+    [HideInInspector] [SerializeField] private float _overtakeRacingPoint;
+    public float LocalOvertakeRacingPoint => _overtakeRacingPoint;
+    public Vector3 OvertakeRacingPoint { get; private set; }
 
     //Gizmos fields
     [HideInInspector] public float TurningAngle;
@@ -103,5 +108,15 @@ public class WayPoint : MonoBehaviour
     {
         _finalRacingPoint = Mathf.Clamp(racingPoint, -0.5f, 0.5f);
         FinalRacingPoint = transform.TransformPoint(_finalRacingPoint * Width, _circlePosY, 0);
+        
+        //Set overtake line = racing line as default 
+        _overtakeRacingPoint = _finalRacingPoint;
+        OvertakeRacingPoint = FinalRacingPoint;
+    }
+    
+    public void SetFinalOvertakeRacingPoint(float racingPoint)
+    {
+        _overtakeRacingPoint = Mathf.Clamp(racingPoint, -0.5f, 0.5f);
+        OvertakeRacingPoint = transform.TransformPoint(_overtakeRacingPoint * Width, _circlePosY, 0);
     }
 }

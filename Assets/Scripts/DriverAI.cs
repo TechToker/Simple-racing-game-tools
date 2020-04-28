@@ -36,8 +36,7 @@ public class DriverAI : BaseDriver
     public AnimationCurve TargetSpeedByTurnAngle;
 
     [Header("FollowState")]
-    public float WheelAngleSpeed = 1;
-    public Vector3 OffsetFromTarget = new Vector3(3f, 0, 0);
+    public float WheelAngleSpeed = 300;
 
     public AnimationCurve DistanceFactor;
     public AnimationCurve DeltaSpeedFactor;
@@ -49,14 +48,26 @@ public class DriverAI : BaseDriver
 
     [SerializeField] private RaceCircuit _circuit;
     
+    //TODO: Remove!!!
+    public bool IsAttack;
+    
+    [Header("Rubberbanding")]
+    public float RubberBandingValue = 1;
+
+    [SerializeField] private float RBAccelerationSpeedMultiplyer = 200;
+    [SerializeField] private float RBCornerSpeedMultiplyer = 1;
+    
+    [Header("Current state")]
     public DriverMode CurrentMode;
     private DriverMode _currentMode;
 
     private BaseState _state;
 
     public float TurningAlanystDistance = 30f;
-    public float CarRadius = 1.5f;
 
+    public float RubberBandingAccelerationSpeedMultiplyer => RubberBandingValue * RBAccelerationSpeedMultiplyer;
+    public float RubberBandingCornerTargetSpeedMultiplyer => (1 - RubberBandingValue) * RBCornerSpeedMultiplyer;
+    
     public string CurrentStateName => _state.GetStateName();
 
     private void OnEnable()

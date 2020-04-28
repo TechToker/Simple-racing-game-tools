@@ -77,6 +77,12 @@ public class RaceCircuit : MonoBehaviour
             {
                 Gizmos.color = Color.red;
                 Gizmos.DrawLine(wpFrom.FinalRacingPoint, wpTo.FinalRacingPoint);
+
+                if (wpFrom.OvertakeRacingPoint != wpFrom.FinalRacingPoint || wpTo.OvertakeRacingPoint != wpTo.FinalRacingPoint)
+                {
+                    Gizmos.color = Color.yellow;
+                    Gizmos.DrawLine(wpFrom.OvertakeRacingPoint, wpTo.OvertakeRacingPoint);
+                }
             }
         }
     }
@@ -145,6 +151,18 @@ public class RaceCircuit : MonoBehaviour
                            * (1 - Waypoints[i].WaypointDifficulty);
             
             Waypoints[i].SetFinalRacingPoint(Waypoints[i].LocalShortestRacingPoint + offset);
+        }
+        
+        //Build overtake line
+        for (int i = 1; i < Waypoints.Count; i++)
+        {
+            WayPoint nextWp = GetWaypointByIndex(i + 1);
+            WayPoint prevWp = GetWaypointByIndex(i - 1);
+
+            if (prevWp.WaypointDifficulty < 0.01 && Waypoints[i].WaypointDifficulty > 0.45f)
+            {
+                Waypoints[i].SetFinalOvertakeRacingPoint(Waypoints[i].LocalFinalRacingPoint + 0.5f);
+            }
         }
     }
 

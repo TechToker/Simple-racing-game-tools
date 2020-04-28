@@ -237,7 +237,6 @@ public class GraphOverlay : MonoBehaviour
             anw += $"to 140: {timeTo140}" + Environment.NewLine;
 
             m_SpeedText.text = anw;
-
         }
 	}
 

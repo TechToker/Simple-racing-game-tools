@@ -137,8 +137,8 @@ namespace BehaviourAI
 
             for (int i = 1; i < navPath.Length; i++)
             {
-                //Берем список точек которые находятся за радиусом автомобиля. Не распространяется на последнюю точку пути (цель)
-                if (Vector3.Distance(Driver.transform.position, navPath[i]) > Driver.CarRadius || (i == navPath.Length - 1 && actualPoints.Count == 0))
+                //Берем список точек которые находятся на некотором минимальном удалении от авто. Не распространяется на последнюю точку пути (цель)
+                if (Vector3.Distance(Driver.transform.position, navPath[i]) > 1 || (i == navPath.Length - 1 && actualPoints.Count == 0))
                 {
                     float distanceBetweenCorners = Vector3.Distance(actualPoints.Count == 0 ? Driver.transform.position : actualPoints[actualPoints.Count - 1], navPath[i]);
                     _currentAnalysisDistance += distanceBetweenCorners;

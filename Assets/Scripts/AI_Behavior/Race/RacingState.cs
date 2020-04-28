@@ -17,7 +17,7 @@ namespace BehaviourAI
         public WayPoint Waypoint { get; }
         public Vector3 CarRacingPoint { get; }
 
-        public PathSegment(BaseCar car, WayPoint wp)
+        public PathSegment(DriverAI driver, WayPoint wp)
         {
             Waypoint = wp;
             
@@ -26,9 +26,11 @@ namespace BehaviourAI
 
             float newWpWidth = wp.Width - carWidth;
 
+            float driverTargetPoint = !driver.IsAttack ? wp.LocalFinalRacingPoint : wp.LocalOvertakeRacingPoint;
+
             //Lock local racing point in new waypoint width
-            float newLocalRp = Mathf.Clamp(wp.LocalFinalRacingPoint, -newWpWidth / wp.Width / 2, newWpWidth / wp.Width / 2);
-            
+            float newLocalRp = Mathf.Clamp(driverTargetPoint, -newWpWidth / wp.Width / 2, newWpWidth / wp.Width / 2);
+
             CarRacingPoint = wp.transform.TransformPoint(newLocalRp * wp.Width, 0.5f, 0);
         }
     }
@@ -36,7 +38,9 @@ namespace BehaviourAI
     public class RacingState : BaseState
     {
         private RaceCircuit _circuit;
-        private float _currentMoveInput;
+
+        private float _steerInput;
+        private float _accelerationInput;
 
         private WayPoint _currentWaypoint;
         private int _currentWaypointIndex;
@@ -105,15 +109,29 @@ namespace BehaviourAI
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-
+            
+            Car.SetSteerAngle(_steerInput);
+            Car.SetMotorTorque(Mathf.Clamp(_accelerationInput, 0, 1));
+            Car.SetBrakeTorque(Mathf.Clamp(-_accelerationInput, 0, 1));
+        }
+        
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+            
             //Steer analyst
             AnalysisWaypoints();
 
-            SetSteering();
-            SetMoveInput();
+            UpdateCurrentWaypoint();
+            UpdateTurningTarget();
+            
+            //Calculate inputs
+            
+            _steerInput = CalculateSteeringInput();
+            _accelerationInput = CalculateMoveInput();
         }
 
-        private void SetSteering()
+        private float CalculateSteeringInput()
         {
             float steerAngleToTracker = GetAngleToBetweenTransfors(Car.transform, _turningTargetPoint);
             
@@ -131,12 +149,10 @@ namespace BehaviourAI
 //
 //            //end 
 
-            float lerpSteerAngle = Mathf.Lerp(Driver.Car.CurrentWheelAngle, steerAngleToTracker, Time.fixedDeltaTime * Driver.WheelAngleSpeed);
-
-            Car.SetSteerAngle(lerpSteerAngle);
+            return Mathf.Lerp(Driver.Car.CurrentWheelAngle, steerAngleToTracker, Time.deltaTime * Driver.WheelAngleSpeed);
         }
 
-        private void SetMoveInput()
+        private float CalculateMoveInput()
         {
             //Move input analyst
             _nextCornerAngle = Vector3.Angle(Car.transform.forward * 20, _carPath[_carPath.Count - 1].CarRacingPoint - _carPath[0].CarRacingPoint);
@@ -146,10 +162,19 @@ namespace BehaviourAI
             _brakingDistance = Driver.BrakingDistanceByDeltaSpeed.Evaluate(Mathf.Clamp(Driver.Car.CarSpeed - _cornerTargetSpeed, 0, float.MaxValue));
             
             float targetMoveInput = distanceToCorner > _brakingDistance? 1f: -1f;
-            _currentMoveInput = Mathf.Lerp(_currentMoveInput, targetMoveInput, Time.fixedDeltaTime * 10);
-
-            Car.SetMotorTorque(Mathf.Clamp(_currentMoveInput, 0, 1));
-            Car.SetBrakeTorque(Mathf.Clamp(-_currentMoveInput, 0, 1));
+            
+            //Create pedal input smooth
+            float pedalsInputSpeed = 10;
+            
+            //Create rubberbanding acceleration lag :
+            if (_accelerationInput > 0 && targetMoveInput > _accelerationInput)
+            {
+                pedalsInputSpeed *= Driver.RubberBandingValue * Driver.RubberBandingAccelerationSpeedMultiplyer;
+            }
+            
+            //Set smooth pedal input
+            float newInput = Mathf.Lerp(_accelerationInput, targetMoveInput, Time.deltaTime * pedalsInputSpeed);
+            return Mathf.Clamp(newInput, -1, 1);
         }
 
         private void AnalysisWaypoints()
@@ -159,14 +184,7 @@ namespace BehaviourAI
 
             _carPath = new List<PathSegment>();
             foreach (WayPoint wp in wpList)
-                _carPath.Add(new PathSegment(Driver.Car, wp));
-        }
-
-        public override void OnUpdate()
-        {
-            base.OnUpdate();
-            UpdateCurrentWaypoint();
-            UpdateTurningTarget();
+                _carPath.Add(new PathSegment(Driver, wp));
         }
 
         private void UpdateCurrentWaypoint()

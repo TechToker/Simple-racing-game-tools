@@ -128,26 +128,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 422774993223194562, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 422774993223194562, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 422774993223194562, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 422774993223194562, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1061837160628710654, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -220,11 +200,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4247216084211675440, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
-      propertyPath: m_SuspensionSpring.spring
-      value: 27434.768
-      objectReference: {fileID: 0}
-    - target: {fileID: 4247216084211675440, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
       propertyPath: m_SuspensionSpring.damper
       value: 4389.563
       objectReference: {fileID: 0}
@@ -232,36 +207,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SuspensionDistance
       value: 0.19620001
-      objectReference: {fileID: 0}
-    - target: {fileID: 4247216084533371965, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: m_SuspensionSpring.spring
-      value: 27833.064
-      objectReference: {fileID: 0}
-    - target: {fileID: 4247216084533371965, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: m_SuspensionSpring.damper
-      value: 4453.2905
-      objectReference: {fileID: 0}
-    - target: {fileID: 4247216084533371965, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: m_SuspensionDistance
-      value: 0.19620001
-      objectReference: {fileID: 0}
-    - target: {fileID: 4247216085113554025, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: m_SuspensionSpring.spring
-      value: 32166.934
-      objectReference: {fileID: 0}
-    - target: {fileID: 4247216085113554025, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: m_SuspensionSpring.damper
-      value: 5146.709
-      objectReference: {fileID: 0}
-    - target: {fileID: 4247216085113554025, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: m_SuspensionDistance
-      value: 0.1962
       objectReference: {fileID: 0}
     - target: {fileID: 4247216085177620515, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
@@ -380,11 +325,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
       propertyPath: TargetCar
       value: 
       objectReference: {fileID: 1307869471}
@@ -393,106 +333,6 @@ PrefabInstance:
       propertyPath: _circuit
       value: 
       objectReference: {fileID: 397454049}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[2].time
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[2].value
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[2].inSlope
-      value: -0.003410781
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[2].outSlope
-      value: -0.003410781
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[2].outWeight
-      value: 0.07763256
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[3].time
-      value: 360
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[3].inSlope
-      value: 0.0034108541
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[3].outSlope
-      value: 0.0034108541
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[3].inWeight
-      value: 0.07840136
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[3].outWeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[1].inSlope
-      value: -0.17434059
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[1].outSlope
-      value: -0.17434059
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[1].outWeight
-      value: 0.07890343
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[1].time
-      value: 51.638084
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[1].value
-      value: 13.425558
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[0].inSlope
-      value: -0.13034685
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[0].outSlope
-      value: -0.13034685
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[0].outWeight
-      value: 0.33484277
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: RubberBandingValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: WheelAngleSpeed
-      value: 300
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc21667f58cd3a146b4d6e9c5e10f492, type: 3}
 --- !u!1 &23822118
@@ -1215,13 +1055,13 @@ MonoBehaviour:
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
-  _finalRacingPoint: -0.13
-  _overtakeRacingPoint: -0.13
-  TurningAngle: 2
-  DistanceToNextWaypoint: 39
+  _finalRacingPoint: -0.07000002
+  _overtakeRacingPoint: -0.07000002
+  TurningAngle: 1
+  DistanceToNextWaypoint: 41
   WaypointDifficulty: -0
-  NextWaypointDifficulty: 0.4
-  PrevWaypointDifficulty: 0.03
+  NextWaypointDifficulty: 0.45
+  PrevWaypointDifficulty: 0.02
   PrevWpDirection: 1
   NextWpDirection: -1
   _rightRotateControlPoint: {x: -78.459274, y: 0, z: -22.263027}
@@ -1276,8 +1116,8 @@ MonoBehaviour:
   _overtakeRacingPoint: -0.5
   TurningAngle: 38
   DistanceToNextWaypoint: 17
-  WaypointDifficulty: 0.22
-  NextWaypointDifficulty: 0.07
+  WaypointDifficulty: 0.11
+  NextWaypointDifficulty: 0.02
   PrevWaypointDifficulty: 0.82
   PrevWpDirection: 1
   NextWpDirection: -1
@@ -1386,13 +1226,13 @@ MonoBehaviour:
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
-  _finalRacingPoint: 0.4951
-  _overtakeRacingPoint: 0.4951
-  TurningAngle: 74
-  DistanceToNextWaypoint: 31
-  WaypointDifficulty: 0.93
-  NextWaypointDifficulty: 0
-  PrevWaypointDifficulty: 0.07
+  _finalRacingPoint: 0.4984
+  _overtakeRacingPoint: 0.4984
+  TurningAngle: 73
+  DistanceToNextWaypoint: 35
+  WaypointDifficulty: 0.92
+  NextWaypointDifficulty: -0
+  PrevWaypointDifficulty: 0.02
   PrevWpDirection: 1
   NextWpDirection: 1
   _rightRotateControlPoint: {x: -109.80657, y: 0, z: -114.678795}
@@ -1796,16 +1636,16 @@ MonoBehaviour:
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
-  _finalRacingPoint: 0.48290002
-  _overtakeRacingPoint: 0.48290002
-  TurningAngle: 80
-  DistanceToNextWaypoint: 23
-  WaypointDifficulty: 0.97
-  NextWaypointDifficulty: 0
-  PrevWaypointDifficulty: 0.57
+  _finalRacingPoint: 0.5
+  _overtakeRacingPoint: 0.5
+  TurningAngle: 93
+  DistanceToNextWaypoint: 24
+  WaypointDifficulty: 1
+  NextWaypointDifficulty: -0
+  PrevWaypointDifficulty: 0.01
   PrevWpDirection: 1
   NextWpDirection: 1
-  _rightRotateControlPoint: {x: -135.91861, y: 0, z: -11.437158}
+  _rightRotateControlPoint: {x: -137.04712, y: 0, z: -12.048548}
 --- !u!4 &255730706
 Transform:
   m_ObjectHideFlags: 0
@@ -1813,8 +1653,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 255730704}
-  m_LocalRotation: {x: -0, y: 0.3322593, z: -0, w: 0.9431881}
-  m_LocalPosition: {x: -146.92924, y: 0, z: -23.817707}
+  m_LocalRotation: {x: -0, y: 0.37873322, z: -0, w: 0.9255059}
+  m_LocalPosition: {x: -147.41724, y: 0, z: -23.928207}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 397454050}
@@ -1849,20 +1689,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 10
+  _width: 12
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
-  _finalRacingPoint: -0.029600024
-  _overtakeRacingPoint: -0.029600024
-  TurningAngle: 21
+  _finalRacingPoint: -0.02000001
+  _overtakeRacingPoint: -0.02000001
+  TurningAngle: 20
   DistanceToNextWaypoint: 75
-  WaypointDifficulty: 0.02
+  WaypointDifficulty: 0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0.48
   PrevWpDirection: -1
   NextWpDirection: -1
-  _rightRotateControlPoint: {x: 66.52636, y: 0, z: -56.17899}
+  _rightRotateControlPoint: {x: 65.5388, y: 0, z: -56.02168}
 --- !u!4 &257930301
 Transform:
   m_ObjectHideFlags: 0
@@ -2091,14 +1931,14 @@ MonoBehaviour:
   _shortestRacingLinePoint: 0.5
   _finalRacingPoint: 0.5
   _overtakeRacingPoint: 0.5
-  TurningAngle: 45
-  DistanceToNextWaypoint: 25
-  WaypointDifficulty: 0.42
-  NextWaypointDifficulty: 0
-  PrevWaypointDifficulty: 0.39
+  TurningAngle: 37
+  DistanceToNextWaypoint: 26
+  WaypointDifficulty: 0.09
+  NextWaypointDifficulty: -0
+  PrevWaypointDifficulty: 0.51
   PrevWpDirection: -1
   NextWpDirection: 1
-  _rightRotateControlPoint: {x: 55.268517, y: 0, z: -148.59622}
+  _rightRotateControlPoint: {x: 56.325417, y: 0, z: -148.08742}
 --- !u!4 &295817470
 Transform:
   m_ObjectHideFlags: 0
@@ -2107,7 +1947,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295817468}
   m_LocalRotation: {x: -0, y: 0.9000913, z: -0, w: -0.4357013}
-  m_LocalPosition: {x: -14.286563, y: 0, z: -120.37862}
+  m_LocalPosition: {x: -13.581963, y: 0, z: -120.03942}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 397454050}
@@ -2824,8 +2664,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.30949488
     - serializedVersion: 3
-      time: 26.859276
-      value: 0.035716683
+      time: 32
+      value: 0.025
       inSlope: 0.0028435776
       outSlope: 0.0028435776
       tangentMode: 0
@@ -2901,7 +2741,7 @@ MonoBehaviour:
   ShowShortestRacingLine: 0
   ShowFinalRacingLine: 1
   EnableWaypointsHandles: 1
-  ShowWaypointsNames: 0
+  ShowWaypointsNames: 1
   ShowWaypointsData: 0
   ShowWaypointsDifficulty: 0
   ShowWaypointsDirections: 0
@@ -3151,16 +2991,16 @@ MonoBehaviour:
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
-  _finalRacingPoint: 0.30219996
-  _overtakeRacingPoint: 0.30219996
-  TurningAngle: 50
-  DistanceToNextWaypoint: 16
-  WaypointDifficulty: 0.57
-  NextWaypointDifficulty: 0.97
-  PrevWaypointDifficulty: 0.51
+  _finalRacingPoint: 0.15349999
+  _overtakeRacingPoint: 0.15349999
+  TurningAngle: 25
+  DistanceToNextWaypoint: 17
+  WaypointDifficulty: 0.01
+  NextWaypointDifficulty: 1
+  PrevWaypointDifficulty: 0.65
   PrevWpDirection: -1
   NextWpDirection: 1
-  _rightRotateControlPoint: {x: -136.45969, y: 0, z: -19.65249}
+  _rightRotateControlPoint: {x: -136.27591, y: 0, z: -19.84555}
 --- !u!4 &414370564
 Transform:
   m_ObjectHideFlags: 0
@@ -3168,8 +3008,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 414370562}
-  m_LocalRotation: {x: -0, y: 0.36919928, z: -0, w: -0.92935026}
-  m_LocalPosition: {x: -147.08266, y: 0, z: -34.546585}
+  m_LocalRotation: {x: -0, y: 0.4079607, z: -0, w: -0.9129995}
+  m_LocalPosition: {x: -146.71916, y: 0, z: -34.91011}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 397454050}
@@ -3512,13 +3352,13 @@ MonoBehaviour:
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
-  _finalRacingPoint: -0.04429999
-  _overtakeRacingPoint: -0.04429999
+  _finalRacingPoint: -0.23539999
+  _overtakeRacingPoint: -0.23539999
   TurningAngle: 31
   DistanceToNextWaypoint: 24
-  WaypointDifficulty: 0.07
-  NextWaypointDifficulty: 0.27
-  PrevWaypointDifficulty: 0.22
+  WaypointDifficulty: 0.02
+  NextWaypointDifficulty: 0.16
+  PrevWaypointDifficulty: 0.11
   PrevWpDirection: -1
   NextWpDirection: -1
   _rightRotateControlPoint: {x: 33.05199, y: 0, z: -62.796368}
@@ -3679,20 +3519,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 10
+  _width: 12
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
-  _finalRacingPoint: 0.40370002
-  _overtakeRacingPoint: 0.40370002
-  TurningAngle: 72
+  _finalRacingPoint: 0.347
+  _overtakeRacingPoint: 0.347
+  TurningAngle: 66
   DistanceToNextWaypoint: 21
-  WaypointDifficulty: 0.91
+  WaypointDifficulty: 0.85
   NextWaypointDifficulty: 1
-  PrevWaypointDifficulty: 0.07
+  PrevWaypointDifficulty: 0.02
   PrevWpDirection: 1
   NextWpDirection: 1
-  _rightRotateControlPoint: {x: 150.79083, y: 0, z: -42.844257}
+  _rightRotateControlPoint: {x: 149.82663, y: 0, z: -42.579124}
 --- !u!4 &491953127
 Transform:
   m_ObjectHideFlags: 0
@@ -3996,14 +3836,14 @@ MonoBehaviour:
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.5
   _overtakeRacingPoint: 0
-  TurningAngle: 48
-  DistanceToNextWaypoint: 23
-  WaypointDifficulty: 0.51
-  NextWaypointDifficulty: 0.57
+  TurningAngle: 54
+  DistanceToNextWaypoint: 19
+  WaypointDifficulty: 0.65
+  NextWaypointDifficulty: 0.01
   PrevWaypointDifficulty: -0
   PrevWpDirection: -1
   NextWpDirection: 1
-  _rightRotateControlPoint: {x: -118.33993, y: 0, z: -21.26109}
+  _rightRotateControlPoint: {x: -121.06631, y: 0, z: -21.261093}
 --- !u!4 &526549040
 Transform:
   m_ObjectHideFlags: 0
@@ -4012,7 +3852,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 526549038}
   m_LocalRotation: {x: -0, y: 0.70951635, z: -0, w: -0.704689}
-  m_LocalPosition: {x: -132.06598, y: 0, z: -36.873966}
+  m_LocalPosition: {x: -133.88356, y: 0, z: -36.87397}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 397454050}
@@ -4450,20 +4290,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 10
+  _width: 11
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
-  _finalRacingPoint: -0.4584
-  _overtakeRacingPoint: -0.4584
-  TurningAngle: 47
+  _finalRacingPoint: -0.4896
+  _overtakeRacingPoint: -0.4896
+  TurningAngle: 49
   DistanceToNextWaypoint: 26
   WaypointDifficulty: 0.48
-  NextWaypointDifficulty: 0.02
-  PrevWaypointDifficulty: 0.06
+  NextWaypointDifficulty: 0
+  PrevWaypointDifficulty: 0.02
   PrevWpDirection: -1
   NextWpDirection: -1
-  _rightRotateControlPoint: {x: 79.63852, y: 0, z: -30.163591}
+  _rightRotateControlPoint: {x: 79.28987, y: 0, z: -29.805195}
 --- !u!4 &593922531
 Transform:
   m_ObjectHideFlags: 0
@@ -5282,13 +5122,13 @@ MonoBehaviour:
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
-  _finalRacingPoint: -0.427
-  _overtakeRacingPoint: -0.427
+  _finalRacingPoint: -0.4748
+  _overtakeRacingPoint: -0.4748
   TurningAngle: 40
   DistanceToNextWaypoint: 34
-  WaypointDifficulty: 0.27
-  NextWaypointDifficulty: 0.03
-  PrevWaypointDifficulty: 0.07
+  WaypointDifficulty: 0.16
+  NextWaypointDifficulty: 0.01
+  PrevWaypointDifficulty: 0.02
   PrevWpDirection: -1
   NextWpDirection: -1
   _rightRotateControlPoint: {x: 12.76409, y: 0, z: -43.521008}
@@ -5528,20 +5368,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 7.93
+  _width: 12
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.5
-  _overtakeRacingPoint: -0.5
-  TurningAngle: 44
+  _overtakeRacingPoint: 0
+  TurningAngle: 50
   DistanceToNextWaypoint: 22
-  WaypointDifficulty: 0.39
-  NextWaypointDifficulty: 0.42
+  WaypointDifficulty: 0.51
+  NextWaypointDifficulty: 0.09
   PrevWaypointDifficulty: 0
   PrevWpDirection: -1
   NextWpDirection: 1
-  _rightRotateControlPoint: {x: 61.81551, y: 0, z: -131.16635}
+  _rightRotateControlPoint: {x: 59.781586, y: 0, z: -131.10014}
 --- !u!4 &930836791
 Transform:
   m_ObjectHideFlags: 0
@@ -5764,13 +5604,13 @@ MonoBehaviour:
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
-  _finalRacingPoint: -0.2672
-  _overtakeRacingPoint: -0.2672
+  _finalRacingPoint: -0.37129998
+  _overtakeRacingPoint: -0.37129998
   TurningAngle: 24
-  DistanceToNextWaypoint: 38
-  WaypointDifficulty: 0.03
+  DistanceToNextWaypoint: 36
+  WaypointDifficulty: 0.01
   NextWaypointDifficulty: 0.02
-  PrevWaypointDifficulty: 0.26
+  PrevWaypointDifficulty: 0.15
   PrevWpDirection: -1
   NextWpDirection: 1
   _rightRotateControlPoint: {x: -24.182732, y: 0, z: -39.73773}
@@ -5939,14 +5779,14 @@ MonoBehaviour:
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.5
   _overtakeRacingPoint: -0.5
-  TurningAngle: 3
-  DistanceToNextWaypoint: 108
+  TurningAngle: 2
+  DistanceToNextWaypoint: 111
   WaypointDifficulty: -0
   NextWaypointDifficulty: 0
-  PrevWaypointDifficulty: 0
+  PrevWaypointDifficulty: -0
   PrevWpDirection: 1
   NextWpDirection: -1
-  _rightRotateControlPoint: {x: 13.045235, y: 0, z: -131.88518}
+  _rightRotateControlPoint: {x: 16.173592, y: 0, z: -131.8347}
 --- !u!4 &1071918496
 Transform:
   m_ObjectHideFlags: 0
@@ -5955,7 +5795,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1071918494}
   m_LocalRotation: {x: -0, y: 0.71295977, z: -0, w: -0.70120496}
-  m_LocalPosition: {x: -44.436687, y: 0, z: -110.62291}
+  m_LocalPosition: {x: -42.351116, y: 0, z: -110.58925}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 397454050}
@@ -6919,14 +6759,14 @@ MonoBehaviour:
   _shortestRacingLinePoint: 0.5
   _finalRacingPoint: 0.5
   _overtakeRacingPoint: 0.5
-  TurningAngle: 25
-  DistanceToNextWaypoint: 24
-  WaypointDifficulty: 0.03
+  TurningAngle: 29
+  DistanceToNextWaypoint: 26
+  WaypointDifficulty: 0.02
   NextWaypointDifficulty: -0
-  PrevWaypointDifficulty: 0.02
+  PrevWaypointDifficulty: 0.01
   PrevWpDirection: -1
   NextWpDirection: -1
-  _rightRotateControlPoint: {x: -57.059277, y: 0, z: -40.1302}
+  _rightRotateControlPoint: {x: -57.83844, y: 0, z: -39.669525}
 --- !u!4 &1181860967
 Transform:
   m_ObjectHideFlags: 0
@@ -6934,8 +6774,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1181860965}
-  m_LocalRotation: {x: -0, y: 0.34005648, z: -0, w: -0.9404051}
-  m_LocalPosition: {x: -94.314415, y: 0, z: -48.011795}
+  m_LocalRotation: {x: -0, y: 0.5466017, z: -0, w: -0.83739275}
+  m_LocalPosition: {x: -93.368774, y: 0, z: -48.808117}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 397454050}
@@ -7031,12 +6871,12 @@ MonoBehaviour:
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
-  _finalRacingPoint: 0.3884
-  _overtakeRacingPoint: 0.3884
+  _finalRacingPoint: 0.3922
+  _overtakeRacingPoint: 0.3922
   TurningAngle: 31
   DistanceToNextWaypoint: 19
-  WaypointDifficulty: 0.07
-  NextWaypointDifficulty: 0.93
+  WaypointDifficulty: 0.02
+  NextWaypointDifficulty: 0.92
   PrevWaypointDifficulty: 0.81
   PrevWpDirection: -1
   NextWpDirection: 1
@@ -7267,20 +7107,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 10
+  _width: 12
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
-  _finalRacingPoint: 0.14659995
-  _overtakeRacingPoint: 0.14659995
-  TurningAngle: 31
+  _finalRacingPoint: 0.2648
+  _overtakeRacingPoint: 0.2648
+  TurningAngle: 28
   DistanceToNextWaypoint: 30
-  WaypointDifficulty: 0.07
-  NextWaypointDifficulty: 0.91
-  PrevWaypointDifficulty: 0.53
+  WaypointDifficulty: 0.02
+  NextWaypointDifficulty: 0.85
+  PrevWaypointDifficulty: 0.61
   PrevWpDirection: -1
   NextWpDirection: 1
-  _rightRotateControlPoint: {x: 146.55736, y: 0, z: -16.968704}
+  _rightRotateControlPoint: {x: 145.70236, y: 0, z: -17.487354}
 --- !u!4 &1323807749
 Transform:
   m_ObjectHideFlags: 0
@@ -8294,6 +8134,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1428332118}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &1438422060 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 4247216085177620514, guid: bc21667f58cd3a146b4d6e9c5e10f492,
+    type: 3}
+  m_PrefabInstance: {fileID: 16300431}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1444367037
 GameObject:
   m_ObjectHideFlags: 0
@@ -8746,7 +8592,7 @@ MonoBehaviour:
   TurningAngle: 62
   DistanceToNextWaypoint: 22
   WaypointDifficulty: 0.81
-  NextWaypointDifficulty: 0.07
+  NextWaypointDifficulty: 0.02
   PrevWaypointDifficulty: -0
   PrevWpDirection: -1
   NextWpDirection: 1
@@ -8781,7 +8627,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1501351797
 Transform:
   m_ObjectHideFlags: 0
@@ -8803,7 +8649,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1501351796}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f9a720e86e6243a389dcce389040366, type: 3}
   m_Name: 
@@ -8828,7 +8674,7 @@ MonoBehaviour:
   zeroColor:
     serializedVersion: 2
     rgba: 1073741824
-  vehicleBody: {fileID: 54000013599116076}
+  vehicleBody: {fileID: 1438422060}
   timeTravel: 0
   wheelConfigs: []
 --- !u!1 &1513554833
@@ -8917,20 +8763,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 10
+  _width: 11
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.5
   _overtakeRacingPoint: 0
-  TurningAngle: 49
+  TurningAngle: 53
   DistanceToNextWaypoint: 32
-  WaypointDifficulty: 0.54
-  NextWaypointDifficulty: 0.07
+  WaypointDifficulty: 0.62
+  NextWaypointDifficulty: 0.02
   PrevWaypointDifficulty: 0
   PrevWpDirection: -1
   NextWpDirection: 1
-  _rightRotateControlPoint: {x: 121.65548, y: 0, z: -4.902727}
+  _rightRotateControlPoint: {x: 121.63568, y: 0, z: -5.402335}
 --- !u!4 &1518794867
 Transform:
   m_ObjectHideFlags: 0
@@ -9152,20 +8998,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 12
+  _width: 10
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
-  _finalRacingPoint: -0.47000003
-  _overtakeRacingPoint: -0.47000003
-  TurningAngle: 9
-  DistanceToNextWaypoint: 121
-  WaypointDifficulty: 0
-  NextWaypointDifficulty: 0
-  PrevWaypointDifficulty: 0.97
+  _finalRacingPoint: -0.5
+  _overtakeRacingPoint: -0.5
+  TurningAngle: 2
+  DistanceToNextWaypoint: 120
+  WaypointDifficulty: -0
+  NextWaypointDifficulty: -0
+  PrevWaypointDifficulty: 1
   PrevWpDirection: 1
   NextWpDirection: -1
-  _rightRotateControlPoint: {x: -118.18021, y: 0, z: -10.205286}
+  _rightRotateControlPoint: {x: -117.077034, y: 0, z: -9.24427}
 --- !u!4 &1546372752
 Transform:
   m_ObjectHideFlags: 0
@@ -9174,7 +9020,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546372750}
   m_LocalRotation: {x: -0, y: 0.7040622, z: -0, w: 0.71013826}
-  m_LocalPosition: {x: -132.02118, y: 0, z: -21.503674}
+  m_LocalPosition: {x: -131.28, y: 0, z: -21.529638}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 397454050}
@@ -9355,20 +9201,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 10
+  _width: 11
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.5
   _overtakeRacingPoint: -0.5
-  TurningAngle: 10
+  TurningAngle: 9
   DistanceToNextWaypoint: 119
-  WaypointDifficulty: 0
+  WaypointDifficulty: -0
   NextWaypointDifficulty: 0
   PrevWaypointDifficulty: 0
   PrevWpDirection: 1
   NextWpDirection: -1
-  _rightRotateControlPoint: {x: 2.9606814, y: 0, z: -4.986409}
+  _rightRotateControlPoint: {x: 2.9385388, y: 0, z: -5.485919}
 --- !u!4 &1586286820
 Transform:
   m_ObjectHideFlags: 0
@@ -10380,12 +10226,12 @@ MonoBehaviour:
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
-  _finalRacingPoint: 0.2556
-  _overtakeRacingPoint: 0.2556
-  TurningAngle: 57
+  _finalRacingPoint: 0.255
+  _overtakeRacingPoint: 0.255
+  TurningAngle: 58
   DistanceToNextWaypoint: 22
-  WaypointDifficulty: 0.74
-  NextWaypointDifficulty: 0.06
+  WaypointDifficulty: 0.75
+  NextWaypointDifficulty: 0.02
   PrevWaypointDifficulty: 1
   PrevWpDirection: 1
   NextWpDirection: -1
@@ -10659,8 +10505,8 @@ MonoBehaviour:
   TurningAngle: 63
   DistanceToNextWaypoint: 22
   WaypointDifficulty: 0.82
-  NextWaypointDifficulty: 0.22
-  PrevWaypointDifficulty: 0
+  NextWaypointDifficulty: 0.11
+  PrevWaypointDifficulty: -0
   PrevWpDirection: 1
   NextWpDirection: -1
   _rightRotateControlPoint: {x: 14.109307, y: 0, z: -100.86817}
@@ -10937,42 +10783,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 306182312, guid: bc21667f58cd3a146b4d6e9c5e10f492, type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 306182312, guid: bc21667f58cd3a146b4d6e9c5e10f492, type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 306182312, guid: bc21667f58cd3a146b4d6e9c5e10f492, type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 306182312, guid: bc21667f58cd3a146b4d6e9c5e10f492, type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 422774993223194562, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 422774993223194562, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 422774993223194562, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 422774993223194562, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1061837160628710654, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -11045,11 +10855,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4247216084211675440, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
-      propertyPath: m_SuspensionSpring.spring
-      value: 27434.768
-      objectReference: {fileID: 0}
-    - target: {fileID: 4247216084211675440, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
       propertyPath: m_SuspensionSpring.damper
       value: 4389.563
       objectReference: {fileID: 0}
@@ -11057,6 +10862,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SuspensionDistance
       value: 0.19620001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4247216084211675440, guid: bc21667f58cd3a146b4d6e9c5e10f492,
+        type: 3}
+      propertyPath: m_SuspensionSpring.spring
+      value: 27434.768
       objectReference: {fileID: 0}
     - target: {fileID: 4247216084533371965, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
@@ -11067,11 +10877,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SuspensionSpring.damper
       value: 4453.2905
-      objectReference: {fileID: 0}
-    - target: {fileID: 4247216084533371965, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: m_SuspensionDistance
-      value: 0.19620001
       objectReference: {fileID: 0}
     - target: {fileID: 4247216085113554025, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
@@ -11101,7 +10906,7 @@ PrefabInstance:
     - target: {fileID: 4247216085177620519, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -50.25
+      value: -49.5
       objectReference: {fileID: 0}
     - target: {fileID: 4247216085177620519, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
@@ -11213,31 +11018,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0.661
       objectReference: {fileID: 0}
-    - target: {fileID: 7194941582311105447, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7194941582311105447, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7194941582311105447, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7194941582311105447, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
       propertyPath: TargetCar
@@ -11250,108 +11030,8 @@ PrefabInstance:
       objectReference: {fileID: 397454049}
     - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[2].time
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[2].value
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[2].inSlope
-      value: -0.003410781
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[2].outSlope
-      value: -0.003410781
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[2].outWeight
-      value: 0.07763256
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[3].time
-      value: 360
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[3].inSlope
-      value: 0.0034108541
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[3].outSlope
-      value: 0.0034108541
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[3].inWeight
-      value: 0.07840136
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[3].outWeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[1].inSlope
-      value: -0.17434059
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[1].outSlope
-      value: -0.17434059
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[1].outWeight
-      value: 0.07890343
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[1].time
-      value: 51.638084
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[1].value
-      value: 13.425558
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[0].inSlope
-      value: -0.13034685
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[0].outSlope
-      value: -0.13034685
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: SpeedByCornerAnlge.m_Curve.Array.data[0].outWeight
-      value: 0.33484277
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: IsAttack
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: RubberBandingValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289247421392153190, guid: bc21667f58cd3a146b4d6e9c5e10f492,
-        type: 3}
-      propertyPath: WheelAngleSpeed
-      value: 300
+      propertyPath: RBAccelerationSpeedMultiplyer
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7339598395786060718, guid: bc21667f58cd3a146b4d6e9c5e10f492,
         type: 3}
@@ -11791,20 +11471,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 10
+  _width: 11
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: -0.5
   _finalRacingPoint: -0.5
   _overtakeRacingPoint: -0.5
-  TurningAngle: 30
+  TurningAngle: 28
   DistanceToNextWaypoint: 27
-  WaypointDifficulty: 0.06
+  WaypointDifficulty: 0.02
   NextWaypointDifficulty: 0.48
-  PrevWaypointDifficulty: 0.74
+  PrevWaypointDifficulty: 0.75
   PrevWpDirection: 1
   NextWpDirection: -1
-  _rightRotateControlPoint: {x: 109.05646, y: 0, z: -20.384571}
+  _rightRotateControlPoint: {x: 109.056015, y: 0, z: -19.884571}
 --- !u!4 &1949173279
 Transform:
   m_ObjectHideFlags: 0
@@ -11846,7 +11526,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951780681}
   m_LocalRotation: {x: 0.09229594, y: 0.70105743, z: -0.09229594, w: 0.70105743}
-  m_LocalPosition: {x: -17.006367, y: 3.5, z: 0}
+  m_LocalPosition: {x: -17.008106, y: 3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 390374273}
@@ -12465,20 +12145,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 12
+  _width: 11
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
-  _finalRacingPoint: -0.43
-  _overtakeRacingPoint: -0.43
-  TurningAngle: 10
-  DistanceToNextWaypoint: 100
-  WaypointDifficulty: 0
+  _finalRacingPoint: -0.35000002
+  _overtakeRacingPoint: -0.35000002
+  TurningAngle: 11
+  DistanceToNextWaypoint: 96
+  WaypointDifficulty: -0
   NextWaypointDifficulty: 0
-  PrevWaypointDifficulty: 0.93
+  PrevWaypointDifficulty: 0.85
   PrevWpDirection: 1
   NextWpDirection: 1
-  _rightRotateControlPoint: {x: -85.54698, y: 0, z: -108.06212}
+  _rightRotateControlPoint: {x: -81.216064, y: 0, z: -106.77573}
 --- !u!4 &2025714936
 Transform:
   m_ObjectHideFlags: 0
@@ -12487,7 +12167,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2025714934}
   m_LocalRotation: {x: -0, y: 0.7110038, z: -0, w: 0.7031882}
-  m_LocalPosition: {x: -110.18712, y: 0, z: -86.74165}
+  m_LocalPosition: {x: -107.30352, y: 0, z: -86.21738}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 397454050}
@@ -12806,20 +12486,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64da83f296810742bf5d7766431927a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 12
+  _width: 11
   _gateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _circlePosY: 0.25
   _shortestRacingLinePoint: 0.5
-  _finalRacingPoint: 0.08000001
-  _overtakeRacingPoint: 0.08000001
-  TurningAngle: 10
-  DistanceToNextWaypoint: 25
-  WaypointDifficulty: 0
+  _finalRacingPoint: 0.41
+  _overtakeRacingPoint: 0.41
+  TurningAngle: 4
+  DistanceToNextWaypoint: 23
+  WaypointDifficulty: -0
   NextWaypointDifficulty: -0
-  PrevWaypointDifficulty: 0.42
+  PrevWaypointDifficulty: 0.09
   PrevWpDirection: 1
   NextWpDirection: -1
-  _rightRotateControlPoint: {x: 36.065277, y: 0, z: -147.76234}
+  _rightRotateControlPoint: {x: 35.83854, y: 0, z: -148.20798}
 --- !u!4 &2131511136
 Transform:
   m_ObjectHideFlags: 0
@@ -12869,11 +12549,11 @@ MonoBehaviour:
   _shortestRacingLinePoint: 0.5
   _finalRacingPoint: 0.5
   _overtakeRacingPoint: 0.5
-  TurningAngle: 98
+  TurningAngle: 103
   DistanceToNextWaypoint: 20
   WaypointDifficulty: 1
-  NextWaypointDifficulty: 0.74
-  PrevWaypointDifficulty: 0.91
+  NextWaypointDifficulty: 0.75
+  PrevWaypointDifficulty: 0.85
   PrevWpDirection: 1
   NextWpDirection: 1
   _rightRotateControlPoint: {x: 137.48433, y: 0, z: -50.389908}
@@ -13107,12 +12787,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4126308969757231546, guid: 877fc6ef080ba4ecd8a8651303bb0d66,
     type: 3}
   m_PrefabInstance: {fileID: 2147309248}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &54000013599116076 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 4891215028234876540, guid: a705b2e85ab488849b71b7a97641c882,
-    type: 3}
-  m_PrefabInstance: {fileID: 4854544629196717392}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4247216085539420995
 PrefabInstance:
@@ -13398,7 +13072,7 @@ PrefabInstance:
     - target: {fileID: 4850653201750622514, guid: a705b2e85ab488849b71b7a97641c882,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.006368
+      value: -9.008107
       objectReference: {fileID: 0}
     - target: {fileID: 4850653202817657498, guid: a705b2e85ab488849b71b7a97641c882,
         type: 3}

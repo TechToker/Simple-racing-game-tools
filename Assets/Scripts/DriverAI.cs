@@ -69,6 +69,7 @@ public class DriverAI : BaseDriver
     public float RubberBandingCornerTargetSpeedMultiplyer => (1 - RubberBandingValue) * RBCornerSpeedMultiplyer;
     
     public string CurrentStateName => _state.GetStateName();
+    public BaseState StateAI => _state;
 
     private void OnEnable()
     {

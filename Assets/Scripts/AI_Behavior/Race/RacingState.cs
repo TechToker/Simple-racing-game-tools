@@ -60,6 +60,18 @@ namespace BehaviourAI
         
         //Waypoints
         private Sides _carWaypointApproachSide;
+        
+        //Debug: Braking
+        public bool EnableBrakingDebug;
+        public float CornerEnterSpeed;
+        public float CornerExitSpeed;
+        
+        public float StartBrakingDistance = -1;
+
+        //Graph-X
+        public float CurrentDistanceProgress;
+        //Graph-Y
+        public float CurrentBrakingSpeed;
 
         public RacingState(RaceCircuit circuit, DriverAI ai, BaseCar car) : base(ai, car)
         {
@@ -104,6 +116,8 @@ namespace BehaviourAI
                                 $"tSpeed: {Math.Round(_cornerTargetSpeed, 1)}";
             
             Handles.Label(_carPath[0].CarRacingPoint, cornerInfo);
+
+            Gizmos.color = Color.red;
         }
 
         public override void FixedUpdate()
@@ -120,9 +134,9 @@ namespace BehaviourAI
             base.OnUpdate();
             
             //Steer analyst
-            AnalysisWaypoints();
-
             UpdateCurrentWaypoint();
+            AnalysisWaypoints();
+            
             UpdateTurningTarget();
             
             //Calculate inputs
@@ -156,7 +170,7 @@ namespace BehaviourAI
         {
             //Move input analyst
             _nextCornerAngle = Vector3.Angle(Car.transform.forward * 20, _carPath[_carPath.Count - 1].CarRacingPoint - _carPath[0].CarRacingPoint);
-            float distanceToCorner = Vector3.Distance(Car.transform.position, _carPath[0].CarRacingPoint);
+            float distanceToCorner = Vector3.Distance(Car.CarFrontBumperPos, _carPath[0].CarRacingPoint);
 
             _cornerTargetSpeed = Driver.SpeedByCornerAnlge.Evaluate(_nextCornerAngle);
             _brakingDistance = Driver.BrakingDistanceByDeltaSpeed.Evaluate(Mathf.Clamp(Driver.Car.CarSpeed - _cornerTargetSpeed, 0, float.MaxValue));
@@ -172,6 +186,22 @@ namespace BehaviourAI
                 pedalsInputSpeed *= Driver.RubberBandingValue * Driver.RubberBandingAccelerationSpeedMultiplyer;
             }
             
+            //Debug:
+            CurrentDistanceProgress = distanceToCorner;
+            CurrentBrakingSpeed = Car.CarSpeed;
+            
+            CornerExitSpeed = _cornerTargetSpeed;
+
+            if (!EnableBrakingDebug && distanceToCorner < _brakingDistance)
+            {
+                //Start braking write
+                CornerEnterSpeed = Car.CarSpeed;
+                StartBrakingDistance = _brakingDistance;
+
+                EnableBrakingDebug = true;
+            }
+
+
             //Set smooth pedal input
             float newInput = Mathf.Lerp(_accelerationInput, targetMoveInput, Time.deltaTime * pedalsInputSpeed);
             return Mathf.Clamp(newInput, -1, 1);
@@ -191,6 +221,9 @@ namespace BehaviourAI
         {
             if (_carWaypointApproachSide != GetCarWaypointApproachSide(_currentWaypoint))
             {
+                //Reset braking debug
+                EnableBrakingDebug = false;
+
                 _currentWaypointIndex++;
                 _currentWaypoint = _circuit.GetWaypointByIndex(_currentWaypointIndex);
                 
@@ -203,7 +236,7 @@ namespace BehaviourAI
         private Sides GetCarWaypointApproachSide(WayPoint waypoint)
         {
             Vector3 waypointLineVector = waypoint.LeftBorder - waypoint.RightBorder;
-            Vector3 toCarWaypointVector = Driver.transform.position + Driver.transform.forward * 2.5f - waypoint.RightBorder;
+            Vector3 toCarWaypointVector = Driver.Car.CarFrontBumperPos - waypoint.RightBorder;
             float singledAngle = Vector3.SignedAngle(waypointLineVector, toCarWaypointVector, Vector3.up);
             
             return singledAngle < 0 ? Sides.LEFT : Sides.RIGHT;

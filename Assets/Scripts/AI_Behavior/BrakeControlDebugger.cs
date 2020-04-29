@@ -103,7 +103,8 @@ public class BrakeControlDebugger : MonoBehaviour
 		_brakingDistance.SetText(Math.Round(rState.StartBrakingDistance, 1).ToString());
 
 		Vector2 pointInPercent = new Vector2(rState.CurrentDistanceProgress / rState.StartBrakingDistance,
-			rState.CurrentBrakingSpeed / rState.CornerEnterSpeed);
+			(rState.CurrentBrakingSpeed - rState.CornerExitSpeed) / (rState.CornerEnterSpeed - rState.CornerExitSpeed));
+		
 		Vector2 pointInDrawableZone = new Vector2(pointInPercent.x * _drawableImageSize.x + _borderOffset,
 			pointInPercent.y * _drawableImageSize.y + _borderOffset);
 		

@@ -52,7 +52,7 @@ public class BrakeControlDebugger : MonoBehaviour
 	void Update()
 	{
 		RacingState rState = (RacingState) _targetDriver.StateAI;
-		if (!rState.EnableBrakingDebug)
+		if (!rState.WriteBrakingData)
 		{
 			_brakingData.Clear();
 			return;

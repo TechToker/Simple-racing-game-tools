@@ -1084,7 +1084,7 @@ MeshCollider:
   m_Material: {fileID: 13400000, guid: 4e2a18fdb7d20fa40bafb75ae73783d7, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: b37bce4519fa07648a6b9e5e034017ec, type: 3}
@@ -1342,6 +1342,88 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Car: {fileID: 4247216085177620513}
+  CurrentMode: 10
+  _circuit: {fileID: 0}
+  TurningAlanystDistance: 30
+  SpeedByCornerAnlge:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 50
+      inSlope: -0.13034685
+      outSlope: -0.13034685
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33484277
+    - serializedVersion: 3
+      time: 51.638084
+      value: 13.425558
+      inSlope: -0.17434059
+      outSlope: -0.17434059
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.07890343
+    - serializedVersion: 3
+      time: 180
+      value: 5
+      inSlope: -0.003410781
+      outSlope: -0.003410781
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.07763256
+    - serializedVersion: 3
+      time: 360
+      value: 5
+      inSlope: 0.0034108541
+      outSlope: 0.0034108541
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.07840136
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  BrakingDistanceByDeltaSpeed:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2.106367
+      outSlope: 2.106367
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.2642857
+    - serializedVersion: 3
+      time: 7.55448
+      value: 12.778233
+      inSlope: 1.1608391
+      outSlope: 1.1608391
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.19689101
+      outWeight: 0.034187034
+    - serializedVersion: 3
+      time: 50
+      value: 50
+      inSlope: 0.39800572
+      outSlope: 0.39800572
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.065191835
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  IsAttack: 0
+  RubberBandingValue: 1
+  RBAccelerationSpeedMultiplyer: 1
+  RBCornerSpeedMultiplyer: 1
   TargetCar: {fileID: 0}
   TargetPositionUpdateDelay: 0.3
   CarSensorsDistance: 3
@@ -1531,87 +1613,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  SpeedByCornerAnlge:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 50
-      inSlope: -0.13034685
-      outSlope: -0.13034685
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33484277
-    - serializedVersion: 3
-      time: 51.638084
-      value: 13.425558
-      inSlope: -0.17434059
-      outSlope: -0.17434059
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.07890343
-    - serializedVersion: 3
-      time: 180
-      value: 5
-      inSlope: -0.003410781
-      outSlope: -0.003410781
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.07763256
-    - serializedVersion: 3
-      time: 360
-      value: 5
-      inSlope: 0.0034108541
-      outSlope: 0.0034108541
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.07840136
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  BrakingDistanceByDeltaSpeed:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2.106367
-      outSlope: 2.106367
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.2642857
-    - serializedVersion: 3
-      time: 7.55448
-      value: 12.778233
-      inSlope: 1.1608391
-      outSlope: 1.1608391
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.19689101
-      outWeight: 0.034187034
-    - serializedVersion: 3
-      time: 50
-      value: 50
-      inSlope: 0.39800572
-      outSlope: 0.39800572
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.065191835
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _circuit: {fileID: 0}
-  IsAttack: 0
-  RubberBandingValue: 1
-  RBAccelerationSpeedMultiplyer: 1
-  CurrentMode: 10
-  TurningAlanystDistance: 30
 --- !u!114 &4247216085177620513
 MonoBehaviour:
   m_ObjectHideFlags: 0

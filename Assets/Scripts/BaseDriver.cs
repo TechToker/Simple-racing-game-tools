@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class BaseDriver : MonoBehaviour
 {
+    [Header("Main")]
     public BaseCar Car;
 }

@@ -20,7 +20,24 @@ public enum DriverMode
 
 public class DriverAI : BaseDriver
 {
-    [Header("Blackboard: Main")]
+    public DriverMode CurrentMode;
+    
+    [Header("Blackboard: Race mode")]
+    [SerializeField] private RaceCircuit _circuit;
+    public float TurningAlanystDistance = 30f;
+
+    [SerializeField] public AnimationCurve SpeedByCornerAnlge;
+    [SerializeField] public AnimationCurve BrakingDistanceByDeltaSpeed;
+    
+    public bool OvertakeMode;
+    
+    [Header("Rubberbanding")]
+    public float RubberBandingValue = 1;
+
+    [SerializeField] private float RBAccelerationSpeedMultiplyer = 200;
+    [SerializeField] private float RBCornerSpeedMultiplyer = 1;
+    
+    [Header("Blackboard: Follow mode")]
     public BaseCar TargetCar;
     public float TargetPositionUpdateDelay = 0.3f;
 
@@ -41,29 +58,9 @@ public class DriverAI : BaseDriver
     public AnimationCurve DistanceFactor;
     public AnimationCurve DeltaSpeedFactor;
     public AnimationCurve DeltaSpeedMultyplyerByDistance;
-
-    [Header("Race")]
-    [SerializeField] public AnimationCurve SpeedByCornerAnlge;
-    [SerializeField] public AnimationCurve BrakingDistanceByDeltaSpeed;
-
-    [SerializeField] private RaceCircuit _circuit;
     
-    //TODO: Remove!!!
-    public bool IsAttack;
-    
-    [Header("Rubberbanding")]
-    public float RubberBandingValue = 1;
-
-    [SerializeField] private float RBAccelerationSpeedMultiplyer = 200;
-    [SerializeField] private float RBCornerSpeedMultiplyer = 1;
-    
-    [Header("Current state")]
-    public DriverMode CurrentMode;
     private DriverMode _currentMode;
-
     private BaseState _state;
-
-    public float TurningAlanystDistance = 30f;
 
     public float RubberBandingAccelerationSpeedMultiplyer => RubberBandingValue * RBAccelerationSpeedMultiplyer;
     public float RubberBandingCornerTargetSpeedMultiplyer => (1 - RubberBandingValue) * RBCornerSpeedMultiplyer;
@@ -79,7 +76,7 @@ public class DriverAI : BaseDriver
 
     private void OnDrawGizmos()
     {
-        if (!Application.isPlaying)
+        if (!Application.isPlaying || _state == null)
             return;
 
         _state.OnDrawGizmos();
@@ -87,21 +84,21 @@ public class DriverAI : BaseDriver
 
     protected void FixedUpdate()
     {
+        if(_state == null)
+            return;
+        
         _state.FixedUpdate();
     }
 
     protected void Update()
     {
+        SetDriverMode(CurrentMode);
+        
+        if (_state == null)
+            return;
+
         _state.OnUpdate();
-
-        //SetDriverMode(CurrentMode);
-
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            SetDriverMode(DriverMode.RoadBlock);
-        }
     }
-
 
     public void SetDriverMode(DriverMode mode)
     {

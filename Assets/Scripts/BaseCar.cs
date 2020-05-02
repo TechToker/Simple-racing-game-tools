@@ -28,8 +28,9 @@ public class BaseCar : MonoBehaviour
     [SerializeField] protected float _defaultRearWheelStiffness = 0.9f;
     [SerializeField] protected float _handbrakeRearWheelStiffness = 0.75f;
 
-    public readonly Vector2 CarSize = new Vector2(3.5f, 4.5f);
-    public Vector3 CarFrontBumperPos => transform.position + transform.forward * CarSize.y / 2;
+    public readonly Vector2 CarSize = new Vector2(1.92f, 4.3f);
+    public Vector3 CarFrontBumperPos => _mainRigidBody.transform.position + transform.forward * CarSize.y / 2;
+    public Transform RigidbodyTransform => _mainRigidBody.transform;
     
     [Header("Vehicle substeps")]
     // На малых скоростях колесо может пробуксовывать и терять сцепление с дорогой.

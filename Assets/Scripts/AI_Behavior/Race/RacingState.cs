@@ -21,15 +21,11 @@ namespace BehaviourAI
         {
             Waypoint = wp;
             
-            //TODO: Get real car width
-            float carWidth = 2f;
-
-            float newWpWidth = wp.Width - carWidth;
-
-            float driverTargetPoint = !driver.IsAttack ? wp.LocalFinalRacingPoint : wp.LocalOvertakeRacingPoint;
+            float wpWidthWithExtraOffset = wp.Width - driver.Car.CarSize.x;
+            float driverTargetPoint = !driver.OvertakeMode ? wp.LocalFinalRacingPoint : wp.LocalOvertakeRacingPoint;
 
             //Lock local racing point in new waypoint width
-            float newLocalRp = Mathf.Clamp(driverTargetPoint, -newWpWidth / wp.Width / 2, newWpWidth / wp.Width / 2);
+            float newLocalRp = Mathf.Clamp(driverTargetPoint, -wpWidthWithExtraOffset / wp.Width / 2, wpWidthWithExtraOffset / wp.Width / 2);
 
             CarRacingPoint = wp.transform.TransformPoint(newLocalRp * wp.Width, 0.5f, 0);
         }
@@ -37,15 +33,15 @@ namespace BehaviourAI
     
     public class RacingState : BaseState
     {
-        private RaceCircuit _circuit;
+        private readonly RaceCircuit _circuit;
 
         private float _steerInput;
         private float _accelerationInput;
 
-        private WayPoint _currentWaypoint;
-        private int _currentWaypointIndex;
+        //private WayPoint _currentWaypoint;
+        private int _currentWaypointIndexOnTrack;
 
-        private List<PathSegment> _carPath;
+        private List<PathSegment> _racingPath;
 
         //Turning
         private Vector3 _turningTargetPoint;
@@ -62,41 +58,40 @@ namespace BehaviourAI
         private Sides _carWaypointApproachSide;
         
         //Debug: Braking
-        public bool EnableBrakingDebug;
+        public bool WriteBrakingData;
+        
         public float CornerEnterSpeed;
         public float CornerExitSpeed;
-        
-        public float StartBrakingDistance = -1;
+        public float StartBrakingDistance;
 
-        //Graph-X
+        //Lifetime graph-X
         public float CurrentDistanceProgress;
-        //Graph-Y
+        //Lifetime graph-Y
         public float CurrentBrakingSpeed;
 
         public RacingState(RaceCircuit circuit, DriverAI ai, BaseCar car) : base(ai, car)
         {
             _circuit = circuit;
 
-            _currentWaypointIndex = 0;
-            _currentWaypoint = _circuit.GetWaypointByIndex(_currentWaypointIndex);
+            _currentWaypointIndexOnTrack = 0;
         }
 
         public override void OnDrawGizmos()
         {
             base.OnDrawGizmos();
 
-            if (_carPath == null)
+            if (_racingPath == null)
                 return;
 
             Gizmos.color = Color.green;
-            foreach(PathSegment point in _carPath)
+            foreach(PathSegment point in _racingPath)
                 Gizmos.DrawSphere(point.CarRacingPoint, 0.25f);
             
             Gizmos.color = new Color(0, 0.3f, 0);
-            Gizmos.DrawLine(Car.transform.position, _carPath[0].CarRacingPoint);
-            Gizmos.DrawRay(_carPath[0].CarRacingPoint, Car.transform.forward * 20);
+            Gizmos.DrawLine(Car.transform.position, _racingPath[0].CarRacingPoint);
+            Gizmos.DrawRay(_racingPath[0].CarRacingPoint, Car.transform.forward * 20);
             
-            Gizmos.DrawRay(_carPath[0].CarRacingPoint, _carPath[_carPath.Count - 1].CarRacingPoint - _carPath[0].CarRacingPoint);
+            Gizmos.DrawRay(_racingPath[0].CarRacingPoint, _racingPath[_racingPath.Count - 1].CarRacingPoint - _racingPath[0].CarRacingPoint);
 
             //Target turning point
             Gizmos.color = Color.yellow;
@@ -106,7 +101,7 @@ namespace BehaviourAI
             if (_brakingDistance > 1)
             {
                 Gizmos.color = Color.red;
-                Vector3 brakingPosition = _carPath[0].CarRacingPoint + (Car.transform.position - _carPath[0].CarRacingPoint).normalized * _brakingDistance;
+                Vector3 brakingPosition = _racingPath[0].CarRacingPoint + (Car.transform.position - _racingPath[0].CarRacingPoint).normalized * _brakingDistance;
                 Gizmos.DrawLine(brakingPosition - Car.transform.right * 3, brakingPosition + Car.transform.right * 3);
                 Handles.Label(brakingPosition - Car.transform.right * 3, $"Braking: {Math.Round(_brakingDistance, 1)}");
             }
@@ -115,7 +110,7 @@ namespace BehaviourAI
             string cornerInfo = $"ang: {Math.Round(_nextCornerAngle, 1)}°{Environment.NewLine}" +
                                 $"tSpeed: {Math.Round(_cornerTargetSpeed, 1)}";
             
-            Handles.Label(_carPath[0].CarRacingPoint, cornerInfo);
+            Handles.Label(_racingPath[0].CarRacingPoint, cornerInfo);
 
             Gizmos.color = Color.red;
         }
@@ -123,26 +118,38 @@ namespace BehaviourAI
         public override void FixedUpdate()
         {
             base.FixedUpdate();
+
+            //Waypoints update
+            CheckIsWaypointReached();
+            UpdateNextWaypointsList();
+
+            //Steer analyst
+            UpdateTurningTarget();
+            
+            //Calculate inputs
+            _steerInput = CalculateSteeringInput();
+            _accelerationInput = CalculateMoveInput();
             
             Car.SetSteerAngle(_steerInput);
             Car.SetMotorTorque(Mathf.Clamp(_accelerationInput, 0, 1));
             Car.SetBrakeTorque(Mathf.Clamp(-_accelerationInput, 0, 1));
         }
-        
-        public override void OnUpdate()
+
+        private void CheckIsWaypointReached()
         {
-            base.OnUpdate();
+            if(_racingPath == null || _racingPath.Count == 0)
+                return;
             
-            //Steer analyst
-            UpdateCurrentWaypoint();
-            AnalysisWaypoints();
-            
-            UpdateTurningTarget();
-            
-            //Calculate inputs
-            
-            _steerInput = CalculateSteeringInput();
-            _accelerationInput = CalculateMoveInput();
+            if (_carWaypointApproachSide != GetCarWaypointApproachSide(_racingPath[0].Waypoint))
+            {
+                //Reset braking debug
+                WriteBrakingData = false;
+
+                _currentWaypointIndexOnTrack++;
+                
+                WayPoint nextWp = _circuit.GetWaypointByIndex(_currentWaypointIndexOnTrack);
+                _carWaypointApproachSide = GetCarWaypointApproachSide(nextWp);
+            }
         }
 
         private float CalculateSteeringInput()
@@ -163,14 +170,14 @@ namespace BehaviourAI
 //
 //            //end 
 
-            return Mathf.Lerp(Driver.Car.CurrentWheelAngle, steerAngleToTracker, Time.deltaTime * Driver.WheelAngleSpeed);
+            return Mathf.Lerp(Driver.Car.CurrentWheelAngle, steerAngleToTracker, Time.fixedTime * Driver.WheelAngleSpeed);
         }
 
         private float CalculateMoveInput()
         {
             //Move input analyst
-            _nextCornerAngle = Vector3.Angle(Car.transform.forward * 20, _carPath[_carPath.Count - 1].CarRacingPoint - _carPath[0].CarRacingPoint);
-            float distanceToCorner = Vector3.Distance(Car.CarFrontBumperPos, _carPath[0].CarRacingPoint);
+            _nextCornerAngle = Vector3.Angle(Car.RigidbodyTransform.forward * 20, _racingPath[_racingPath.Count - 1].CarRacingPoint - _racingPath[0].CarRacingPoint);
+            float distanceToCorner = Vector3.Distance(Car.CarFrontBumperPos, _racingPath[0].CarRacingPoint);
 
             _cornerTargetSpeed = Driver.SpeedByCornerAnlge.Evaluate(_nextCornerAngle);
             _brakingDistance = Driver.BrakingDistanceByDeltaSpeed.Evaluate(Mathf.Clamp(Driver.Car.CarSpeed - _cornerTargetSpeed, 0, float.MaxValue));
@@ -192,43 +199,28 @@ namespace BehaviourAI
             
             CornerExitSpeed = _cornerTargetSpeed;
 
-            if (!EnableBrakingDebug && distanceToCorner < _brakingDistance)
+            if (!WriteBrakingData && distanceToCorner < _brakingDistance)
             {
                 //Start braking write
                 CornerEnterSpeed = Car.CarSpeed;
                 StartBrakingDistance = _brakingDistance;
 
-                EnableBrakingDebug = true;
+                WriteBrakingData = true;
             }
 
-
             //Set smooth pedal input
-            float newInput = Mathf.Lerp(_accelerationInput, targetMoveInput, Time.deltaTime * pedalsInputSpeed);
+            float newInput = Mathf.Lerp(_accelerationInput, targetMoveInput, Time.fixedTime * pedalsInputSpeed);
             return Mathf.Clamp(newInput, -1, 1);
         }
 
-        private void AnalysisWaypoints()
+        private void UpdateNextWaypointsList()
         {
             //TODO: Remove another direction turn from list
-            List<WayPoint> wpList = _circuit.GetWaypointsInDistance(Car.transform.position, 35, _currentWaypointIndex);
+            List<WayPoint> wpList = _circuit.GetWaypointsInDistance(Car.CarFrontBumperPos, 35, _currentWaypointIndexOnTrack);
 
-            _carPath = new List<PathSegment>();
+            _racingPath = new List<PathSegment>();
             foreach (WayPoint wp in wpList)
-                _carPath.Add(new PathSegment(Driver, wp));
-        }
-
-        private void UpdateCurrentWaypoint()
-        {
-            if (_carWaypointApproachSide != GetCarWaypointApproachSide(_currentWaypoint))
-            {
-                //Reset braking debug
-                EnableBrakingDebug = false;
-
-                _currentWaypointIndex++;
-                _currentWaypoint = _circuit.GetWaypointByIndex(_currentWaypointIndex);
-                
-                _carWaypointApproachSide = GetCarWaypointApproachSide(_currentWaypoint);
-            }
+                _racingPath.Add(new PathSegment(Driver, wp));
         }
 
         //Возвращает сторону с которой автомобиль приближается к Waypoint
@@ -246,10 +238,10 @@ namespace BehaviourAI
         {
             float distance = _turningTargetDistance;
             
-            Vector3 pointFrom = Driver.transform.position;
-            Vector3 pointTo = _carPath[0].CarRacingPoint;
+            Vector3 pointFrom = Car.RigidbodyTransform.position;
+            Vector3 pointTo = _racingPath[0].CarRacingPoint;
 
-            for (int i = 0; i < _carPath.Count - 1; i++)
+            for (int i = 0; i < _racingPath.Count - 1; i++)
             {
                 float distToNextTarget = (pointFrom - pointTo).magnitude;
                 
@@ -260,8 +252,8 @@ namespace BehaviourAI
                 else
                 {
                     distance -= distToNextTarget;
-                    pointFrom = _carPath[i].CarRacingPoint;
-                    pointTo = _carPath[i + 1].CarRacingPoint;
+                    pointFrom = _racingPath[i].CarRacingPoint;
+                    pointTo = _racingPath[i + 1].CarRacingPoint;
                 }
             }
 

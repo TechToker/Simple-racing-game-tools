@@ -21,8 +21,7 @@ public class RaceCircuit : MonoBehaviour
 
     [SerializeField] private AnimationCurve _waypointDifficultyByAngle;
     [SerializeField] private AnimationCurve _waypointDifficultyByDistance;
-
-
+    
     [Header("Debug: Road")]
     public bool IsClosed;
 

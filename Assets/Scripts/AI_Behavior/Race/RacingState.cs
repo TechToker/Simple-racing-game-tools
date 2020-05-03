@@ -45,7 +45,7 @@ namespace BehaviourAI
 
         //Turning
         private Vector3 _turningTargetPoint;
-        private float _turningTargetDistance = 10f;
+        private float _turningTargetDistance = 15f;
 
         //Braking
         private Vector3 _brakingPoint;
@@ -186,13 +186,13 @@ namespace BehaviourAI
             
             //Create pedal input smooth
             float pedalsInputSpeed = 10;
+
+            float deltaSpeedError = 0;
             
             //Create rubberbanding acceleration lag :
             if (_accelerationInput > 0 && targetMoveInput > _accelerationInput)
-            {
                 pedalsInputSpeed *= Driver.RubberBandingValue * Driver.RubberBandingAccelerationSpeedMultiplyer;
-            }
-            
+
             //Debug:
             CurrentDistanceProgress = distanceToCorner;
             CurrentBrakingSpeed = Car.CarSpeed;

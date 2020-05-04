@@ -147,9 +147,11 @@ namespace BehaviourAI
             //Calculate inputs
             _steerInput = CalculateSteeringInput();
             _accelerationInput = CalculateMoveInput();
+
+            float rbExtraAcceleration = (Driver.RbTorqueMultiplyer - 1) * Driver.RBTorqueMultiplyerBySpeed.Evaluate(Car.CarSpeed);
             
             Car.SetSteerAngle(_steerInput);
-            Car.SetMotorTorque(Mathf.Clamp(_accelerationInput, 0, 1));
+            Car.SetMotorTorque(Mathf.Clamp(_accelerationInput, 0, 1) + rbExtraAcceleration);
             Car.SetBrakeTorque(Mathf.Clamp(-_accelerationInput, 0, 1));
         }
 
@@ -197,7 +199,7 @@ namespace BehaviourAI
 //
 //            //end 
 
-            return Mathf.Lerp(Driver.Car.CurrentWheelAngle, steerAngleToTracker, Time.fixedTime * Driver.WheelAngleSpeed);
+            return Mathf.Lerp(Driver.Car.CurrentWheelAngle, steerAngleToTracker, Time.fixedDeltaTime * Driver.WheelAngleSpeed);
         }
 
         private float CalculateMoveInput()
@@ -209,13 +211,14 @@ namespace BehaviourAI
             
             float distanceToCorner = Vector3.Distance(Car.CarFrontBumperPos, _racingPath[0].CarRacingPoint);
             _brakingDistance = Driver.BrakingDistanceByDeltaSpeed.Evaluate(Mathf.Clamp(Driver.Car.CarSpeed - _cornerTargetSpeed, 0, float.MaxValue));
+            _brakingDistance *= Driver.RbBrakingDistanceMultiplyer;
             //_brakingDistance = 40;
 
             WriteBrakingDebugData(distanceToCorner);
             
-            float moveInput = 0;
+            float moveInput;
             if (BrakingData == null || !BrakingData.IsRecording)
-                moveInput = 1;
+                moveInput = Mathf.Lerp(_accelerationInput, 1, Time.fixedDeltaTime * Driver.RbAccelerationSpeedMultiplyer);
             else
             {
                 float distanceProgressPercentage = distanceToCorner / BrakingData.StartBrakingDistance;
@@ -229,7 +232,7 @@ namespace BehaviourAI
                 //moveInput = speedError > 0 ? 1 : -1;
             }
             
-            //float newInput = Mathf.Lerp(_accelerationInput, targetMoveInput, Time.fixedTime * 10);
+            //float newInput = Mathf.Lerp(_accelerationInput, targetMoveInput, Time.fixedDeltaTime * 10);
             return Mathf.Clamp(moveInput, -1, 1);
         }
 

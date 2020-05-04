@@ -61,8 +61,7 @@ public class BaseCar : MonoBehaviour
     public float AccelerationInput { get; private set; }
     public float BrakingInput { get; private set; }
     public bool EBrakeInput { get; private set; }
-
-
+    
     private GameObject[] _visualWheels;
     protected WheelCollider[] _allWheels;
 
@@ -126,7 +125,7 @@ public class BaseCar : MonoBehaviour
             motorTorq = _torqueBySpeed.Evaluate(CarSpeed) * motorInput;
         else
             motorTorq = _reverceTorqueBySpeed.Evaluate(CarSpeed) * motorInput;
-
+        
         //If car speed != 0, add motor resistance force
         if (CarSpeed > 0.01f)
             motorTorq += _motorTorqueResistance * (IsCarMovingForward ? -1 : 1);

@@ -1,4 +1,5 @@
-﻿using BehaviourAI;
+﻿using System;
+using BehaviourAI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,10 +39,23 @@ public class DriverAI : BaseDriver
     public float DerivativeCoef = 0.5f;
     
     [Header("Rubberbanding")]
+    [Range(0.5f, 1.5f)]
     public float RubberBandingValue = 1;
 
-    [SerializeField] private float RBAccelerationSpeedMultiplyer = 200;
-    [SerializeField] private float RBCornerSpeedMultiplyer = 1;
+    [ReadOnly] public float RbTorqueMultiplyer = 1;
+    [ReadOnly] public float RbAccelerationSpeedMultiplyer = 200;
+    [ReadOnly] public float RbBrakingDistanceMultiplyer = 1;
+
+    [SerializeField] private float _minTorqueMultiplier = 1f;
+    [SerializeField] private float _maxTorqueMultiplier = 2f;
+    
+    [SerializeField] private float _minAccelPedalSpeedMultiplier = 50f;
+    [SerializeField] private float _maxAccelPedalSpeedMultiplier = 0.5f;
+    
+    [SerializeField] private float _minBrakingDistanceMultiplier = 1f;
+    [SerializeField] private float _maxBrakingDistanceMultiplier = 3f;
+    
+    public AnimationCurve RBTorqueMultiplyerBySpeed;
     
     [Header("Blackboard: Follow mode")]
     public BaseCar TargetCar;
@@ -68,11 +82,21 @@ public class DriverAI : BaseDriver
     private DriverMode _currentMode;
     private BaseState _state;
 
-    public float RubberBandingAccelerationSpeedMultiplyer => RubberBandingValue * RBAccelerationSpeedMultiplyer;
-    public float RubberBandingCornerTargetSpeedMultiplyer => (1 - RubberBandingValue) * RBCornerSpeedMultiplyer;
+    public float RubberBandingAccelerationSpeedMultiplyer => RubberBandingValue * RbAccelerationSpeedMultiplyer;
+    public float RubberBandingCornerTargetSpeedMultiplyer => (1 - RubberBandingValue) * RbBrakingDistanceMultiplyer;
     
     public string CurrentStateName => _state.GetStateName();
     public BaseState StateAI => _state;
+
+    private void OnValidate()
+    {
+        float positiveRbPercent = Mathf.Clamp((RubberBandingValue - 1) / (1.5f - 1), 0, float.MaxValue);
+        float negativeRbPercent = (Mathf.Clamp(RubberBandingValue, 0.5f, 1f) - 0.5f) / 0.5f;
+        
+        RbTorqueMultiplyer = _minTorqueMultiplier + positiveRbPercent * (_maxTorqueMultiplier - _minTorqueMultiplier);
+        RbAccelerationSpeedMultiplyer = _minAccelPedalSpeedMultiplier + negativeRbPercent * (_maxAccelPedalSpeedMultiplier - _minAccelPedalSpeedMultiplier);
+        RbBrakingDistanceMultiplyer = _minBrakingDistanceMultiplier + negativeRbPercent * (_maxBrakingDistanceMultiplier - _minBrakingDistanceMultiplier);
+    }
 
     private void OnEnable()
     {

@@ -230,7 +230,7 @@ TrailRenderer:
   m_Time: 5
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 1.75
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -1097,10 +1097,10 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.315
   m_SuspensionSpring:
-    spring: 32565.334
-    damper: 5210.454
+    spring: 29851.564
+    damper: 4776.25
     targetPosition: 0.5
-  m_SuspensionDistance: 0.19620003
+  m_SuspensionDistance: 0.1962
   m_ForceAppPointDistance: 0.67725265
   m_Mass: 15
   m_WheelDampingRate: 0.25
@@ -1257,8 +1257,8 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.315
   m_SuspensionSpring:
-    spring: 27434.66
-    damper: 4389.546
+    spring: 25148.44
+    damper: 4023.75
     targetPosition: 0.5
   m_SuspensionDistance: 0.1962
   m_ForceAppPointDistance: 0.67725265
@@ -1318,10 +1318,10 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.315
   m_SuspensionSpring:
-    spring: 27832.957
-    damper: 4453.2734
+    spring: 25513.549
+    damper: 4082.168
     targetPosition: 0.5
-  m_SuspensionDistance: 0.19620003
+  m_SuspensionDistance: 0.19620001
   m_ForceAppPointDistance: 0.67725265
   m_Mass: 15
   m_WheelDampingRate: 0.25
@@ -1379,10 +1379,10 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.315
   m_SuspensionSpring:
-    spring: 32167.037
-    damper: 5146.726
+    spring: 29486.445
+    damper: 4717.8315
     targetPosition: 0.5
-  m_SuspensionDistance: 0.1962
+  m_SuspensionDistance: 0.19620001
   m_ForceAppPointDistance: 0.67725265
   m_Mass: 15
   m_WheelDampingRate: 0.25
@@ -1450,7 +1450,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4247216085177620515}
   serializedVersion: 2
-  m_Mass: 1200
+  m_Mass: 1100
   m_Drag: 0.05
   m_AngularDrag: 0.5
   m_UseGravity: 1
@@ -1605,8 +1605,57 @@ MonoBehaviour:
   IntegralCoef: 0.5
   DerivativeCoef: 0.5
   RubberBandingValue: 1
-  RBAccelerationSpeedMultiplyer: 1
-  RBCornerSpeedMultiplyer: 1
+  RbTorqueMultiplyer: 1
+  RbAccelerationSpeedMultiplyer: 50
+  RbBrakingDistanceMultiplyer: 1
+  _minTorqueMultiplier: 1
+  _maxTorqueMultiplier: 2
+  _minAccelPedalSpeedMultiplier: 0.5
+  _maxAccelPedalSpeedMultiplier: 50
+  _minBrakingDistanceMultiplier: 3
+  _maxBrakingDistanceMultiplier: 1
+  RBTorqueMultiplyerBySpeed:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 15
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.4155365
+    - serializedVersion: 3
+      time: 22.5
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11837234
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 50
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   TargetCar: {fileID: 0}
   TargetPositionUpdateDelay: 0.3
   CarSensorsDistance: 3

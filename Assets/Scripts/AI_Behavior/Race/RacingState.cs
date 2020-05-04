@@ -30,6 +30,33 @@ namespace BehaviourAI
             CarRacingPoint = wp.transform.TransformPoint(newLocalRp * wp.Width, 0.5f, 0);
         }
     }
+
+    public class BrakingData
+    {
+        public bool IsRecording;
+        public float CornerEnterSpeed { get; }
+        public float CornerExitSpeed { get; }
+        public float StartBrakingDistance { get; }
+        
+        //Lifetime graph-X
+        public float CurrentDistanceProgress { get; private set; }
+        //Lifetime graph-Y
+        public float CurrentBrakingSpeed { get; private set; }
+        
+        public BrakingData(float enterSpeed, float exitSpeed, float brakingDistance)
+        {
+            IsRecording = true;
+            CornerEnterSpeed = enterSpeed;
+            CornerExitSpeed = exitSpeed;
+            StartBrakingDistance = brakingDistance;
+        }
+
+        public void SetCurrentData(float currentDistance, float currentSpeed)
+        {
+            CurrentDistanceProgress = currentDistance;
+            CurrentBrakingSpeed = currentSpeed;
+        }
+    }
     
     public class RacingState : BaseState
     {
@@ -45,7 +72,6 @@ namespace BehaviourAI
 
         //Turning
         private Vector3 _turningTargetPoint;
-        private float _turningTargetDistance = 15f;
 
         //Braking
         private Vector3 _brakingPoint;
@@ -58,16 +84,7 @@ namespace BehaviourAI
         private Sides _carWaypointApproachSide;
         
         //Debug: Braking
-        public bool WriteBrakingData;
-        
-        public float CornerEnterSpeed;
-        public float CornerExitSpeed;
-        public float StartBrakingDistance;
-
-        //Lifetime graph-X
-        public float CurrentDistanceProgress;
-        //Lifetime graph-Y
-        public float CurrentBrakingSpeed;
+        public BrakingData BrakingData { get; private set; }
 
         public RacingState(RaceCircuit circuit, DriverAI ai, BaseCar car) : base(ai, car)
         {
@@ -98,7 +115,7 @@ namespace BehaviourAI
             Gizmos.DrawSphere(_turningTargetPoint, 0.2f);
             
             //Braking point
-            if (_brakingDistance > 1)
+            if (_brakingDistance > 0.5f)
             {
                 Gizmos.color = Color.red;
                 Vector3 brakingPosition = _racingPath[0].CarRacingPoint + (Car.transform.position - _racingPath[0].CarRacingPoint).normalized * _brakingDistance;
@@ -113,6 +130,7 @@ namespace BehaviourAI
             Handles.Label(_racingPath[0].CarRacingPoint, cornerInfo);
 
             Gizmos.color = Color.red;
+            Gizmos.DrawSphere(Car.CarFrontBumperPos, 0.05f);
         }
 
         public override void FixedUpdate()
@@ -135,6 +153,11 @@ namespace BehaviourAI
             Car.SetBrakeTorque(Mathf.Clamp(-_accelerationInput, 0, 1));
         }
 
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+        }
+
         private void CheckIsWaypointReached()
         {
             if(_racingPath == null || _racingPath.Count == 0)
@@ -143,7 +166,11 @@ namespace BehaviourAI
             if (_carWaypointApproachSide != GetCarWaypointApproachSide(_racingPath[0].Waypoint))
             {
                 //Reset braking debug
-                WriteBrakingData = false;
+                if (BrakingData != null)
+                {
+                    BrakingData.SetCurrentData(0, Car.CarSpeed);
+                    BrakingData.IsRecording = false;
+                }
 
                 _currentWaypointIndexOnTrack++;
                 
@@ -177,40 +204,42 @@ namespace BehaviourAI
         {
             //Move input analyst
             _nextCornerAngle = Vector3.Angle(Car.RigidbodyTransform.forward * 20, _racingPath[_racingPath.Count - 1].CarRacingPoint - _racingPath[0].CarRacingPoint);
-            float distanceToCorner = Vector3.Distance(Car.CarFrontBumperPos, _racingPath[0].CarRacingPoint);
-
             _cornerTargetSpeed = Driver.SpeedByCornerAnlge.Evaluate(_nextCornerAngle);
+            //_cornerTargetSpeed = 8;
+            
+            float distanceToCorner = Vector3.Distance(Car.CarFrontBumperPos, _racingPath[0].CarRacingPoint);
             _brakingDistance = Driver.BrakingDistanceByDeltaSpeed.Evaluate(Mathf.Clamp(Driver.Car.CarSpeed - _cornerTargetSpeed, 0, float.MaxValue));
-            
-            float targetMoveInput = distanceToCorner > _brakingDistance? 1f: -1f;
-            
-            //Create pedal input smooth
-            float pedalsInputSpeed = 10;
+            //_brakingDistance = 40;
 
-            float deltaSpeedError = 0;
+            WriteBrakingDebugData(distanceToCorner);
             
-            //Create rubberbanding acceleration lag :
-            if (_accelerationInput > 0 && targetMoveInput > _accelerationInput)
-                pedalsInputSpeed *= Driver.RubberBandingValue * Driver.RubberBandingAccelerationSpeedMultiplyer;
-
-            //Debug:
-            CurrentDistanceProgress = distanceToCorner;
-            CurrentBrakingSpeed = Car.CarSpeed;
-            
-            CornerExitSpeed = _cornerTargetSpeed;
-
-            if (!WriteBrakingData && distanceToCorner < _brakingDistance)
+            float moveInput = 0;
+            if (BrakingData == null || !BrakingData.IsRecording)
+                moveInput = 1;
+            else
             {
-                //Start braking write
-                CornerEnterSpeed = Car.CarSpeed;
-                StartBrakingDistance = _brakingDistance;
+                float distanceProgressPercentage = distanceToCorner / BrakingData.StartBrakingDistance;
+                float targetBrakingSpeed = BrakingData.CornerExitSpeed + distanceProgressPercentage * (BrakingData.CornerEnterSpeed - BrakingData.CornerExitSpeed);
+                float speedError = targetBrakingSpeed - Car.CarSpeed;
+             
+                //Proportional control
+                moveInput = Driver.ProportionalCoef * speedError;
 
-                WriteBrakingData = true;
+                //Bang-bang control
+                //moveInput = speedError > 0 ? 1 : -1;
             }
+            
+            //float newInput = Mathf.Lerp(_accelerationInput, targetMoveInput, Time.fixedTime * 10);
+            return Mathf.Clamp(moveInput, -1, 1);
+        }
 
-            //Set smooth pedal input
-            float newInput = Mathf.Lerp(_accelerationInput, targetMoveInput, Time.fixedTime * pedalsInputSpeed);
-            return Mathf.Clamp(newInput, -1, 1);
+        private void WriteBrakingDebugData(float distanceToCorner)
+        {
+            if ((BrakingData == null || !BrakingData.IsRecording) && distanceToCorner < _brakingDistance)
+                BrakingData = new BrakingData(Car.CarSpeed, _cornerTargetSpeed, distanceToCorner);
+
+            if(BrakingData != null && BrakingData.IsRecording)
+                BrakingData.SetCurrentData(distanceToCorner, Car.CarSpeed);
         }
 
         private void UpdateNextWaypointsList()
@@ -236,7 +265,7 @@ namespace BehaviourAI
 
         private void UpdateTurningTarget()
         {
-            float distance = _turningTargetDistance;
+            float distance = Driver.TurningTargetDistanceBySpeed.Evaluate(Car.CarSpeed);
             
             Vector3 pointFrom = Car.RigidbodyTransform.position;
             Vector3 pointTo = _racingPath[0].CarRacingPoint;

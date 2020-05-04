@@ -28,8 +28,14 @@ public class DriverAI : BaseDriver
 
     [SerializeField] public AnimationCurve SpeedByCornerAnlge;
     [SerializeField] public AnimationCurve BrakingDistanceByDeltaSpeed;
+    [SerializeField] public AnimationCurve TurningTargetDistanceBySpeed;
     
     public bool OvertakeMode;
+
+    [Header("PID controller")]
+    public float ProportionalCoef = 0.5f;
+    public float IntegralCoef = 0.5f;
+    public float DerivativeCoef = 0.5f;
     
     [Header("Rubberbanding")]
     public float RubberBandingValue = 1;

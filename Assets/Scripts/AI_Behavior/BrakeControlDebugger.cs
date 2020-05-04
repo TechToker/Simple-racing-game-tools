@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using BehaviourAI;
 using TMPro;
 using UnityEngine;
@@ -31,6 +32,7 @@ public class BrakeControlDebugger : MonoBehaviour
 	private Vector2Int _drawableImageSize;
 	
 	private List<Vector2> _brakingData;
+	private bool _isGraphUpdating = true;
 	
 	void Start()
 	{
@@ -49,10 +51,10 @@ public class BrakeControlDebugger : MonoBehaviour
 	    _brakingData = new List<Vector2>();
 	}
 
-	void Update()
+	void LateUpdate()
 	{
-		RacingState rState = (RacingState) _targetDriver.StateAI;
-		if (!rState.WriteBrakingData)
+		BrakingData brakingData = ((RacingState) _targetDriver.StateAI).BrakingData;
+		if (brakingData == null || (!brakingData.IsRecording && !_isGraphUpdating))
 		{
 			_brakingData.Clear();
 			return;
@@ -62,7 +64,7 @@ public class BrakeControlDebugger : MonoBehaviour
 		Array.Copy(m_PixelsBg, m_Pixels, m_Pixels.Length);
 
         DrawPattern();
-        DrawCarData();
+        DrawCarData(brakingData);
         
 		m_Texture.SetPixels32(m_Pixels);
 		m_Texture.Apply();
@@ -94,24 +96,29 @@ public class BrakeControlDebugger : MonoBehaviour
 		DrawLine(new Vector2(leftPx, lowerPx), new Vector2(rightPx, upperPx), Color.green);
 	}
 
-	private void DrawCarData()
+	private void DrawCarData(BrakingData brakingData)
 	{
-		RacingState rState = (RacingState) _targetDriver.StateAI;
+		_enterSpeedText.SetText(brakingData.CornerEnterSpeed.ToString("N1"));
+		_exitSpeedText.SetText(brakingData.CornerExitSpeed.ToString("N1"));
+		_brakingDistance.SetText(brakingData.StartBrakingDistance.ToString("N1"));
 
-		_enterSpeedText.SetText(Math.Round(rState.CornerEnterSpeed, 1).ToString());
-		_exitSpeedText.SetText(Math.Round(rState.CornerExitSpeed, 1).ToString());
-		_brakingDistance.SetText(Math.Round(rState.StartBrakingDistance, 1).ToString());
-
-		Vector2 pointInPercent = new Vector2(rState.CurrentDistanceProgress / rState.StartBrakingDistance,
-			(rState.CurrentBrakingSpeed - rState.CornerExitSpeed) / (rState.CornerEnterSpeed - rState.CornerExitSpeed));
+		Vector2 pointInPercent = new Vector2(brakingData.CurrentDistanceProgress / brakingData.StartBrakingDistance,
+			(brakingData.CurrentBrakingSpeed - brakingData.CornerExitSpeed) / (brakingData.CornerEnterSpeed - brakingData.CornerExitSpeed));
 		
 		Vector2 pointInDrawableZone = new Vector2(pointInPercent.x * _drawableImageSize.x + _borderOffset,
 			pointInPercent.y * _drawableImageSize.y + _borderOffset);
+		
+		//Set limit to 80 elements
+		if(_brakingData.Count() > 80)
+			_brakingData.RemoveAt(0);
 		
 		_brakingData.Add(pointInDrawableZone);
 
 		for (int i = 1; i < _brakingData.Count; i++)
 			DrawLine(_brakingData[i - 1], _brakingData[i], Color.red);
+
+		//Allow last graph after stop recording
+		_isGraphUpdating = brakingData.IsRecording;
 	}
 
 	void DrawLine(Vector2 from, Vector2 to, Color32 color)

@@ -24,8 +24,8 @@ namespace RacingGame.UI
         private void LateUpdate()
         {
             _uiTextBehaviourState.SetText(_driver.CurrentStateName);
-            _uiTextSpeed.SetText($"{Math.Round(_driver.Car.CarSpeed, 1)}m/s");
-            _uiTextRubberbandingValue.SetText($"RB:{Math.Round(_driver.RubberBandingValue, 2)}");
+            _uiTextSpeed.SetText($"{_driver.Car.CarSpeed:N1}m/s");
+            _uiTextRubberbandingValue.SetText($"RB:{_driver.RubberBandingValue:N2}");
 
             _uiSliderTurningInput.value = (_driver.Car.TurningAngle + _driver.Car.MaxWheelAngle) / (_driver.Car.MaxWheelAngle * 2);
             _uiSliderAcceleationInput.value = Mathf.Abs(_driver.Car.AccelerationInput);

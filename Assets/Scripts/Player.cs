@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : BaseDriver
 {
-    protected void Update()
+    protected void FixedUpdate()
     {
         float turningInput = Input.GetAxis("Horizontal") * Car.MaxWheelAngle;
         float motorInput = Input.GetAxis("Vertical");

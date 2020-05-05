@@ -1097,8 +1097,8 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.315
   m_SuspensionSpring:
-    spring: 29851.564
-    damper: 4776.25
+    spring: 29851.406
+    damper: 4776.225
     targetPosition: 0.5
   m_SuspensionDistance: 0.1962
   m_ForceAppPointDistance: 0.67725265
@@ -1257,10 +1257,10 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.315
   m_SuspensionSpring:
-    spring: 25148.44
-    damper: 4023.75
+    spring: 25148.592
+    damper: 4023.7747
     targetPosition: 0.5
-  m_SuspensionDistance: 0.1962
+  m_SuspensionDistance: 0.19620001
   m_ForceAppPointDistance: 0.67725265
   m_Mass: 15
   m_WheelDampingRate: 0.25
@@ -1318,8 +1318,8 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.315
   m_SuspensionSpring:
-    spring: 25513.549
-    damper: 4082.168
+    spring: 25513.705
+    damper: 4082.193
     targetPosition: 0.5
   m_SuspensionDistance: 0.19620001
   m_ForceAppPointDistance: 0.67725265
@@ -1379,8 +1379,8 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.315
   m_SuspensionSpring:
-    spring: 29486.445
-    damper: 4717.8315
+    spring: 29486.295
+    damper: 4717.807
     targetPosition: 0.5
   m_SuspensionDistance: 0.19620001
   m_ForceAppPointDistance: 0.67725265
@@ -1600,7 +1600,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  OvertakeMode: 0
+  OvertakeMode: 1
   ProportionalCoef: 1
   IntegralCoef: 0.5
   DerivativeCoef: 0.5

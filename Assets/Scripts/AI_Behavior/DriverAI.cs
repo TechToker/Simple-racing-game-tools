@@ -82,9 +82,6 @@ public class DriverAI : BaseDriver
     private DriverMode _currentMode;
     private BaseState _state;
 
-    public float RubberBandingAccelerationSpeedMultiplyer => RubberBandingValue * RbAccelerationSpeedMultiplyer;
-    public float RubberBandingCornerTargetSpeedMultiplyer => (1 - RubberBandingValue) * RbBrakingDistanceMultiplyer;
-    
     public string CurrentStateName => _state.GetStateName();
     public BaseState StateAI => _state;
 

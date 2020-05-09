@@ -56,6 +56,9 @@ public class DriverAI : BaseDriver
     [SerializeField] private float _maxBrakingDistanceMultiplier = 3f;
     
     public AnimationCurve RBTorqueMultiplyerBySpeed;
+
+    [Header("Obstacle avoidance")] 
+    public float ObstacleAvoidanceWeight;
     
     [Header("Blackboard: Follow mode")]
     public BaseCar TargetCar;

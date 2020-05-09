@@ -8,121 +8,114 @@ namespace BehaviourAI
 {
     public class CarSensor
     {
-        public Vector3 SensorOffset { get; private set; }
-        public float SensorAngle { get; private set; }
+        public Vector3 SensorOffset { get; }
+        public float SensorAngle { get;}
+        public float SensorDistance { get; }
 
         public bool IsDetected;
-        public float SensorDistance = 12;
 
-        public Transform _targetTransform;
+        private float _weight = 0;
 
-        public CarSensor(Transform targetTransform, Vector3 position, float angle)
+        public float Weight => IsDetected? _weight: 0;
+
+        private readonly Transform _targetTransform;
+
+        public CarSensor(Transform targetTransform, Vector3 fromPosition, float angle, float weight, float sensorDistance = 12)
         {
             _targetTransform = targetTransform;
-            SensorOffset = position;
+            SensorOffset = fromPosition;
             SensorAngle = angle;
+
+            _weight = weight;
+
+            SensorDistance = sensorDistance;
         }
 
         public Vector3 SensorPosition => _targetTransform.TransformPoint(SensorOffset);
         public Vector3 SensorDirection => Quaternion.Euler(0, SensorAngle, 0) * _targetTransform.forward * SensorDistance;
-
     }
 
     public class BaseState
     {
         public DriverAI Driver;
         public BaseCar Car;
-
-        public float CarWidth = 1.7f;
-        public float CarLength = 3.6f;
-
-        //public float SensorDistance = 12;
-
-        protected CarSensor[] _frontSensors;
-        protected CarSensor[] _backwardSensors;
+        
         protected List<CarSensor> _allSensors = new List<CarSensor>();
+        private int SensorLayer;
 
         public BaseState(DriverAI driver, BaseCar car)
         {
             Driver = driver;
             Car = car;
+            
+            float offset = 0.2f;
+            
+            //Catfish whiskers
+            float frontSensorDistance = 12f;
+            float frontSideSensorSideOffset = 3f;
 
-            _frontSensors = new CarSensor[]
+            float frontSideSonsorDistance = Mathf.Sqrt(Mathf.Pow(frontSensorDistance, 2) + (Mathf.Pow(frontSideSensorSideOffset, 2)));
+            float frontSideSensorAngle = Mathf.Atan2(frontSideSensorSideOffset, frontSensorDistance) * Mathf.Rad2Deg;
+            
+            _allSensors.AddRange(
+            new List<CarSensor>
+                {
+                    //Forward
+                    new CarSensor(Car.transform, new Vector3(-Car.CarSize.x / 2 + offset, 0, Car.CarSize.y / 2 - offset), 0, -0.3f, frontSensorDistance),
+                    new CarSensor(Car.transform, new Vector3(0, 0, Car.CarSize.y / 2 - offset), 0, 0.1f, frontSensorDistance),
+                    new CarSensor(Car.transform, new Vector3(Car.CarSize.x / 2 - offset, 0, Car.CarSize.y / 2 - offset), 0,0.3f, frontSensorDistance),
+
+                    //Catfish whiskers
+                    new CarSensor(Car.transform, new Vector3(-Car.CarSize.x / 2 + offset, 0, Car.CarSize.y / 2 - offset), -frontSideSensorAngle, -0.2f, frontSideSonsorDistance),
+                    new CarSensor(Car.transform, new Vector3(Car.CarSize.x / 2 - offset, 0, Car.CarSize.y / 2 - offset), frontSideSensorAngle, 0.2f, frontSideSonsorDistance),
+                }
+            );
+
+            _allSensors.AddRange(
+                new List<CarSensor>
+                { 
+                    new CarSensor(Car.transform, new Vector3(0, 0, -Car.CarSize.y / 2 + offset), -180, 0, 2)
+                });
+            
+            _allSensors.AddRange(new List<CarSensor>
             {
-                new CarSensor(Car.transform, new Vector3(-CarWidth / 2, 0, CarLength / 2), 0),
-                new CarSensor(Car.transform, new Vector3(0, 0, CarLength / 2), 0),
-                new CarSensor(Car.transform, new Vector3(CarWidth / 2, 0, CarLength / 2), 0),
-
-                new CarSensor(Car.transform, new Vector3(-CarWidth / 2, 0, CarLength / 2), -20),
-                new CarSensor(Car.transform, new Vector3(CarWidth / 2, 0, CarLength / 2), 20),
-            };
-
-            _backwardSensors = new CarSensor[]
-            {
-                new CarSensor(Car.transform, new Vector3(-CarWidth / 2, 0, -CarLength / 2), -180),
-                new CarSensor(Car.transform, new Vector3(0, 0, -CarLength / 2), -180),
-                new CarSensor(Car.transform, new Vector3(CarWidth / 2, 0, -CarLength / 2), -180),
-            };
-
-            _allSensors.AddRange(_frontSensors);
-            _allSensors.AddRange(_backwardSensors);
+                //Left
+                new CarSensor(Car.transform, new Vector3(-Car.CarSize.x / 2 + offset, 0, Car.CarSize.y / 2 - offset), -90, 0f, 2),
+                new CarSensor(Car.transform, new Vector3(-Car.CarSize.x / 2 + offset, 0, -Car.CarSize.y / 2 + offset), -90, 0f, 2),
+                
+                //Right
+                new CarSensor(Car.transform, new Vector3(Car.CarSize.x / 2 - offset, 0, Car.CarSize.y / 2 - offset), 90, 0f, 2),
+                new CarSensor(Car.transform, new Vector3(Car.CarSize.x / 2 - offset, 0, -Car.CarSize.y / 2 + offset), 90, 0f, 2),
+            });
+            
+            SensorLayer = LayerMask.GetMask("Car", "Obstacle");
         }
 
         public virtual void OnDrawGizmos()
         {
-//            foreach(CarSensor sensor in _allSensors)
-//            {
-//                Gizmos.color = sensor.IsDetected? Color.red : Color.white;
-//                Gizmos.DrawRay(sensor.SensorPosition, sensor.SensorDirection);
-//            }
+            foreach(CarSensor sensor in _allSensors)
+            {
+                Gizmos.color = sensor.IsDetected? Color.red : Color.white;
+                Gizmos.DrawRay(sensor.SensorPosition, sensor.SensorDirection);
+            }
         }
 
-        private bool _isCarMoveForward;
 
         public virtual void OnUpdate()
         {
             foreach (CarSensor sensor in _allSensors)
             {
                 RaycastHit hit;
-                sensor.IsDetected = Physics.Raycast(sensor.SensorPosition, sensor.SensorDirection, out hit, sensor.SensorDistance, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore);
+                sensor.IsDetected = Physics.Raycast(sensor.SensorPosition, sensor.SensorDirection,
+                    out hit, sensor.SensorDistance, SensorLayer, QueryTriggerInteraction.Ignore);
             }
 
-            if (!_isCarMoveForward && _backwardSensors.Take(3).Where(item => item.IsDetected).Count() == 3)
-            {
-                _isCarMoveForward = true;
-            }
-
-            if (_isCarMoveForward && _frontSensors.Take(3).Where(item => item.IsDetected).Count() == 3)
-            {
-                _isCarMoveForward = false;
-            }
+            Driver.ObstacleAvoidanceWeight = _allSensors.Sum(item => item.Weight);
         }
 
 
         public virtual void FixedUpdate()
         {
-            if (_isCarMoveForward)
-            {
-                Driver.Car.SetMotorTorque(0.1f);
-            } else
-            {
-                Driver.Car.SetMotorTorque(-0.1f);
-            }
-
-
-            float steerAngle = 0;
-
-            if (_frontSensors[0].IsDetected)
-                steerAngle += Driver.Car.MaxWheelAngle * 0.33f;
-            else
-                steerAngle -= Driver.Car.MaxWheelAngle * 0.33f;
-
-            if (_frontSensors[2].IsDetected)
-                steerAngle -= Driver.Car.MaxWheelAngle * 0.33f;
-            else
-                steerAngle += Driver.Car.MaxWheelAngle * 0.33f;
-
-            //Driver.Car.SetSteerAngle(steerAngle);
         }
 
         public virtual string GetStateName()

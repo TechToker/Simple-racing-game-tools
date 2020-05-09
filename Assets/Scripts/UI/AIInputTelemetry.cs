@@ -15,6 +15,7 @@ namespace RacingGame.UI
         [SerializeField] private TextMeshProUGUI _uiTextBehaviourState;
         [SerializeField] private TextMeshProUGUI _uiTextSpeed;
         [SerializeField] private TextMeshProUGUI _uiTextRubberbandingValue;
+        [SerializeField] private TextMeshProUGUI _uiTextObstacleAvoidanceValue;
         
         [SerializeField] private Slider _uiSliderTurningInput;
         [SerializeField] private Slider _uiSliderAcceleationInput;
@@ -26,6 +27,7 @@ namespace RacingGame.UI
             _uiTextBehaviourState.SetText(_driver.CurrentStateName);
             _uiTextSpeed.SetText($"{_driver.Car.CarSpeed:N1}m/s");
             _uiTextRubberbandingValue.SetText($"RB:{_driver.RubberBandingValue:N2}");
+            _uiTextObstacleAvoidanceValue.SetText($"OA: {_driver.ObstacleAvoidanceWeight}");
 
             _uiSliderTurningInput.value = (_driver.Car.TurningAngle + _driver.Car.MaxWheelAngle) / (_driver.Car.MaxWheelAngle * 2);
             _uiSliderAcceleationInput.value = Mathf.Abs(_driver.Car.AccelerationInput);

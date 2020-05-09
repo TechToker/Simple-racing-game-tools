@@ -15,7 +15,7 @@ namespace BehaviourAI
     public class PathSegment
     {
         public WayPoint Waypoint { get; }
-        public Vector3 CarRacingPoint { get; }
+        public Vector3 CarRacingPoint { get; private set; }
 
         public PathSegment(DriverAI driver, WayPoint wp)
         {
@@ -29,6 +29,11 @@ namespace BehaviourAI
 
             CarRacingPoint = wp.transform.TransformPoint(newLocalRp * wp.Width, 0.5f, 0);
         }
+
+        // public void ObstacleAvoidance(float weight)
+        // {
+        //     CarRacingPoint = Waypoint.transform.position + Waypoint.transform.right * 5 * -weight;
+        // }
     }
 
     public class BrakingData
@@ -131,6 +136,9 @@ namespace BehaviourAI
 
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(Car.CarFrontBumperPos, 0.05f);
+
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawLine(Car.CarFrontBumperPos, _turningTargetPoint);
         }
 
         public override void FixedUpdate()
@@ -142,8 +150,9 @@ namespace BehaviourAI
             UpdateNextWaypointsList();
 
             //Steer analyst
+            ObstacleAvoidance();
             UpdateTurningTarget();
-            
+
             //Calculate inputs
             _steerInput = CalculateSteeringInput();
             _accelerationInput = CalculateMoveInput();
@@ -151,7 +160,8 @@ namespace BehaviourAI
             float rbExtraAcceleration = (Driver.RbTorqueMultiplyer - 1) * Driver.RBTorqueMultiplyerBySpeed.Evaluate(Car.CarSpeed);
             
             Car.SetSteerAngle(_steerInput);
-            Car.SetMotorTorque(Mathf.Clamp(_accelerationInput, 0, 1) + rbExtraAcceleration);
+            
+            Car.SetMotorTorque(Mathf.Clamp(_accelerationInput, 0, 1) * 0.1f + rbExtraAcceleration);
             Car.SetBrakeTorque(Mathf.Clamp(-_accelerationInput, 0, 1));
         }
 
@@ -289,7 +299,17 @@ namespace BehaviourAI
                 }
             }
 
-            _turningTargetPoint = pointFrom + (pointTo - pointFrom).normalized * distance;
+            Debug.LogError($"Cur: {CurrentObstacleAvoidOffset}, Weight: {Driver.ObstacleAvoidanceWeight * 3}");
+            CurrentObstacleAvoidOffset = Mathf.Lerp(CurrentObstacleAvoidOffset, Driver.ObstacleAvoidanceWeight * 3, Time.fixedTime / 500);
+            
+            _turningTargetPoint = pointFrom + (pointTo - pointFrom).normalized * distance + _racingPath[0].Waypoint.transform.right * -CurrentObstacleAvoidOffset;
+        }
+
+        private float CurrentObstacleAvoidOffset = 0;
+
+        private void ObstacleAvoidance()
+        {
+            //_racingPath[0].ObstacleAvoidance(Driver.ObstacleAvoidanceWeight);
         }
 
         private float GetTurnMileage()

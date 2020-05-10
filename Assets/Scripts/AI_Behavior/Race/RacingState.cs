@@ -35,33 +35,7 @@ namespace BehaviourAI
         //     CarRacingPoint = Waypoint.transform.position + Waypoint.transform.right * 5 * -weight;
         // }
     }
-
-    public class BrakingData
-    {
-        public bool IsRecording;
-        public float CornerEnterSpeed { get; }
-        public float CornerExitSpeed { get; }
-        public float StartBrakingDistance { get; }
-        
-        //Lifetime graph-X
-        public float CurrentDistanceProgress { get; private set; }
-        //Lifetime graph-Y
-        public float CurrentBrakingSpeed { get; private set; }
-        
-        public BrakingData(float enterSpeed, float exitSpeed, float brakingDistance)
-        {
-            IsRecording = true;
-            CornerEnterSpeed = enterSpeed;
-            CornerExitSpeed = exitSpeed;
-            StartBrakingDistance = brakingDistance;
-        }
-
-        public void SetCurrentData(float currentDistance, float currentSpeed)
-        {
-            CurrentDistanceProgress = currentDistance;
-            CurrentBrakingSpeed = currentSpeed;
-        }
-    }
+    
     
     public class RacingState : BaseState
     {
@@ -70,9 +44,11 @@ namespace BehaviourAI
         private float _steerInput;
         private float _accelerationInput;
 
-        //private WayPoint _currentWaypoint;
         private int _currentWaypointIndexOnTrack;
-
+        public int GetCurrentWaypointIndex => _currentWaypointIndexOnTrack;
+        public PathSegment NextTargetPosition => _racingPath[0];
+        
+        
         private List<PathSegment> _racingPath;
 
         //Turning
@@ -105,40 +81,43 @@ namespace BehaviourAI
             if (_racingPath == null)
                 return;
 
+            //Local racing line
+            if (Driver.ShowTurnDataGizmos)
+                DrawTurnDataGizmos();
+        }
+
+        private void DrawTurnDataGizmos()
+        {
             Gizmos.color = Color.green;
-            foreach(PathSegment point in _racingPath)
+            foreach (PathSegment point in _racingPath)
                 Gizmos.DrawSphere(point.CarRacingPoint, 0.25f);
-            
+
             Gizmos.color = new Color(0, 0.3f, 0);
             Gizmos.DrawLine(Car.transform.position, _racingPath[0].CarRacingPoint);
             Gizmos.DrawRay(_racingPath[0].CarRacingPoint, Car.transform.forward * 20);
-            
-            Gizmos.DrawRay(_racingPath[0].CarRacingPoint, _racingPath[_racingPath.Count - 1].CarRacingPoint - _racingPath[0].CarRacingPoint);
+
+            Gizmos.DrawRay(_racingPath[0].CarRacingPoint,
+                _racingPath[_racingPath.Count - 1].CarRacingPoint - _racingPath[0].CarRacingPoint);
 
             //Target turning point
             Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(_turningTargetPoint, 0.2f);
-            
+            Gizmos.DrawLine(Car.CarFrontBumperPos, _turningTargetPoint);
+            Gizmos.DrawSphere(_turningTargetPoint, 0.1f);
+            Gizmos.DrawSphere(Car.CarFrontBumperPos, 0.05f);
+
             //Braking point
             if (_brakingDistance > 0.5f)
             {
                 Gizmos.color = Color.red;
                 Vector3 brakingPosition = _racingPath[0].CarRacingPoint + (Car.transform.position - _racingPath[0].CarRacingPoint).normalized * _brakingDistance;
                 Gizmos.DrawLine(brakingPosition - Car.transform.right * 3, brakingPosition + Car.transform.right * 3);
-                Handles.Label(brakingPosition - Car.transform.right * 3, $"Braking: {Math.Round(_brakingDistance, 1)}");
+                Handles.Label(brakingPosition - Car.transform.right * 3,$"Braking: {Math.Round(_brakingDistance, 1)}");
             }
 
             //Corner info
-            string cornerInfo = $"ang: {Math.Round(_nextCornerAngle, 1)}°{Environment.NewLine}" +
-                                $"tSpeed: {Math.Round(_cornerTargetSpeed, 1)}";
-            
+            string cornerInfo = $"ang: {Math.Round(_nextCornerAngle, 1)}°{Environment.NewLine} tSpeed: {Math.Round(_cornerTargetSpeed, 1)}";
+
             Handles.Label(_racingPath[0].CarRacingPoint, cornerInfo);
-
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(Car.CarFrontBumperPos, 0.05f);
-
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawLine(Car.CarFrontBumperPos, _turningTargetPoint);
         }
 
         public override void FixedUpdate()
@@ -299,10 +278,17 @@ namespace BehaviourAI
                 }
             }
 
-            Debug.LogError($"Cur: {CurrentObstacleAvoidOffset}, Weight: {Driver.ObstacleAvoidanceWeight * 3}");
-            CurrentObstacleAvoidOffset = Mathf.Lerp(CurrentObstacleAvoidOffset, Driver.ObstacleAvoidanceWeight * 3, Time.fixedTime / 500);
-            
-            _turningTargetPoint = pointFrom + (pointTo - pointFrom).normalized * distance + _racingPath[0].Waypoint.transform.right * -CurrentObstacleAvoidOffset;
+            // Debug.LogError($"Cur: {CurrentObstacleAvoidOffset}, Weight: {Driver.ObstacleAvoidanceWeight * 3}");
+            // CurrentObstacleAvoidOffset = Mathf.Lerp(CurrentObstacleAvoidOffset, Driver.ObstacleAvoidanceWeight * 3, Time.fixedTime / 500);
+
+            if (Driver.ObstacleAvoidController.NeedAvoid)
+            {
+                _turningTargetPoint = Driver.ObstacleAvoidController.FinalPosition;
+            }
+            else
+            {
+                _turningTargetPoint =  pointFrom + (pointTo - pointFrom).normalized * distance;
+            }
         }
 
         private float CurrentObstacleAvoidOffset = 0;

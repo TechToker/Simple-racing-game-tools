@@ -50,45 +50,45 @@ namespace BehaviourAI
             
             float offset = 0.2f;
             
-            //Catfish whiskers
-            float frontSensorDistance = 12f;
-            float frontSideSensorSideOffset = 3f;
-
-            float frontSideSonsorDistance = Mathf.Sqrt(Mathf.Pow(frontSensorDistance, 2) + (Mathf.Pow(frontSideSensorSideOffset, 2)));
-            float frontSideSensorAngle = Mathf.Atan2(frontSideSensorSideOffset, frontSensorDistance) * Mathf.Rad2Deg;
-            
-            _allSensors.AddRange(
-            new List<CarSensor>
-                {
-                    //Forward
-                    new CarSensor(Car.transform, new Vector3(-Car.CarSize.x / 2 + offset, 0, Car.CarSize.y / 2 - offset), 0, -0.3f, frontSensorDistance),
-                    new CarSensor(Car.transform, new Vector3(0, 0, Car.CarSize.y / 2 - offset), 0, 0.1f, frontSensorDistance),
-                    new CarSensor(Car.transform, new Vector3(Car.CarSize.x / 2 - offset, 0, Car.CarSize.y / 2 - offset), 0,0.3f, frontSensorDistance),
-
-                    //Catfish whiskers
-                    new CarSensor(Car.transform, new Vector3(-Car.CarSize.x / 2 + offset, 0, Car.CarSize.y / 2 - offset), -frontSideSensorAngle, -0.2f, frontSideSonsorDistance),
-                    new CarSensor(Car.transform, new Vector3(Car.CarSize.x / 2 - offset, 0, Car.CarSize.y / 2 - offset), frontSideSensorAngle, 0.2f, frontSideSonsorDistance),
-                }
-            );
-
-            _allSensors.AddRange(
-                new List<CarSensor>
-                { 
-                    new CarSensor(Car.transform, new Vector3(0, 0, -Car.CarSize.y / 2 + offset), -180, 0, 2)
-                });
-            
-            _allSensors.AddRange(new List<CarSensor>
-            {
-                //Left
-                new CarSensor(Car.transform, new Vector3(-Car.CarSize.x / 2 + offset, 0, Car.CarSize.y / 2 - offset), -90, 0f, 2),
-                new CarSensor(Car.transform, new Vector3(-Car.CarSize.x / 2 + offset, 0, -Car.CarSize.y / 2 + offset), -90, 0f, 2),
-                
-                //Right
-                new CarSensor(Car.transform, new Vector3(Car.CarSize.x / 2 - offset, 0, Car.CarSize.y / 2 - offset), 90, 0f, 2),
-                new CarSensor(Car.transform, new Vector3(Car.CarSize.x / 2 - offset, 0, -Car.CarSize.y / 2 + offset), 90, 0f, 2),
-            });
-            
-            SensorLayer = LayerMask.GetMask("Car", "Obstacle");
+            // //Catfish whiskers
+            // float frontSensorDistance = 12f;
+            // float frontSideSensorSideOffset = 3f;
+            //
+            // float frontSideSonsorDistance = Mathf.Sqrt(Mathf.Pow(frontSensorDistance, 2) + (Mathf.Pow(frontSideSensorSideOffset, 2)));
+            // float frontSideSensorAngle = Mathf.Atan2(frontSideSensorSideOffset, frontSensorDistance) * Mathf.Rad2Deg;
+            //
+            // _allSensors.AddRange(
+            // new List<CarSensor>
+            //     {
+            //         //Forward
+            //         new CarSensor(Car.transform, new Vector3(-Car.CarSize.x / 2 + offset, 0, Car.CarSize.y / 2 - offset), 0, -0.3f, frontSensorDistance),
+            //         new CarSensor(Car.transform, new Vector3(0, 0, Car.CarSize.y / 2 - offset), 0, 0.1f, frontSensorDistance),
+            //         new CarSensor(Car.transform, new Vector3(Car.CarSize.x / 2 - offset, 0, Car.CarSize.y / 2 - offset), 0,0.3f, frontSensorDistance),
+            //
+            //         //Catfish whiskers
+            //         new CarSensor(Car.transform, new Vector3(-Car.CarSize.x / 2 + offset, 0, Car.CarSize.y / 2 - offset), -frontSideSensorAngle, -0.2f, frontSideSonsorDistance),
+            //         new CarSensor(Car.transform, new Vector3(Car.CarSize.x / 2 - offset, 0, Car.CarSize.y / 2 - offset), frontSideSensorAngle, 0.2f, frontSideSonsorDistance),
+            //     }
+            // );
+            //
+            // _allSensors.AddRange(
+            //     new List<CarSensor>
+            //     { 
+            //         new CarSensor(Car.transform, new Vector3(0, 0, -Car.CarSize.y / 2 + offset), -180, 0, 2)
+            //     });
+            //
+            // _allSensors.AddRange(new List<CarSensor>
+            // {
+            //     //Left
+            //     new CarSensor(Car.transform, new Vector3(-Car.CarSize.x / 2 + offset, 0, Car.CarSize.y / 2 - offset), -90, 0f, 2),
+            //     new CarSensor(Car.transform, new Vector3(-Car.CarSize.x / 2 + offset, 0, -Car.CarSize.y / 2 + offset), -90, 0f, 2),
+            //     
+            //     //Right
+            //     new CarSensor(Car.transform, new Vector3(Car.CarSize.x / 2 - offset, 0, Car.CarSize.y / 2 - offset), 90, 0f, 2),
+            //     new CarSensor(Car.transform, new Vector3(Car.CarSize.x / 2 - offset, 0, -Car.CarSize.y / 2 + offset), 90, 0f, 2),
+            // });
+            //
+            // SensorLayer = LayerMask.GetMask("Car", "Obstacle");
         }
 
         public virtual void OnDrawGizmos()

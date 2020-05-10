@@ -7,8 +7,11 @@ public class BaseCar : MonoBehaviour
 {
     public bool IsDebug;
 
+    [Header("Main")]
     [SerializeField] protected Rigidbody _mainRigidBody;
-
+    [SerializeField] protected Collider _mainCollider;
+    
+    [Header("Wheels")]
     [SerializeField] protected WheelCollider[] _forwardWheels;
     [SerializeField] protected WheelCollider[] _backwardWheels;
 
@@ -16,6 +19,7 @@ public class BaseCar : MonoBehaviour
 
     [SerializeField] private GameObject _wheelVisualPrefab;
 
+    [Header("Specifications")]
     [SerializeField] protected AnimationCurve _turningAngleBySpeed;
     [SerializeField] protected AnimationCurve _torqueBySpeed;
     [SerializeField] protected AnimationCurve _reverceTorqueBySpeed;
@@ -52,6 +56,8 @@ public class BaseCar : MonoBehaviour
     public float CarSpeed => _mainRigidBody.velocity.magnitude;
     public bool IsCarMovingForward => _mainRigidBody.transform.InverseTransformDirection(_mainRigidBody.velocity).z >= 0;
     public Vector3 RelativeForce => _mainRigidBody.velocity;
+
+    public Collider MainCollider => _mainCollider;
 
     public float CurrentWheelAngle => _forwardWheels[0].steerAngle;
 

@@ -24,7 +24,7 @@ public class DriverAI : BaseDriver
     public DriverMode CurrentMode;
     
     [Header("Blackboard: Race mode")]
-    [SerializeField] private RaceCircuit _circuit;
+    public RaceCircuit Circuit;
     public float TurningAlanystDistance = 30f;
 
     [SerializeField] public AnimationCurve SpeedByCornerAnlge;
@@ -59,6 +59,10 @@ public class DriverAI : BaseDriver
 
     [Header("Obstacle avoidance")] 
     public float ObstacleAvoidanceWeight;
+    public ObstacleAvoidanceController ObstacleAvoidController;
+
+    [Header("Racing state gizmos")]
+    public bool ShowTurnDataGizmos;
     
     [Header("Blackboard: Follow mode")]
     public BaseCar TargetCar;
@@ -153,7 +157,7 @@ public class DriverAI : BaseDriver
                 _state = new RoadBlockState(this, Car);
                 break;
             case (DriverMode.WaypointRace):
-                _state = new RacingState(_circuit, this, Car);
+                _state = new RacingState(Circuit, this, Car);
                 break;
         }
 

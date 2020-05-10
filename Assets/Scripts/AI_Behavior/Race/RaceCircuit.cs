@@ -304,4 +304,18 @@ public class RaceCircuit : MonoBehaviour
         for (int i = fromIndex; i < Waypoints.Count; i++)
             Waypoints[i].name = string.Format(WaypointFormatName, i);
     }
+    
+    public Vector2 FindNearestPointOnLine(Vector2 lineStart, Vector2 lineEnd, Vector2 point)
+    {
+        //Get heading
+        Vector2 heading = (lineEnd - lineStart);
+        float magnitudeMax = heading.magnitude;
+        heading.Normalize();
+
+        //Do projection from the point but clamp it
+        Vector2 lhs = point - lineStart;
+        float dotP = Vector2.Dot(lhs, heading);
+        dotP = Mathf.Clamp(dotP, 0f, magnitudeMax);
+        return lineStart + heading * dotP;
+    }
 }

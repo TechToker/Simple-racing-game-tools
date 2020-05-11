@@ -29,11 +29,6 @@ namespace BehaviourAI
 
             CarRacingPoint = wp.transform.TransformPoint(newLocalRp * wp.Width, 0.5f, 0);
         }
-
-        // public void ObstacleAvoidance(float weight)
-        // {
-        //     CarRacingPoint = Waypoint.transform.position + Waypoint.transform.right * 5 * -weight;
-        // }
     }
     
     
@@ -140,7 +135,7 @@ namespace BehaviourAI
             
             Car.SetSteerAngle(_steerInput);
             
-            Car.SetMotorTorque(Mathf.Clamp(_accelerationInput, 0, 1) * 0.1f + rbExtraAcceleration);
+            Car.SetMotorTorque(Mathf.Clamp(_accelerationInput, 0, 1) * 0.15f + rbExtraAcceleration);
             Car.SetBrakeTorque(Mathf.Clamp(-_accelerationInput, 0, 1));
         }
 
@@ -277,13 +272,10 @@ namespace BehaviourAI
                     pointTo = _racingPath[i + 1].CarRacingPoint;
                 }
             }
-
-            // Debug.LogError($"Cur: {CurrentObstacleAvoidOffset}, Weight: {Driver.ObstacleAvoidanceWeight * 3}");
-            // CurrentObstacleAvoidOffset = Mathf.Lerp(CurrentObstacleAvoidOffset, Driver.ObstacleAvoidanceWeight * 3, Time.fixedTime / 500);
-
+            
             if (Driver.ObstacleAvoidController.NeedAvoid)
             {
-                _turningTargetPoint = Driver.ObstacleAvoidController.FinalPosition;
+                _turningTargetPoint = Driver.ObstacleAvoidController.ObstacleAvoidPosition + Driver.ObstacleAvoidController.transform.forward * 15;
             }
             else
             {

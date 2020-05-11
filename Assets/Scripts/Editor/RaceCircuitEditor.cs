@@ -109,7 +109,7 @@ public class RaceCircuitEditor : Editor
             Vector2 lineStartPos = new Vector2(_circuit.Waypoints[i].Center.x, _circuit.Waypoints[i].Center.z);
             Vector2 lineFinishPos = new Vector2(_circuit.Waypoints[i + 1].Center.x, _circuit.Waypoints[i + 1].Center.z);
             
-            Vector2 nearestPointOnLine = _circuit.FindNearestPointOnLine(lineStartPos,lineFinishPos, mousePosXZ);
+            Vector2 nearestPointOnLine = MathfExtensions.FindNearestPointOnLine(lineStartPos,lineFinishPos, mousePosXZ);
             float distanceToLine = Vector2.Distance(nearestPointOnLine, mousePosXZ);
 
             if (distanceToLine < minDistance)

@@ -6,29 +6,34 @@ using UnityEngine;
 
 public class ObstacleAvoidanceController : MonoBehaviour
 {
+    [Header("Debug")]
+    [SerializeField] private bool _enableGizmos;
+    
+    [Header("Main")]
     [SerializeField] private DriverAI _driver;
     [SerializeField] private int _heatLineDimension = 50;
     [SerializeField] private float _heatLineLength = 10f;
 
     public float[] _heatLine;
 
-    private Vector3 HeatLineLeftBorder => transform.position + transform.forward * _heatLineLength / 2;
-    private Vector3 HeatLineRightBorder => transform.position - transform.forward * _heatLineLength / 2;
+    private Vector3 HeatLineLeftBorder => transform.position - transform.right * _heatLineLength / 2;
+    private Vector3 HeatLineRightBorder => transform.position + transform.right * _heatLineLength / 2;
     
     private float SpaceBetweenHeatValues => _heatLineLength / _heatLineDimension;
     
     private readonly List<Collider> _observedObstacles = new List<Collider>();
-    private readonly List<Vector2> _projectionPoints = new List<Vector2>();
+    private readonly List<Vector3> _projectionPoints = new List<Vector3>();
     
     private int _obstacleColliderMask;
     
     private PathSegment DriverTargetSegment => (_driver.StateAI as RacingState)?.NextTargetPosition;
 
-    public bool NeedAvoid => ObstacleAvoidIndex >= 0;
-    public Vector3 FinalPosition => ConvertIndexToWorldPosition(ObstacleAvoidIndex);
+    public bool NeedAvoid => _obstacleAvoidIndex >= 0;
+    private int _obstacleAvoidIndex;
+    public Vector3 ObstacleAvoidPosition => ConvertIndexToWorldPosition(_obstacleAvoidIndex) + transform.up;
 
     private Vector3 _gizmosOffset = new Vector3(0, 0.5f, 0f);
-    
+
     private void Awake()
     {
         _obstacleColliderMask = LayerMask.GetMask("Car", "Obstacle");
@@ -39,193 +44,186 @@ public class ObstacleAvoidanceController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if(!Application.isPlaying)
+        if(!Application.isPlaying || !_enableGizmos)
             return;
+
+        DrawRayToNextWaypoint();
+        DrawHeatLineGizmos();
         
+        //DrawProjectionPoints();
+        //DrawObstacleProjectionPoints();
+        
+        // Gizmos.color = Color.yellow;
+        // Gizmos.DrawSphere(ConvertIndexToWorldPosition(ObstacleAvoidIndex), 0.2f);
+    }
+
+    private void DrawRayToNextWaypoint()
+    {
         //Draw vector to next WP
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawSphere(transform.position + transform.up, 0.05f);
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position + _gizmosOffset, 0.05f);
         
+        Gizmos.color = new Color(0.75f, 0f, 0f);
         Vector3 rayToTargetPosition = new Vector3(DriverTargetSegment.Waypoint.Center.x, 0, DriverTargetSegment.Waypoint.Center.z) - transform.position;
         Gizmos.DrawRay(transform.position + _gizmosOffset, rayToTargetPosition);
-        
+    }
+
+    private void DrawHeatLineGizmos()
+    {
         //Draw heat line
         Gizmos.color = Color.red;
+        Gizmos.DrawSphere(HeatLineLeftBorder + _gizmosOffset, 0.05f);
         
-        Gizmos.DrawSphere(HeatLineLeftBorder, 0.1f);
-        Gizmos.DrawSphere(HeatLineRightBorder, 0.1f);
+        Gizmos.DrawSphere(HeatLineRightBorder + _gizmosOffset, 0.05f);
         
         for (int i = 1; i < _heatLine.Length; i++)
         {
-            Vector3 positionFrom = HeatLineLeftBorder - (transform.forward * SpaceBetweenHeatValues * (i - 1)) + (transform.right * _heatLine[i - 1]);
-            Vector3 positionTo = HeatLineLeftBorder - (transform.forward * SpaceBetweenHeatValues * i) + (transform.right * _heatLine[i]);
+            Vector3 prevHeatValuePos = ConvertIndexToWorldPosition(i - 1) + (transform.forward * _heatLine[i - 1]);
+            Vector3 currentHeatValuePos = ConvertIndexToWorldPosition(i) + (transform.forward * _heatLine[i]);
             
-            Gizmos.DrawLine(positionFrom + _gizmosOffset, positionTo + _gizmosOffset);
+            Gizmos.DrawLine(prevHeatValuePos + _gizmosOffset, currentHeatValuePos + _gizmosOffset);
         }
-        
-        //Heat object
-        // Gizmos.color = Color.blue;
-        // Gizmos.DrawSphere(new Vector3(colliderPosOnLine.x, 1, colliderPosOnLine.y), 0.2f);
-        //
-        // Gizmos.color = Color.cyan;
-        // foreach (var collider in _allColliders)
-        // {
-        //     Gizmos.DrawSphere(collider.bounds.max, 0.2f);
-        //     Gizmos.DrawSphere(collider.bounds.min, 0.2f);
-        // }
+    }
 
+    private void DrawObstacleColliderPoints()
+    {
         Gizmos.color = Color.cyan;
-        foreach (Vector2 value in _projectionPoints)
+        foreach (Collider colider in _observedObstacles)
         {
-            Vector3 v3 = ConvertFromXZ(value);
-            Gizmos.DrawSphere(v3 + transform.up, 0.05f);
+            Gizmos.DrawSphere(colider.bounds.max, 0.2f);
+            Gizmos.DrawSphere(colider.bounds.min, 0.2f);
         }
-        
-        Gizmos.color = Color.yellow;
-        
-        Gizmos.DrawSphere(ConvertIndexToWorldPosition(ObstacleAvoidIndex), 0.2f);
+    }
+
+    private void DrawObstacleProjectionPoints()
+    {
+        Gizmos.color = Color.cyan;
+        foreach (Vector3 value in _projectionPoints)
+            Gizmos.DrawSphere(value + _gizmosOffset, 0.05f);
     }
 
     private void LateUpdate()
     {
         UpdateTransform();
-        ObstacleProjection();
-        
-        //Racing point projection
-        Vector2 waypointPos = ConvertToXZ(DriverTargetSegment.CarRacingPoint);
-        Vector2 waypointPosOnLine = _driver.Circuit.FindNearestPointOnLine(ConvertToXZ(HeatLineLeftBorder), ConvertToXZ(HeatLineRightBorder), waypointPos);
-
-        _projectionPoints.Add(waypointPosOnLine);
-        
-        Vector3 rpPosition = ConvertFromXZ(waypointPosOnLine);
-        rpPosition = transform.InverseTransformPoint(rpPosition);
-        int racingPointIndex = ConvertPosOnLineToArrayIndex(rpPosition.z);
-
-        
-        //Ищем место в которое может поместится наш автомобиль
-        int carNeededIndexCount = Mathf.CeilToInt(_driver.Car.CarSize.x / SpaceBetweenHeatValues);
-        
-        //Бежать влево и вправо и смотреть где ближе к точке будет
-        int leftPoint = -1, rightPoint = -1;
-        //Left check
-        for (int pointIndex = racingPointIndex - carNeededIndexCount / 2; pointIndex < _heatLineDimension; pointIndex++)
-        {
-            if (CarFitsCheck(pointIndex, carNeededIndexCount))
-            {
-                leftPoint = pointIndex;
-                break;
-            }
-        }
-        
-        //Right check
-        for (int pointIndex = racingPointIndex - carNeededIndexCount / 2; pointIndex < _heatLineDimension; pointIndex--)
-        {
-            if (CarFitsCheck(pointIndex, carNeededIndexCount))
-            {
-                leftPoint = pointIndex;
-                break;
-            }
-        }
-
-        ObstacleAvoidIndex = carNeededIndexCount / 2 + Math.Abs(racingPointIndex - leftPoint) < Math.Abs(racingPointIndex - rightPoint)
-            ? leftPoint
-            : rightPoint;
-        
+        WriteObstacleToHeatLine();
+        CalculateObstacleAvoidancePoint();
     }
-
-    private bool CarFitsCheck(int pointToCheck, int carWidth)
-    {
-        for (int i = pointToCheck; i < _heatLine.Length && i < pointToCheck + carWidth; i++)
-        {
-            if (_heatLine[i] != 0)
-                return false;
-        }
-
-        return true;
-    }
-
-    private Vector3 ConvertIndexToWorldPosition(int index)
-    {
-        return HeatLineLeftBorder + transform.forward * (index * SpaceBetweenHeatValues) + transform.right * 15;
-    }
-
-    private int ObstacleAvoidIndex;
 
     private void UpdateTransform()
     {
-        int driverCurrentWaypoint = (_driver.StateAI as RacingState).GetCurrentWaypointIndex;
-
-        WayPoint wpFrom = _driver.Circuit.GetWaypointByIndex(driverCurrentWaypoint - 1);
-        Vector2 lineStart = new Vector2(wpFrom.transform.position.x, wpFrom.transform.position.z);
+        int currentTargetWaypoint = (_driver.StateAI as RacingState).GetCurrentWaypointIndex;
         
-        WayPoint wpTo = _driver.Circuit.GetWaypointByIndex(driverCurrentWaypoint);
-        Vector2 lineFinish = new Vector2(wpTo.transform.position.x, wpTo.transform.position.z);
+        Vector2 prevWaypointPos = MathfExtensions.ConvertToXZ(_driver.Circuit.GetWaypointByIndex(currentTargetWaypoint - 1).transform.position);
+        Vector2 targetWaypointPos = MathfExtensions.ConvertToXZ(_driver.Circuit.GetWaypointByIndex(currentTargetWaypoint).transform.position);
 
-        Vector2 driverPos = new Vector2(_driver.Car.CarFrontBumperPos.x, _driver.Car.CarFrontBumperPos.z);
-        
-        Vector2 newPosV2 = _driver.Circuit.FindNearestPointOnLine(lineStart, lineFinish, driverPos);
-        Vector3 newPosV3 = new Vector3(newPosV2.x, 0, newPosV2.y);
+        Vector2 carPos = MathfExtensions.ConvertToXZ(_driver.Car.CarFrontBumperPos);
+        Vector3 carPosOnLine = MathfExtensions.ConvertFromXZ(MathfExtensions.FindNearestPointOnLine(prevWaypointPos, targetWaypointPos, carPos));
 
-        transform.position = newPosV3;
+        Vector3 vectorToNextWp = MathfExtensions.ConvertFromXZ(targetWaypointPos) - carPosOnLine;
         
-        Vector3 vectorToNextWp = new Vector3(wpTo.transform.position.x, 0, wpTo.transform.position.z) - newPosV3;
+        transform.position = carPosOnLine;
         transform.rotation = Quaternion.LookRotation(vectorToNextWp,  Vector3.up);
-        
-        //TODO: REMOVE THIS SHIW
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y - 90, transform.eulerAngles.z);
     }
-
-    private void ObstacleProjection()
+    
+    private void WriteObstacleToHeatLine()
     {
         for (int i = 0; i < _heatLine.Length; i++)
             _heatLine[i] = 0;
         
         _projectionPoints.Clear();
+
+        Vector2 heatLineLeftBorderXZ = MathfExtensions.ConvertToXZ(HeatLineLeftBorder);
+        Vector2 heatLineRightBorderXZ = MathfExtensions.ConvertToXZ(HeatLineRightBorder);
         
-        foreach (Collider collider in _observedObstacles)
+        foreach (Collider obstacle in _observedObstacles)
         {
-            Vector2 posMin = _driver.Circuit.FindNearestPointOnLine(ConvertToXZ(HeatLineLeftBorder), ConvertToXZ(HeatLineRightBorder), ConvertToXZ(collider.bounds.min));
-            Vector2 posMax = _driver.Circuit.FindNearestPointOnLine(ConvertToXZ(HeatLineLeftBorder), ConvertToXZ(HeatLineRightBorder), ConvertToXZ(collider.bounds.max));
+            Vector3 obstacleMinPosOnLine = MathfExtensions.FindNearestPointOnLine(heatLineLeftBorderXZ, heatLineRightBorderXZ, MathfExtensions.ConvertToXZ(obstacle.bounds.min));
+            Vector3 obstacleMaxPosOnLine = MathfExtensions.FindNearestPointOnLine(heatLineLeftBorderXZ, heatLineRightBorderXZ, MathfExtensions.ConvertToXZ(obstacle.bounds.max));
             
-            _projectionPoints.Add(posMin);
-            _projectionPoints.Add(posMax);
-
-            Vector3 posMin3 = ConvertFromXZ(posMin);
-            Vector3 posMax3 = ConvertFromXZ(posMax);
+            obstacleMinPosOnLine = MathfExtensions.ConvertFromXZ(obstacleMinPosOnLine);
+            obstacleMaxPosOnLine = MathfExtensions.ConvertFromXZ(obstacleMaxPosOnLine);
             
-            posMin3 = transform.InverseTransformPoint(posMin3);
-            posMax3 = transform.InverseTransformPoint(posMax3);
-
-            float OnLinePosMin = Mathf.Min(posMin3.z, posMax3.z);
-            float OnLinePosMax = Mathf.Max(posMin3.z, posMax3.z);
-
-            float pointMinPercentage = (OnLinePosMin + _heatLineLength) / (_heatLineLength * 2);
-            float pointMaxPercentage = (OnLinePosMax + _heatLineLength) / (_heatLineLength * 2);
-
-            int minIndex = Mathf.Clamp((int) (pointMinPercentage * _heatLineDimension), 0, _heatLineDimension - 1);
-            int maxIndex = Mathf.Clamp((int) (pointMaxPercentage * _heatLineDimension), 0, _heatLineDimension - 1);
+            _projectionPoints.Add(obstacleMinPosOnLine);
+            _projectionPoints.Add(obstacleMaxPosOnLine);
             
-            for (int i = minIndex; i <= maxIndex; i++)
-                _heatLine[i] = 0.5f;
+            obstacleMinPosOnLine = transform.InverseTransformPoint(obstacleMinPosOnLine);
+            obstacleMaxPosOnLine = transform.InverseTransformPoint(obstacleMaxPosOnLine);
+            
+            int obstacleMinIndex = ConvertPosOnLineToArrayIndex(obstacleMinPosOnLine.x);
+            int obstacleMaxIndex = ConvertPosOnLineToArrayIndex(obstacleMaxPosOnLine.x);
+            
+            //Obstacle bounds min & max does not mean that the min index is less than max index
+            for (int i = Mathf.Min(obstacleMinIndex, obstacleMaxIndex); i <=  Mathf.Max(obstacleMinIndex, obstacleMaxIndex); i++)
+                _heatLine[i] = 1f;
         }   
     }
-
-    private int ConvertPosOnLineToArrayIndex(float posZOnLine)
+    
+    //Z-index range [-heatLineLength / 2; heatLineLength / 2]
+    private int ConvertPosOnLineToArrayIndex(float zLinePos)
     {
-        float pointMinPercentage = (posZOnLine + _heatLineLength) / (_heatLineLength * 2);
-        return Mathf.Clamp((int) (pointMinPercentage * _heatLineDimension), 0, _heatLineDimension - 1);
+        float zPosInPercent = Mathf.InverseLerp(-_heatLineLength / 2, _heatLineLength / 2, zLinePos);
+        return Mathf.Clamp(Mathf.RoundToInt(zPosInPercent * _heatLineDimension), 0, _heatLineDimension - 1);
     }
 
-    private Vector2 ConvertToXZ(Vector3 vec)
+    private Vector3 ProjectPositionOnLine(Vector3 position)
     {
-        return new Vector2(vec.x, vec.z);
+        Vector2 position2D = MathfExtensions.ConvertToXZ(position);
+        return MathfExtensions.ConvertFromXZ(MathfExtensions.FindNearestPointOnLine(
+            MathfExtensions.ConvertToXZ(HeatLineLeftBorder), MathfExtensions.ConvertToXZ(HeatLineRightBorder), position2D));
+    }
+    
+    private Vector3 ConvertIndexToWorldPosition(int index)
+    {
+        return HeatLineLeftBorder + transform.right * (index * SpaceBetweenHeatValues);
     }
 
-    private Vector3 ConvertFromXZ(Vector2 vec)
+    private void CalculateObstacleAvoidancePoint()
     {
-        return new Vector3(vec.x, 0, vec.y);
+        Vector3 projectionWorldPosition = ProjectPositionOnLine(DriverTargetSegment.CarRacingPoint);
+        _projectionPoints.Add(projectionWorldPosition);
+
+        projectionWorldPosition = transform.InverseTransformPoint(projectionWorldPosition);
+        int racingPointIndex = ConvertPosOnLineToArrayIndex(projectionWorldPosition.x);
+        
+        //Make needed space even number
+        int carNeededIndexesWidth = Mathf.CeilToInt(_driver.Car.CarSize.x / SpaceBetweenHeatValues / 2) * 2;
+
+        int leftSpaceIndex = GetCarFreeSpaceIndex(racingPointIndex, carNeededIndexesWidth, Sides.LEFT);
+        int rightSpaceIndex = GetCarFreeSpaceIndex(racingPointIndex, carNeededIndexesWidth, Sides.RIGHT);
+
+        int nearestAvoidIndex = leftSpaceIndex >= 0 && Math.Abs(racingPointIndex - leftSpaceIndex) < Math.Abs(racingPointIndex - rightSpaceIndex)
+                ? leftSpaceIndex
+                : rightSpaceIndex;
+        
+        _obstacleAvoidIndex = carNeededIndexesWidth / 2 + nearestAvoidIndex;
     }
 
+    private int GetCarFreeSpaceIndex(int startFindIndex, int neededSpace, Sides moveSide)
+    {
+        //Find starts from left side of car
+        //TODO: Find start side car may be depended from 'moveSize'; To minimize for-cycles
+        
+        int movingDelta = moveSide == Sides.LEFT ? -1: 1;
+        for (int index = startFindIndex; moveSide == Sides.LEFT ? index >= 0: index < _heatLineDimension - neededSpace / 2; index += movingDelta)
+        {
+            if (IsCarFits(index, neededSpace))
+                return index;
+        }
+
+        return -1;
+    }
+
+    private bool IsCarFits(int pointToCheck, int neededSpace)
+    {
+        for (int index = pointToCheck; index < pointToCheck + neededSpace && index < _heatLine.Length; index++)
+        {
+            if (_heatLine[index] > float.Epsilon)
+                return false;
+        }
+
+        return true;
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (_obstacleColliderMask == (_obstacleColliderMask | (1 << other.gameObject.layer)) && other != _driver.Car.MainCollider)

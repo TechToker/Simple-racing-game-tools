@@ -12,39 +12,23 @@ namespace BehaviourAI
         RIGHT,
     }
 
-    public class PathSegment
+    public enum BrakeAlgorithm
     {
-        public WayPoint Waypoint { get; }
-        public Vector3 CarRacingPoint { get; private set; }
-
-        public PathSegment(DriverAI driver, WayPoint wp)
-        {
-            Waypoint = wp;
-            
-            float wpWidthWithExtraOffset = wp.Width - driver.Car.CarSize.x;
-            float driverTargetPoint = !driver.OvertakeMode ? wp.LocalFinalRacingPoint : wp.LocalOvertakeRacingPoint;
-
-            //Lock local racing point in new waypoint width
-            float newLocalRp = Mathf.Clamp(driverTargetPoint, -wpWidthWithExtraOffset / wp.Width / 2, wpWidthWithExtraOffset / wp.Width / 2);
-
-            CarRacingPoint = wp.transform.TransformPoint(newLocalRp * wp.Width, 0.5f, 0);
-        }
+        PID,
+        BANGBANG,
     }
-    
-    
+
     public class RacingState : BaseState
     {
         private readonly RaceCircuit _circuit;
+        private List<PathSegment> _racingPath;
 
         private float _steerInput;
         private float _accelerationInput;
-
-        private int _currentWaypointIndexOnTrack;
+        
         public int GetCurrentWaypointIndex => _currentWaypointIndexOnTrack;
+        private int _currentWaypointIndexOnTrack;
         public PathSegment NextTargetPosition => _racingPath[0];
-        
-        
-        private List<PathSegment> _racingPath;
 
         //Turning
         private Vector3 _turningTargetPoint;
@@ -56,22 +40,20 @@ namespace BehaviourAI
         private float _cornerTargetSpeed;
         private float _brakingDistance;
         
+        public BrakingData BrakingData { get; private set; }
+        
         //Waypoints
         private Sides _carWaypointApproachSide;
-        
-        //Debug: Braking
-        public BrakingData BrakingData { get; private set; }
 
         public RacingState(RaceCircuit circuit, DriverAI ai, BaseCar car) : base(ai, car)
         {
             _circuit = circuit;
-
             _currentWaypointIndexOnTrack = 0;
         }
 
-        public override void OnDrawGizmos()
+        public override void OnEveryGizmosDraw()
         {
-            base.OnDrawGizmos();
+            base.OnEveryGizmosDraw();
 
             if (_racingPath == null)
                 return;
@@ -115,35 +97,29 @@ namespace BehaviourAI
             Handles.Label(_racingPath[0].CarRacingPoint, cornerInfo);
         }
 
-        public override void FixedUpdate()
+        public override void OnEveryFixedUpdate()
         {
-            base.FixedUpdate();
+            base.OnEveryFixedUpdate();
 
             //Waypoints update
             CheckIsWaypointReached();
             UpdateNextWaypointsList();
 
             //Steer analyst
-            ObstacleAvoidance();
             UpdateTurningTarget();
 
             //Calculate inputs
             _steerInput = CalculateSteeringInput();
             _accelerationInput = CalculateMoveInput();
 
-            float rbExtraAcceleration = (Driver.RbTorqueMultiplyer - 1) * Driver.RBTorqueMultiplyerBySpeed.Evaluate(Car.CarSpeed);
+            float rbExtraAcceleration = (Driver.RubberbandingController.RbTorqueMultiplyer - 1) * Driver.RubberbandingController.RBTorqueMultiplyerBySpeed.Evaluate(Car.CarSpeed);
             
             Car.SetSteerAngle(_steerInput);
             
-            Car.SetMotorTorque(Mathf.Clamp(_accelerationInput, 0, 1) * 0.15f + rbExtraAcceleration);
+            Car.SetMotorTorque(Mathf.Clamp(_accelerationInput, 0, 1) * 1f + rbExtraAcceleration);
             Car.SetBrakeTorque(Mathf.Clamp(-_accelerationInput, 0, 1));
         }
-
-        public override void OnUpdate()
-        {
-            base.OnUpdate();
-        }
-
+        
         private void CheckIsWaypointReached()
         {
             if(_racingPath == null || _racingPath.Count == 0)
@@ -167,22 +143,7 @@ namespace BehaviourAI
 
         private float CalculateSteeringInput()
         {
-            float steerAngleToTracker = GetAngleToBetweenTransfors(Car.transform, _turningTargetPoint);
-            
-//            //FROM BASE STATE: уворот
-//
-//            if (_frontSensors[0].IsDetected)
-//                steerAngleToTracker += Driver.Car.MaxWheelAngle * 0.33f;
-//            else
-//                steerAngleToTracker -= Driver.Car.MaxWheelAngle * 0.33f;
-//
-//            if (_frontSensors[2].IsDetected)
-//                steerAngleToTracker -= Driver.Car.MaxWheelAngle * 0.33f;
-//            else
-//                steerAngleToTracker += Driver.Car.MaxWheelAngle * 0.33f;
-//
-//            //end 
-
+            float steerAngleToTracker = MathfExtensions.GetAngleToBetweenTransfors(Car.transform, _turningTargetPoint);
             return Mathf.Lerp(Driver.Car.CurrentWheelAngle, steerAngleToTracker, Time.fixedDeltaTime * Driver.WheelAngleSpeed);
         }
 
@@ -195,28 +156,32 @@ namespace BehaviourAI
             
             float distanceToCorner = Vector3.Distance(Car.CarFrontBumperPos, _racingPath[0].CarRacingPoint);
             _brakingDistance = Driver.BrakingDistanceByDeltaSpeed.Evaluate(Mathf.Clamp(Driver.Car.CarSpeed - _cornerTargetSpeed, 0, float.MaxValue));
-            _brakingDistance *= Driver.RbBrakingDistanceMultiplyer;
+            _brakingDistance *= Driver.RubberbandingController.RbBrakingDistanceMultiplyer;
             //_brakingDistance = 40;
 
             WriteBrakingDebugData(distanceToCorner);
             
             float moveInput;
             if (BrakingData == null || !BrakingData.IsRecording)
-                moveInput = Mathf.Lerp(_accelerationInput, 1, Time.fixedDeltaTime * Driver.RbAccelerationSpeedMultiplyer);
+                moveInput = Mathf.Lerp(_accelerationInput, 1, Time.fixedDeltaTime * Driver.RubberbandingController.RbAccelerationSpeedMultiplyer);
             else
             {
                 float distanceProgressPercentage = distanceToCorner / BrakingData.StartBrakingDistance;
                 float targetBrakingSpeed = BrakingData.CornerExitSpeed + distanceProgressPercentage * (BrakingData.CornerEnterSpeed - BrakingData.CornerExitSpeed);
                 float speedError = targetBrakingSpeed - Car.CarSpeed;
              
-                //Proportional control
-                moveInput = Driver.ProportionalCoef * speedError;
-
-                //Bang-bang control
-                //moveInput = speedError > 0 ? 1 : -1;
+                //Brake algorithm
+                switch (Driver.BrakeAlgorithm)
+                {
+                    case (BrakeAlgorithm.BANGBANG): 
+                        moveInput = speedError > 0 ? 1 : -1;
+                        break;
+                    default: //PID
+                        moveInput = Driver.ProportionalCoef * speedError;
+                        break;
+                }
             }
             
-            //float newInput = Mathf.Lerp(_accelerationInput, targetMoveInput, Time.fixedDeltaTime * 10);
             return Mathf.Clamp(moveInput, -1, 1);
         }
 
@@ -274,42 +239,14 @@ namespace BehaviourAI
             }
             
             if (Driver.ObstacleAvoidController.NeedAvoid)
-            {
                 _turningTargetPoint = Driver.ObstacleAvoidController.ObstacleAvoidPosition + Driver.ObstacleAvoidController.transform.forward * 15;
-            }
             else
-            {
                 _turningTargetPoint =  pointFrom + (pointTo - pointFrom).normalized * distance;
-            }
         }
 
-        private float CurrentObstacleAvoidOffset = 0;
-
-        private void ObstacleAvoidance()
+        public override string GetStateName()
         {
-            //_racingPath[0].ObstacleAvoidance(Driver.ObstacleAvoidanceWeight);
-        }
-
-        private float GetTurnMileage()
-        {
-//            float distance = 0;
-//
-//            //If is simple corner (only two points => не учитывать длину поворота)
-//            if (_analysisWaypoints.Count <= 2)
-//                return 0;
-//
-//            for(int i = 0; i < _analysisWaypoints.Count - 1; i++)
-//                distance += Vector3.Distance(_analysisWaypoints[i].transform.position, _analysisWaypoints[i + 1].transform.position);
-//            
-//            return distance;
-            return 0;
-        }
-
-        //DUPLICATE from chase state
-        private float GetAngleToBetweenTransfors(Transform from, Vector3 to)
-        {
-            Vector3 deltaVec = from.InverseTransformPoint(to);
-            return Mathf.Atan2(deltaVec.x, deltaVec.z) * Mathf.Rad2Deg;
+            return "[Racing state]";
         }
     }
 }

@@ -24,9 +24,9 @@ namespace BehaviourAI
 
         }
 
-        public override void OnDrawGizmos()
+        public override void OnEveryGizmosDraw()
         {
-            base.OnDrawGizmos();
+            base.OnEveryGizmosDraw();
 
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(relativeTarget, Vector3.one);
@@ -38,9 +38,9 @@ namespace BehaviourAI
             Gizmos.DrawWireCube(predictTarget, Vector3.one);
         }
 
-        public override void FixedUpdate()
+        public override void OnEveryFixedUpdate()
         {
-            base.FixedUpdate();
+            base.OnEveryFixedUpdate();
             FollowTarget(offsetFromTarget);
         }
 
@@ -92,7 +92,7 @@ namespace BehaviourAI
             Car.SetSteerAngle(wheelAngle);
         }
 
-        public override void OnUpdate()
+        public override void OnEveryUpdate()
         {
             if (_distanceToTarget < 1.5f)
             {
@@ -115,7 +115,7 @@ namespace BehaviourAI
 
             Debug.Log($"{_nearTargetTime}");
 
-            base.OnUpdate();
+            base.OnEveryUpdate();
         }
 
         private void ChangeRelativePosition(Vector3 newRelativePos)

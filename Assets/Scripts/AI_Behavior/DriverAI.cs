@@ -24,53 +24,36 @@ public class DriverAI : BaseDriver
     public DriverMode CurrentMode;
     
     [Header("Blackboard: Race mode")]
+    public bool ShowTurnDataGizmos;
+    
     public RaceCircuit Circuit;
+    
+    public bool OvertakeMode;
     public float TurningAlanystDistance = 30f;
-
+    public float WheelAngleSpeed = 300;
+    
     [SerializeField] public AnimationCurve SpeedByCornerAnlge;
     [SerializeField] public AnimationCurve BrakingDistanceByDeltaSpeed;
     [SerializeField] public AnimationCurve TurningTargetDistanceBySpeed;
-    
-    public bool OvertakeMode;
 
-    [Header("PID controller")]
+    [Header("Braking system")]
+    public BrakeAlgorithm BrakeAlgorithm = BrakeAlgorithm.PID; 
     public float ProportionalCoef = 0.5f;
     public float IntegralCoef = 0.5f;
     public float DerivativeCoef = 0.5f;
-    
-    [Header("Rubberbanding")]
-    [Range(0.5f, 1.5f)]
-    public float RubberBandingValue = 1;
 
-    [ReadOnly] public float RbTorqueMultiplyer = 1;
-    [ReadOnly] public float RbAccelerationSpeedMultiplyer = 200;
-    [ReadOnly] public float RbBrakingDistanceMultiplyer = 1;
+    [Header("Rubberbanding")] 
+    public RubberbandingController RubberbandingController;
 
-    [SerializeField] private float _minTorqueMultiplier = 1f;
-    [SerializeField] private float _maxTorqueMultiplier = 2f;
-    
-    [SerializeField] private float _minAccelPedalSpeedMultiplier = 50f;
-    [SerializeField] private float _maxAccelPedalSpeedMultiplier = 0.5f;
-    
-    [SerializeField] private float _minBrakingDistanceMultiplier = 1f;
-    [SerializeField] private float _maxBrakingDistanceMultiplier = 3f;
-    
-    public AnimationCurve RBTorqueMultiplyerBySpeed;
-
-    [Header("Obstacle avoidance")] 
+    [Header("Obstacle avoidance")]
     public float ObstacleAvoidanceWeight;
-    public ObstacleAvoidanceController ObstacleAvoidController;
-
-    [Header("Racing state gizmos")]
-    public bool ShowTurnDataGizmos;
+    public HeatLineController ObstacleAvoidController;
     
-    [Header("Blackboard: Follow mode")]
+    [Header("Blackboard: Chase mode")]
     public BaseCar TargetCar;
     public float TargetPositionUpdateDelay = 0.3f;
 
     public float CarSensorsDistance = 3f;
-
-    public AnimationCurve TargetSpeedByTarget;
 
     [Header("Autobraking")]
     public float _brakingPedalForce = 0.1f;
@@ -80,27 +63,16 @@ public class DriverAI : BaseDriver
     public AnimationCurve TargetSpeedByTurnAngle;
 
     [Header("FollowState")]
-    public float WheelAngleSpeed = 300;
-
     public AnimationCurve DistanceFactor;
     public AnimationCurve DeltaSpeedFactor;
     public AnimationCurve DeltaSpeedMultyplyerByDistance;
+    
     
     private DriverMode _currentMode;
     private BaseState _state;
 
     public string CurrentStateName => _state.GetStateName();
     public BaseState StateAI => _state;
-
-    private void OnValidate()
-    {
-        float positiveRbPercent = Mathf.Clamp((RubberBandingValue - 1) / (1.5f - 1), 0, float.MaxValue);
-        float negativeRbPercent = (Mathf.Clamp(RubberBandingValue, 0.5f, 1f) - 0.5f) / 0.5f;
-        
-        RbTorqueMultiplyer = _minTorqueMultiplier + positiveRbPercent * (_maxTorqueMultiplier - _minTorqueMultiplier);
-        RbAccelerationSpeedMultiplyer = _minAccelPedalSpeedMultiplier + negativeRbPercent * (_maxAccelPedalSpeedMultiplier - _minAccelPedalSpeedMultiplier);
-        RbBrakingDistanceMultiplyer = _minBrakingDistanceMultiplier + negativeRbPercent * (_maxBrakingDistanceMultiplier - _minBrakingDistanceMultiplier);
-    }
 
     private void OnEnable()
     {
@@ -113,7 +85,7 @@ public class DriverAI : BaseDriver
         if (!Application.isPlaying || _state == null)
             return;
 
-        _state.OnDrawGizmos();
+        _state.OnEveryGizmosDraw();
     }
 
     protected void FixedUpdate()
@@ -121,7 +93,7 @@ public class DriverAI : BaseDriver
         if(_state == null)
             return;
         
-        _state.FixedUpdate();
+        _state.OnEveryFixedUpdate();
     }
 
     protected void Update()
@@ -131,7 +103,7 @@ public class DriverAI : BaseDriver
         if (_state == null)
             return;
 
-        _state.OnUpdate();
+        _state.OnEveryUpdate();
     }
 
     public void SetDriverMode(DriverMode mode)

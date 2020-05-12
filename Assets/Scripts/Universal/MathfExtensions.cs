@@ -27,4 +27,10 @@ public static class MathfExtensions
     {
         return new Vector3(vec.x, 0, vec.y);
     }
+    
+    public static float GetAngleToBetweenTransfors(Transform from, Vector3 to)
+    {
+        Vector3 deltaVec = from.InverseTransformPoint(to);
+        return Mathf.Atan2(deltaVec.x, deltaVec.z) * Mathf.Rad2Deg;
+    }
 }

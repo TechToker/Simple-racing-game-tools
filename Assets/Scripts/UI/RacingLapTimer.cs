@@ -9,9 +9,19 @@ public class RacingLapTimer : MonoBehaviour
 {
     public event Action<BaseDriver, float> OnLapComplete; 
     private readonly Dictionary<BaseDriver, float> _lapTimes = new Dictionary<BaseDriver, float>();
+
+    private int _obstacleColliderMask;
     
+    private void Awake()
+    {
+        _obstacleColliderMask = LayerMask.GetMask("Car");
+    }
+
     public void OnTriggerEnter(Collider other)
     {
+        if(_obstacleColliderMask != (_obstacleColliderMask | (1 << other.gameObject.layer)))
+            return;
+            
         BaseDriver driver = other.GetComponentInParent<BaseDriver>();
         if(driver == null)
             return;

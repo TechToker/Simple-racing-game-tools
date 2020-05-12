@@ -3,6 +3,8 @@
 [ExecuteInEditMode]
 public class EasySuspension : MonoBehaviour
 {
+	[SerializeField] private Rigidbody _targetRigidbody;
+	
 	[Range(0.1f, 20f)]
 	[Tooltip("Natural frequency of the suspension springs. Describes bounciness of the suspension.")]
 	public float naturalFrequency = 10;
@@ -17,14 +19,7 @@ public class EasySuspension : MonoBehaviour
 
 	[Tooltip("Adjust the length of the suspension springs according to the natural frequency and damping ratio. When off, can cause unrealistic suspension bounce.")]
 	public bool setSuspensionDistance = true;
-
-    Rigidbody m_Rigidbody;
-
-    void Start ()
-    {
-        m_Rigidbody = GetComponent<Rigidbody> ();
-    }
-    
+	
 	void Update () 
     {
 		// Work out the stiffness and damper parameters based on the better spring model.
@@ -39,7 +34,7 @@ public class EasySuspension : MonoBehaviour
 			wc.suspensionSpring = spring;
 
 			Vector3 wheelRelativeBody = transform.InverseTransformPoint(wc.transform.position);
-            float distance = m_Rigidbody.centerOfMass.y - wheelRelativeBody.y + wc.radius;
+            float distance = _targetRigidbody.centerOfMass.y - wheelRelativeBody.y + wc.radius;
 
 			wc.forceAppPointDistance = distance - forceShift;
 

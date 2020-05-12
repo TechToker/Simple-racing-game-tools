@@ -10,19 +10,19 @@ namespace BehaviourAI {
 
         }
 
-        public override void OnDrawGizmos()
+        public override void OnEveryGizmosDraw()
         {
-            base.OnDrawGizmos();
+            base.OnEveryGizmosDraw();
         }
 
-        public override void FixedUpdate()
+        public override void OnEveryFixedUpdate()
         {
             FollowTarget(Vector3.zero);
         }
 
-        public override void OnUpdate()
+        public override void OnEveryUpdate()
         {
-            base.OnUpdate();
+            base.OnEveryUpdate();
         }
 
         public override string GetStateName()

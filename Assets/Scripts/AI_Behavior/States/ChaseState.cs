@@ -25,7 +25,7 @@ namespace BehaviourAI
             GameManager.Instance.StartCoroutine(CalculatePathToTarget());
         }
 
-        public override void OnDrawGizmos()
+        public override void OnEveryGizmosDraw()
         {
             if (_navMeshPath == null)
                 return;
@@ -57,7 +57,7 @@ namespace BehaviourAI
             Gizmos.DrawLine(Driver.transform.position, Driver.transform.position + Driver.transform.forward * Driver.CarSensorsDistance);
         }
 
-        public override void OnUpdate()
+        public override void OnEveryUpdate()
         {
 
         }
@@ -79,7 +79,7 @@ namespace BehaviourAI
             _roadExist = !NavMesh.Raycast(Driver.transform.position, Driver.transform.position + Driver.transform.forward * Driver.CarSensorsDistance, out NavMeshHit hit, NavMesh.AllAreas);
         }
 
-        public override void FixedUpdate()
+        public override void OnEveryFixedUpdate()
         {
             if (_navMeshPath.corners.Length == 0)
                 return;

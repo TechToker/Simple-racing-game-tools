@@ -26,7 +26,7 @@ namespace RacingGame.UI
         {
             _uiTextBehaviourState.SetText(_driver.CurrentStateName);
             _uiTextSpeed.SetText($"{_driver.Car.CarSpeed:N1}m/s");
-            _uiTextRubberbandingValue.SetText($"RB:{_driver.RubberBandingValue:N2}");
+            _uiTextRubberbandingValue.SetText($"RB:{_driver.RubberbandingController.RubberBandingValue:N2}");
             _uiTextObstacleAvoidanceValue.SetText($"OA: {_driver.ObstacleAvoidanceWeight}");
 
             _uiSliderTurningInput.value = (_driver.Car.TurningAngle + _driver.Car.MaxWheelAngle) / (_driver.Car.MaxWheelAngle * 2);

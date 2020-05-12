@@ -19,9 +19,9 @@ namespace BehaviourAI
             _targetCarPos = Driver.TargetCar.transform.position;
         }
 
-        public override void OnDrawGizmos()
+        public override void OnEveryGizmosDraw()
         {
-            base.OnDrawGizmos();
+            base.OnEveryGizmosDraw();
 
             Gizmos.color = Color.red;
             Gizmos.DrawLine(_startPos, _targetCarPos);
@@ -44,14 +44,14 @@ namespace BehaviourAI
             _startTargetPositionFromVector = Vector3.Dot(Quaternion.Euler(0, 90, 0) * _roadBlockCrossingLine, Driver.TargetCar.transform.position - (Driver.transform.position - new Vector3(0, 0, -20))) > 0;
         }
 
-        public override void FixedUpdate()
+        public override void OnEveryFixedUpdate()
         {
             Car.SetSteerAngle(-90);
             Car.SetMotorTorque(0);
             Car.SetEBrake(true);
         }
 
-        public override void OnUpdate()
+        public override void OnEveryUpdate()
         {
             if(Vector3.Dot(Quaternion.Euler(0, 90, 0) * _roadBlockCrossingLine, Driver.TargetCar.transform.position - (Driver.transform.position - new Vector3(0, 0, -20))) > 0 != _startTargetPositionFromVector)
             {

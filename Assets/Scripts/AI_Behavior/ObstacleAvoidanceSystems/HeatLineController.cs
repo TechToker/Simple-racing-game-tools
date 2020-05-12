@@ -4,13 +4,11 @@ using System.Collections.Generic;
 using BehaviourAI;
 using UnityEngine;
 
-public class ObstacleAvoidanceController : MonoBehaviour
+public class HeatLineController : BaseObstacleAvoidanceController
 {
     [Header("Debug")]
     [SerializeField] private bool _enableGizmos;
     
-    [Header("Main")]
-    [SerializeField] private DriverAI _driver;
     [SerializeField] private int _heatLineDimension = 50;
     [SerializeField] private float _heatLineLength = 10f;
 
@@ -24,21 +22,17 @@ public class ObstacleAvoidanceController : MonoBehaviour
     private readonly List<Collider> _observedObstacles = new List<Collider>();
     private readonly List<Vector3> _projectionPoints = new List<Vector3>();
     
-    private int _obstacleColliderMask;
-    
-    private PathSegment DriverTargetSegment => (_driver.StateAI as RacingState)?.NextTargetPosition;
+    private PathSegment DriverTargetSegment => (Driver.StateAI as RacingState)?.NextTargetPosition;
 
     public bool NeedAvoid => _obstacleAvoidIndex >= 0;
-    private int _obstacleAvoidIndex;
+    private int _obstacleAvoidIndex = -1;
     public Vector3 ObstacleAvoidPosition => ConvertIndexToWorldPosition(_obstacleAvoidIndex) + transform.up;
 
     private Vector3 _gizmosOffset = new Vector3(0, 0.5f, 0f);
 
-    private void Awake()
+    protected override void Awake()
     {
-        _obstacleColliderMask = LayerMask.GetMask("Car", "Obstacle");
-        //_colliderToCheck = LayerMask.GetMask("Obstacle");
-        
+        base.Awake();
         _heatLine = new float[_heatLineDimension];
     }
 
@@ -111,12 +105,12 @@ public class ObstacleAvoidanceController : MonoBehaviour
 
     private void UpdateTransform()
     {
-        int currentTargetWaypoint = (_driver.StateAI as RacingState).GetCurrentWaypointIndex;
+        int currentTargetWaypoint = (Driver.StateAI as RacingState).GetCurrentWaypointIndex;
         
-        Vector2 prevWaypointPos = MathfExtensions.ConvertToXZ(_driver.Circuit.GetWaypointByIndex(currentTargetWaypoint - 1).transform.position);
-        Vector2 targetWaypointPos = MathfExtensions.ConvertToXZ(_driver.Circuit.GetWaypointByIndex(currentTargetWaypoint).transform.position);
+        Vector2 prevWaypointPos = MathfExtensions.ConvertToXZ(Driver.Circuit.GetWaypointByIndex(currentTargetWaypoint - 1).transform.position);
+        Vector2 targetWaypointPos = MathfExtensions.ConvertToXZ(Driver.Circuit.GetWaypointByIndex(currentTargetWaypoint).transform.position);
 
-        Vector2 carPos = MathfExtensions.ConvertToXZ(_driver.Car.CarFrontBumperPos);
+        Vector2 carPos = MathfExtensions.ConvertToXZ(Driver.Car.CarFrontBumperPos);
         Vector3 carPosOnLine = MathfExtensions.ConvertFromXZ(MathfExtensions.FindNearestPointOnLine(prevWaypointPos, targetWaypointPos, carPos));
 
         Vector3 vectorToNextWp = MathfExtensions.ConvertFromXZ(targetWaypointPos) - carPosOnLine;
@@ -186,7 +180,7 @@ public class ObstacleAvoidanceController : MonoBehaviour
         int racingPointIndex = ConvertPosOnLineToArrayIndex(projectionWorldPosition.x);
         
         //Make needed space even number
-        int carNeededIndexesWidth = Mathf.CeilToInt(_driver.Car.CarSize.x / SpaceBetweenHeatValues / 2) * 2;
+        int carNeededIndexesWidth = Mathf.CeilToInt(Driver.Car.CarSize.x / SpaceBetweenHeatValues / 2) * 2;
 
         int leftSpaceIndex = GetCarFreeSpaceIndex(racingPointIndex, carNeededIndexesWidth, Sides.LEFT);
         int rightSpaceIndex = GetCarFreeSpaceIndex(racingPointIndex, carNeededIndexesWidth, Sides.RIGHT);
@@ -226,7 +220,7 @@ public class ObstacleAvoidanceController : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (_obstacleColliderMask == (_obstacleColliderMask | (1 << other.gameObject.layer)) && other != _driver.Car.MainCollider)
+        if (ObstacleColliderMask == (ObstacleColliderMask | (1 << other.gameObject.layer)) && other != Driver.Car.MainCollider)
         {
             Debug.LogError($"Enter: {other.gameObject.name}");
             _observedObstacles.Add(other);
@@ -235,7 +229,7 @@ public class ObstacleAvoidanceController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (_obstacleColliderMask == (_obstacleColliderMask | (1 << other.gameObject.layer)) && other != _driver.Car.MainCollider)
+        if (ObstacleColliderMask == (ObstacleColliderMask | (1 << other.gameObject.layer)) && other != Driver.Car.MainCollider)
         {
             Debug.LogError($"Exit: {other.gameObject.name}");
             _observedObstacles.Remove(other);

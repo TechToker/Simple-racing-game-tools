@@ -185,7 +185,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4247216085177620519}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!96 &413034352
 TrailRenderer:
@@ -301,7 +301,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2117414634
 Transform:
   m_ObjectHideFlags: 0
@@ -377,7 +377,7 @@ Transform:
   - {fileID: 2117414634}
   - {fileID: 2162574325021477199}
   m_Father: {fileID: 4247216085177620519}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &655056649304547911
 GameObject:
@@ -1738,8 +1738,8 @@ Transform:
   - {fileID: 1353479504667245401}
   - {fileID: 7993156475514705578}
   - {fileID: 4722642906150058277}
-  - {fileID: 413034351}
   - {fileID: 734431421367479192}
+  - {fileID: 413034351}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -1910,7 +1910,7 @@ MonoBehaviour:
   DerivativeCoef: 0.5
   RubberbandingController: {fileID: 84678252}
   ObstacleAvoidanceWeight: 0
-  ObstacleAvoidController: {fileID: 2117414636}
+  ObstacleAvoidController: {fileID: 0}
   TargetCar: {fileID: 0}
   TargetPositionUpdateDelay: 0.3
   CarSensorsDistance: 3

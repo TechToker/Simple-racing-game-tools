@@ -51,10 +51,11 @@ namespace BehaviourAI
             _currentWaypointIndexOnTrack = 0;
         }
 
+#if UNITY_EDITOR
         public override void OnEveryGizmosDraw()
         {
             base.OnEveryGizmosDraw();
-
+            
             if (_racingPath == null)
                 return;
 
@@ -81,7 +82,7 @@ namespace BehaviourAI
             Gizmos.DrawLine(Car.CarFrontBumperPos, _turningTargetPoint);
             Gizmos.DrawSphere(_turningTargetPoint, 0.1f);
             Gizmos.DrawSphere(Car.CarFrontBumperPos, 0.05f);
-
+            
             //Braking point
             if (_brakingDistance > 0.5f)
             {
@@ -96,6 +97,7 @@ namespace BehaviourAI
 
             Handles.Label(_racingPath[0].CarRacingPoint, cornerInfo);
         }
+#endif
 
         public override void OnEveryFixedUpdate()
         {
@@ -238,7 +240,7 @@ namespace BehaviourAI
                 }
             }
             
-            if (Driver.ObstacleAvoidController.NeedAvoid)
+            if (Driver.ObstacleAvoidController != null && Driver.ObstacleAvoidController.NeedAvoid)
                 _turningTargetPoint = Driver.ObstacleAvoidController.ObstacleAvoidPosition + Driver.ObstacleAvoidController.transform.forward * 15;
             else
                 _turningTargetPoint =  pointFrom + (pointTo - pointFrom).normalized * distance;

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 [ExecuteInEditMode]
 public class EasySuspension : MonoBehaviour
@@ -19,11 +21,18 @@ public class EasySuspension : MonoBehaviour
 
 	[Tooltip("Adjust the length of the suspension springs according to the natural frequency and damping ratio. When off, can cause unrealistic suspension bounce.")]
 	public bool setSuspensionDistance = true;
+
+	private List<WheelCollider> _wheels;
+
+	private void Awake()
+	{
+		_wheels = GetComponentsInChildren<WheelCollider>().ToList();
+	}
 	
-	void Update () 
+	private void Update () 
     {
 		// Work out the stiffness and damper parameters based on the better spring model.
-		foreach (WheelCollider wc in GetComponentsInChildren<WheelCollider>()) 
+		foreach (WheelCollider wc in _wheels) 
         {
 			JointSpring spring = wc.suspensionSpring;
 

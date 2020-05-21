@@ -118,7 +118,7 @@ namespace BehaviourAI
             
             Car.SetSteerAngle(_steerInput);
             
-            Car.SetMotorTorque(Mathf.Clamp(_accelerationInput, 0, 1) * 1f + rbExtraAcceleration);
+            Car.SetMotorTorque(Mathf.Clamp(_accelerationInput, 0, 1) * 0.1f + rbExtraAcceleration);
             Car.SetBrakeTorque(Mathf.Clamp(-_accelerationInput, 0, 1));
         }
         

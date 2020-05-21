@@ -74,7 +74,7 @@ public class DriverAI : BaseDriver
     public string CurrentStateName => _state.GetStateName();
     public BaseState StateAI => _state;
 
-    private void OnEnable()
+    private void Awake()
     {
         _state = new BaseState(this, Car);
         SetDriverMode(CurrentMode);

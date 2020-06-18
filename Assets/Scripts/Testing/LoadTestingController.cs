@@ -49,6 +49,6 @@ public class LoadTestingController : MBSingleton<LoadTestingController>
 
     private void Update()
     {
-        Time.timeScale = _timeScale;
+        //Time.timeScale = _timeScale;
     }
 }

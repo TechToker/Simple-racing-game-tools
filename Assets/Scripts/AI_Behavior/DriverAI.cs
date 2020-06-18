@@ -22,8 +22,10 @@ public enum DriverMode
 public class DriverAI : BaseDriver
 {
     public DriverMode CurrentMode;
-    
+
     [Header("Blackboard: Race mode")]
+    public float AccelerationMultiplyer = 1f;
+    
     public bool ShowTurnDataGizmos;
     
     public RaceCircuit Circuit;

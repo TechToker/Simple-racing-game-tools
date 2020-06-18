@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Driver: {fileID: 7289247421392153190}
-  _enableGizmos: 0
+  _enableGizmos: 1
   _heatLineDimension: 50
   _heatLineLength: 15
   _heatLine: []
@@ -505,10 +505,10 @@ RectTransform:
   m_Father: {fileID: 544533230852253953}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0.126}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0.38666666, y: -0.57399994}
+  m_SizeDelta: {x: 0.12666667, y: 0.126}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1812057517134539468
 MonoBehaviour:
@@ -677,7 +677,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0.3}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -964,7 +964,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0.661}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1020,7 +1020,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3283584120191534601}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
@@ -1723,7 +1723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4247216085177620519
 Transform:
   m_ObjectHideFlags: 0
@@ -1773,6 +1773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Car: {fileID: 4247216085177620513}
   CurrentMode: 10
+  AccelerationMultiplyer: 0.1
   ShowTurnDataGizmos: 1
   Circuit: {fileID: 0}
   OvertakeMode: 0
@@ -1910,7 +1911,7 @@ MonoBehaviour:
   DerivativeCoef: 0.5
   RubberbandingController: {fileID: 84678252}
   ObstacleAvoidanceWeight: 0
-  ObstacleAvoidController: {fileID: 0}
+  ObstacleAvoidController: {fileID: 2117414636}
   TargetCar: {fileID: 0}
   TargetPositionUpdateDelay: 0.3
   CarSensorsDistance: 3
@@ -2406,10 +2407,10 @@ RectTransform:
   m_Father: {fileID: 544533230852253953}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0.7}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -0.34999993}
+  m_SizeDelta: {x: 0.12666667, y: 0.7}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &5887887181854939143
 MonoBehaviour:
@@ -2749,7 +2750,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6297298443147301946}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
@@ -2803,10 +2804,10 @@ RectTransform:
   m_Father: {fileID: 544533230852253953}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0.7}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0.16166666, y: -0.34999993}
+  m_SizeDelta: {x: 0.12666667, y: 0.7}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &2684137571030383269
 MonoBehaviour:
@@ -3226,7 +3227,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8121693223509611819}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
@@ -3278,8 +3279,8 @@ RectTransform:
   m_Father: {fileID: 661920759835395213}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0.05, y: 0.04}
   m_Pivot: {x: 0.5, y: 0.5}

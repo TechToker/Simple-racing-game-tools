@@ -44,7 +44,7 @@ public class HeatLineController : BaseObstacleAvoidanceController
         DrawRayToNextWaypoint();
         DrawHeatLineGizmos();
         
-        //DrawProjectionPoints();
+        DrawObstacleColliderPoints();
         //DrawObstacleProjectionPoints();
         
         // Gizmos.color = Color.yellow;
@@ -143,8 +143,8 @@ public class HeatLineController : BaseObstacleAvoidanceController
             obstacleMinPosOnLine = transform.InverseTransformPoint(obstacleMinPosOnLine);
             obstacleMaxPosOnLine = transform.InverseTransformPoint(obstacleMaxPosOnLine);
             
-            int obstacleMinIndex = ConvertPosOnLineToArrayIndex(obstacleMinPosOnLine.x);
-            int obstacleMaxIndex = ConvertPosOnLineToArrayIndex(obstacleMaxPosOnLine.x);
+            int obstacleMinIndex = ConvertPosOnLineToArrayIndex(obstacleMinPosOnLine.x + 1.5f);
+            int obstacleMaxIndex = ConvertPosOnLineToArrayIndex(obstacleMaxPosOnLine.x - 1.5f);
             
             //Obstacle bounds min & max does not mean that the min index is less than max index
             for (int i = Mathf.Min(obstacleMinIndex, obstacleMaxIndex); i <=  Mathf.Max(obstacleMinIndex, obstacleMaxIndex); i++)

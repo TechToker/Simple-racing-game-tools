@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BaseCar : MonoBehaviour
@@ -105,8 +106,11 @@ public class BaseCar : MonoBehaviour
     protected virtual void Update()
     {
         UpdateWheelsVisual();
+    }
 
-        _lights.gameObject.SetActive(_forwardWheels[0].brakeTorque > 0);
+    private void LateUpdate()
+    {
+       // _lights.gameObject.SetActive(BrakingInput > 0);
     }
 
     public void SetSteerAngle(float turningAnlge)
@@ -149,7 +153,7 @@ public class BaseCar : MonoBehaviour
         float brakeTorq = _brakeTorque * brakeInput;
 
         if (IsDebug)
-            Debug.Log($"Brake: {brakeTorq}");
+            Debug.LogError($"Brake: {brakeTorq}");
 
         _currentBrakeTorque = brakeTorq;
         foreach (WheelCollider wheel in _allWheels)

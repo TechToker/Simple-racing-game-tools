@@ -53,6 +53,9 @@ public class BrakeControlDebugger : MonoBehaviour
 
 	void LateUpdate()
 	{
+		if (_targetDriver == null || !_targetDriver.gameObject.activeSelf)
+			return;
+			
 		BrakingData brakingData = ((RacingState) _targetDriver.StateAI).BrakingData;
 		if (brakingData == null || (!brakingData.IsRecording && !_isGraphUpdating))
 		{

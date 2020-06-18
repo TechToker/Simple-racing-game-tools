@@ -69,7 +69,7 @@ public class RaceCircuit : MonoBehaviour
             if (ShowShortestRacingLine)
             {
                 Gizmos.color = Color.blue;
-                Gizmos.DrawLine(wpFrom.ShortestRacingPoint, wpTo.ShortestRacingPoint);
+                Gizmos.DrawLine(wpFrom.ShortestRacingPoint + Vector3.up, wpTo.ShortestRacingPoint + Vector3.up);
             }
 
             if (ShowFinalRacingLine)

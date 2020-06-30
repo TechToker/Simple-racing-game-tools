@@ -8,3 +8,5 @@ Track edit tools:
 Race:
 
 ![GIF 15 06 2020 2-51-11](https://user-images.githubusercontent.com/27694775/86153826-42efb580-bb13-11ea-9217-e9a90813a64c.gif)
+
+![GIF 15 06 2020 3-00-29](https://user-images.githubusercontent.com/27694775/86156093-7aac2c80-bb16-11ea-9395-98f462026688.gif)

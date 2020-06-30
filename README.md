@@ -14,3 +14,4 @@ Race:
 
 ![GIF 30 06 2020 21-28-15](https://user-images.githubusercontent.com/27694775/86157620-bb0caa00-bb18-11ea-92bc-5dda518d95a1.gif)
 
+![GIF 30 06 2020 21-32-41](https://user-images.githubusercontent.com/27694775/86158043-47b76800-bb19-11ea-83a5-a3c84fb1faef.gif)

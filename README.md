@@ -2,8 +2,9 @@
 Racing game on Unity engine
 
 Track edit tools:
+
 ![GIF 13 06 2020 1-50-28](https://user-images.githubusercontent.com/27694775/86156289-c2cb4f00-bb16-11ea-9f9b-80b870f9d51c.gif)
-![GIF 13 06 2020 1-48-42](https://user-images.githubusercontent.com/27694775/86156274-bd6e0480-bb16-11ea-8059-df44cbb5137c.gif)
+
 
 Race:
 
